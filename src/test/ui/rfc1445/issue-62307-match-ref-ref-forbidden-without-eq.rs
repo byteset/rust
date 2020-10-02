@@ -8,9 +8,9 @@
 // resolve the question of what semantics is used for such matching.
 // (See RFC 1445 for more details and discussion.)
 
-// Issue 62307 pointed out a case where the checking for
-// `#[structural_match]` was too shallow.
-#![warn(indirect_structural_match)]
+// Issue 62307 pointed out a case where the structural-match checking
+// was too shallow.
+#![warn(indirect_structural_match, nontrivial_structural_match)]
 // run-pass
 
 #[derive(Debug)]
@@ -30,14 +30,14 @@ fn main() {
     match RR_B0 {
         RR_B1 => { println!("CLAIM RR0: {:?} matches {:?}", RR_B1, RR_B0); }
         //~^ WARN must be annotated with `#[derive(PartialEq, Eq)]`
-        //~| WARN will become a hard error in a future release
+        //~| WARN this was previously accepted
         _ => { }
     }
 
     match RR_B1 {
         RR_B1 => { println!("CLAIM RR1: {:?} matches {:?}", RR_B1, RR_B1); }
         //~^ WARN must be annotated with `#[derive(PartialEq, Eq)]`
-        //~| WARN will become a hard error in a future release
+        //~| WARN this was previously accepted
         _ => { }
     }
 }

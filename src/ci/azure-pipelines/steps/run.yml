@@ -1,3 +1,14 @@
+#####################################
+##    READ BEFORE CHANGING THIS    ##
+#####################################
+
+# We're in the process of evaluating GitHub Actions as a possible replacement
+# for Azure Pipelines, and at the moment the configuration is duplicated
+# between the two CI providers. Be sure to also change the configuration in
+# src/ci/github-actions when changing this file.
+
+#####################################
+
 # FIXME(linux): need to configure core dumps, enable them, and then dump
 # backtraces on failure from all core dumps:
 #
@@ -6,12 +17,14 @@
 #
 # Check travis config for `gdb --batch` command to print all crash logs
 
-parameters:
-  # When this parameter is set to anything other than an empty string the tests
-  # will only be executed when the commit updates submodules
-  only_on_updated_submodules: ''
-
 steps:
+
+# Configure our CI_JOB_NAME variable which log analyzers can use for the main
+# step to see what's going on.
+- bash: |
+    builder=$(echo $AGENT_JOBNAME | cut -d ' ' -f 2)
+    echo "##vso[task.setvariable variable=CI_JOB_NAME]$builder"
+  displayName: Configure Job Name
 
 # Disable automatic line ending conversion, which is enabled by default on
 # Azure's Windows image. Having the conversion enabled caused regressions both
@@ -26,192 +39,104 @@ steps:
 - checkout: self
   fetchDepth: 2
 
-# Set the SKIP_JOB environment variable if this job is supposed to only run
-# when submodules are updated and they were not. The following time consuming
-# tasks will be skipped when the environment variable is present.
-- ${{ if parameters.only_on_updated_submodules }}:
-  - bash: |
-      set -e
-      # Submodules pseudo-files inside git have the 160000 permissions, so when
-      # those files are present in the diff a submodule was updated.
-      if git diff HEAD^ | grep "^index .* 160000" >/dev/null 2>&1; then
-          echo "Executing the job since submodules are updated"
-      else
-          echo "Not executing this job since no submodules were updated"
-          echo "##vso[task.setvariable variable=SKIP_JOB;]1"
-      fi
-    displayName: Decide whether to run this job
+- bash: src/ci/scripts/setup-environment.sh
+  displayName: Setup environment
 
-# Spawn a background process to collect CPU usage statistics which we'll upload
-# at the end of the build. See the comments in the script here for more
-# information.
-- bash: python src/ci/cpu-usage-over-time.py &> cpu-usage.csv &
-  displayName: "Collect CPU-usage statistics in the background"
+- bash: src/ci/scripts/clean-disk.sh
+  displayName: Clean disk
 
-- bash: printenv | sort
-  displayName: Show environment variables
+- bash: src/ci/scripts/should-skip-this.sh
+  displayName: Decide whether to run this job
 
-- bash: |
-    set -e
-    df -h
-    du . | sort -nr | head -n100
-  displayName: Show disk usage
-  # FIXME: this hasn't been tested, but maybe it works on Windows? Should test!
-  condition: and(succeeded(), ne(variables['Agent.OS'], 'Windows_NT'))
+- bash: src/ci/scripts/collect-cpu-stats.sh
+  displayName: Collect CPU-usage statistics in the background
 
-- template: install-sccache.yml
-- template: install-clang.yml
+- bash: src/ci/scripts/dump-environment.sh
+  displayName: Show the current environment
 
-# Switch to XCode 9.3 on OSX since it seems to be the last version that supports
-# i686-apple-darwin. We'll eventually want to upgrade this and it will probably
-# force us to drop i686-apple-darwin, but let's keep the wheels turning for now.
-- bash: |
-    set -e
-    sudo xcode-select --switch /Applications/Xcode_9.3.app
-  displayName: Switch to Xcode 9.3 (OSX)
-  condition: and(succeeded(), eq(variables['Agent.OS'], 'Darwin'))
+- bash: src/ci/scripts/install-sccache.sh
+  displayName: Install sccache
+  condition: and(succeeded(), not(variables.SKIP_JOB))
 
-- template: install-windows-build-deps.yml
+- bash: src/ci/scripts/install-clang.sh
+  displayName: Install clang
+  condition: and(succeeded(), not(variables.SKIP_JOB))
 
-# Looks like docker containers have IPv6 disabled by default, so let's turn it
-# on since libstd tests require it
-- bash: |
-    set -e
-    sudo mkdir -p /etc/docker
-    echo '{"ipv6":true,"fixed-cidr-v6":"fd9a:8454:6789:13f7::/64"}' | sudo tee /etc/docker/daemon.json
-    sudo service docker restart
-  displayName: Enable IPv6
-  condition: and(succeeded(), not(variables.SKIP_JOB), eq(variables['Agent.OS'], 'Linux'))
+- bash: src/ci/scripts/install-wix.sh
+  displayName: Install wix
+  condition: and(succeeded(), not(variables.SKIP_JOB))
+
+- bash: src/ci/scripts/symlink-build-dir.sh
+  displayName: Ensure the build happens on a partition with enough space
+  condition: and(succeeded(), not(variables.SKIP_JOB))
+
+- bash: src/ci/scripts/disable-git-crlf-conversion.sh
+  displayName: "Disable git automatic line ending conversion (on C:/)"
+  condition: and(succeeded(), not(variables.SKIP_JOB))
+
+- bash: src/ci/scripts/install-msys2.sh
+  displayName: Install msys2
+  condition: and(succeeded(), not(variables.SKIP_JOB))
+
+- bash: src/ci/scripts/install-mingw.sh
+  displayName: Install MinGW
+  condition: and(succeeded(), not(variables.SKIP_JOB))
+
+- bash: src/ci/scripts/install-ninja.sh
+  displayName: Install ninja
+  condition: and(succeeded(), not(variables.SKIP_JOB))
+
+- bash: src/ci/scripts/enable-docker-ipv6.sh
+  displayName: Enable IPv6 on Docker
+  condition: and(succeeded(), not(variables.SKIP_JOB))
 
 # Disable automatic line ending conversion (again). On Windows, when we're
 # installing dependencies, something switches the git configuration directory or
 # re-enables autocrlf. We've not tracked down the exact cause -- and there may
 # be multiple -- but this should ensure submodules are checked out with the
 # appropriate line endings.
-- bash: git config --replace-all --global core.autocrlf false
-  displayName: "Disable git automatic line ending conversion"
+- bash: src/ci/scripts/disable-git-crlf-conversion.sh
+  displayName: Disable git automatic line ending conversion
+  condition: and(succeeded(), not(variables.SKIP_JOB))
 
-# Check out all our submodules, but more quickly than using git by using one of
-# our custom scripts
-- bash: |
-    set -e
-    mkdir -p $HOME/rustsrc
-    $BUILD_SOURCESDIRECTORY/src/ci/init_repo.sh . $HOME/rustsrc
-  condition: and(succeeded(), not(variables.SKIP_JOB), ne(variables['Agent.OS'], 'Windows_NT'))
-  displayName: Check out submodules (Unix)
-- script: |
-    if not exist C:\cache\rustsrc\NUL mkdir C:\cache\rustsrc
-    sh src/ci/init_repo.sh . /c/cache/rustsrc
-  condition: and(succeeded(), not(variables.SKIP_JOB), eq(variables['Agent.OS'], 'Windows_NT'))
-  displayName: Check out submodules (Windows)
+- bash: src/ci/scripts/checkout-submodules.sh
+  displayName: Checkout submodules
+  condition: and(succeeded(), not(variables.SKIP_JOB))
 
-# See also the disable for autocrlf above, this just checks that it worked
-#
-# We check both in rust-lang/rust and in a submodule to make sure both are
-# accurate. Submodules are checked out significantly later than the main
-# repository in this script, so settings can (and do!) change between then.
-#
-# Linux (and maybe macOS) builders don't currently have dos2unix so just only
-# run this step on Windows.
-- bash: |
-    set -x
-    # print out the git configuration so we can better investigate failures in
-    # the following
-    git config --list --show-origin
-    dos2unix -ih Cargo.lock src/tools/rust-installer/install-template.sh
-    endings=$(dos2unix -ic Cargo.lock src/tools/rust-installer/install-template.sh)
-    # if endings has non-zero length, error out
-    if [ -n "$endings" ]; then exit 1 ; fi
-  condition: and(succeeded(), eq(variables['Agent.OS'], 'Windows_NT'))
-  displayName: Verify line endings are LF
+- bash: src/ci/scripts/verify-line-endings.sh
+  displayName: Verify line endings
+  condition: and(succeeded(), not(variables.SKIP_JOB))
 
 # Ensure the `aws` CLI is installed so we can deploy later on, cache docker
 # images, etc.
-- bash: src/ci/install-awscli.sh
-  env:
-    AGENT_OS: $(Agent.OS)
+- bash: src/ci/scripts/install-awscli.sh
   condition: and(succeeded(), not(variables.SKIP_JOB))
   displayName: Install awscli
 
-# Configure our CI_JOB_NAME variable which log analyzers can use for the main
-# step to see what's going on.
-- bash: |
-    builder=$(echo $AGENT_JOBNAME | cut -d ' ' -f 2)
-    echo "##vso[task.setvariable variable=CI_JOB_NAME]$builder"
-  displayName: Configure Job Name
-
-# As a quick smoke check on the otherwise very fast mingw-check linux builder
-# check our own internal scripts.
-- bash: |
-    set -e
-    git clone --depth=1 https://github.com/rust-lang-nursery/rust-toolstate.git
-    cd rust-toolstate
-    python2.7 "$BUILD_SOURCESDIRECTORY/src/tools/publish_toolstate.py" "$(git rev-parse HEAD)" "$(git log --format=%s -n1 HEAD)" "" ""
-    # Only check maintainers if this build is supposed to publish toolstate.
-    # Builds that are not supposed to publish don't have the access token.
-    if [ -n "${TOOLSTATE_PUBLISH+is_set}" ]; then
-      TOOLSTATE_VALIDATE_MAINTAINERS_REPO=rust-lang/rust python2.7 "${BUILD_SOURCESDIRECTORY}/src/tools/publish_toolstate.py"
-    fi
-    cd ..
-    rm -rf rust-toolstate
-  env:
-    TOOLSTATE_REPO_ACCESS_TOKEN: $(TOOLSTATE_REPO_ACCESS_TOKEN)
-  condition: and(succeeded(), not(variables.SKIP_JOB), eq(variables['IMAGE'], 'mingw-check'))
-  displayName: Verify the publish_toolstate script works
-
-- bash: |
-    set -e
-    # Remove any preexisting rustup installation since it can interfere
-    # with the cargotest step and its auto-detection of things like Clippy in
-    # the environment
-    rustup self uninstall -y || true
-    if [ "$IMAGE" = "" ]; then
-      src/ci/run.sh
-    else
-      src/ci/docker/run.sh $IMAGE
-    fi
-  #timeoutInMinutes: 180
+- bash: src/ci/scripts/run-build-from-ci.sh
   timeoutInMinutes: 600
   env:
-    CI: true
-    SRC: .
     AWS_ACCESS_KEY_ID: $(SCCACHE_AWS_ACCESS_KEY_ID)
     AWS_SECRET_ACCESS_KEY: $(SCCACHE_AWS_SECRET_ACCESS_KEY)
     TOOLSTATE_REPO_ACCESS_TOKEN: $(TOOLSTATE_REPO_ACCESS_TOKEN)
   condition: and(succeeded(), not(variables.SKIP_JOB))
   displayName: Run build
 
-# If we're a deploy builder, use the `aws` command to publish everything to our
-# bucket.
-- bash: |
-    set -e
-    source src/ci/shared.sh
-    if [ "$AGENT_OS" = "Linux" ]; then
-        rm -rf obj/build/dist/doc
-        upload_dir=obj/build/dist
-    else
-        rm -rf build/dist/doc
-        upload_dir=build/dist
-    fi
-    ls -la $upload_dir
-    deploy_dir=rustc-builds
-    if [ "$DEPLOY_ALT" == "1" ]; then
-        deploy_dir=rustc-builds-alt
-    fi
-    retry aws s3 cp --no-progress --recursive --acl public-read ./$upload_dir s3://$DEPLOY_BUCKET/$deploy_dir/$BUILD_SOURCEVERSION
+- bash: src/ci/scripts/upload-artifacts.sh
   env:
     AWS_ACCESS_KEY_ID: $(UPLOAD_AWS_ACCESS_KEY_ID)
     AWS_SECRET_ACCESS_KEY: $(UPLOAD_AWS_SECRET_ACCESS_KEY)
-  condition: and(succeeded(), not(variables.SKIP_JOB), or(eq(variables.DEPLOY, '1'), eq(variables.DEPLOY_ALT, '1')))
   displayName: Upload artifacts
-
-# Upload CPU usage statistics that we've been gathering this whole time. Always
-# execute this step in case we want to inspect failed builds, but don't let
-# errors here ever fail the build since this is just informational.
-- bash: aws s3 cp --acl public-read cpu-usage.csv s3://$DEPLOY_BUCKET/rustc-builds/$BUILD_SOURCEVERSION/cpu-$CI_JOB_NAME.csv
-  env:
-    AWS_ACCESS_KEY_ID: $(UPLOAD_AWS_ACCESS_KEY_ID)
-    AWS_SECRET_ACCESS_KEY: $(UPLOAD_AWS_SECRET_ACCESS_KEY)
-  condition: variables['UPLOAD_AWS_SECRET_ACCESS_KEY']
-  continueOnError: true
-  displayName: Upload CPU usage statistics
+  # Adding a condition on DEPLOY=1 or DEPLOY_ALT=1 is not needed as all deploy
+  # builders *should* have the AWS credentials available. Still, explicitly
+  # adding the condition is helpful as this way CI will not silently skip
+  # deploying artifacts from a dist builder if the variables are misconfigured,
+  # erroring about invalid credentials instead.
+  condition: |
+    and(
+      succeeded(), not(variables.SKIP_JOB),
+      or(
+        variables.UPLOAD_AWS_SECRET_ACCESS_KEY,
+        eq(variables.DEPLOY, '1'), eq(variables.DEPLOY_ALT, '1')
+      )
+    )

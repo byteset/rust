@@ -1,5 +1,3 @@
-// ignore-x86
-// ^ due to stderr output differences
 use std::thread;
 use std::sync::mpsc::channel;
 
@@ -18,7 +16,7 @@ fn bar() {
 fn foo() {
     let (tx, _rx) = channel();
     thread::spawn(|| tx.send(()).unwrap());
-    //~^ ERROR `std::sync::mpsc::Sender<()>` cannot be shared between threads safely
+    //~^ ERROR `Sender<()>` cannot be shared between threads safely
 }
 
 fn main() {}

@@ -1,5 +1,3 @@
-// ignore-x86
-// ^ due to stderr output differences
 struct Bar;
 
 impl Bar {
@@ -8,6 +6,6 @@ impl Bar {
 
 #[derive(Hash)]
 struct Foo(Bar);
-//~^ error: `Bar: std::hash::Hash` is not satisfied
+//~^ error: `Bar: Hash` is not satisfied
 
 fn main() {}
