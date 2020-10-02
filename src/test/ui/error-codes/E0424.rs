@@ -6,10 +6,6 @@ impl Foo {
     fn foo() {
         self.bar(); //~ ERROR E0424
     }
-
-    fn baz(_: i32) {
-        self.bar(); //~ ERROR E0424
-    }
 }
 
 fn main () {

@@ -105,7 +105,8 @@ impl<U: Unsigned, B: Bit> Add<B0> for UInt<U, B> {
 impl<U: Unsigned> Add<U> for UTerm {
     type Output = U;
     fn add(self, _: U) -> Self::Output {
-        unimplemented!()
+        #[allow(deprecated)]
+        unsafe { ::std::mem::uninitialized() }
     }
 }
 
@@ -136,7 +137,7 @@ where
 {
     type Output = UInt<Prod<Ul, UInt<Ur, B>>, B0>;
     fn mul(self, _: UInt<Ur, B>) -> Self::Output {
-        unimplemented!()
+        unsafe { ::std::mem::uninitialized() }
     }
 }
 

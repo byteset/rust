@@ -58,5 +58,4 @@ pub fn main() {
   if (true) { 12; } {-num};
   if (true) { 12; }; {-num};
   if (true) { 12; };;; -num;
-  //~^ WARNING unnecessary trailing semicolons
 }

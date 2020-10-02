@@ -1,4 +1,7 @@
 // run-pass
+//compile-flags: -Z borrowck=mir
+
+#![feature(slice_patterns)]
 
 fn mut_head_tail<'a, A>(v: &'a mut [A]) -> Option<(&'a mut A, &'a mut [A])> {
     match *v {

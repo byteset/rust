@@ -1,4 +1,4 @@
-// Check that functions visible to macros through paths with >2 segments are
+// Check that functions visible to macros through paths with >2 segements are
 // considered reachable
 
 // aux-build:field-method-macro.rs

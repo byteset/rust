@@ -1,8 +1,11 @@
 // run-pass
+// revisions: old re
+
+#![cfg_attr(re, feature(re_rebalance_coherence))]
 #![allow(dead_code)]
 // pretty-expanded FIXME #23616
 
-#![feature(negative_impls)]
+#![feature(optin_builtin_traits)]
 
 use std::marker::Send;
 

@@ -4,10 +4,10 @@
 #![allow(dead_code)]
 #![feature(rustc_private)]
 
-extern crate rustc_serialize;
+extern crate serialize;
 
 use std::collections::HashMap;
-use rustc_serialize::json::{self, Json};
+use serialize::json::{self, Json};
 use std::option;
 
 enum object {

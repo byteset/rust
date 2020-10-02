@@ -1,4 +1,5 @@
 // run-pass
+#![feature(slice_patterns)]
 
 fn slice_pat() {
     let sl: &[u8] = b"foo";

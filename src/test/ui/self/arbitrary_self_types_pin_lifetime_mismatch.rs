@@ -1,3 +1,5 @@
+// compile-fail
+
 use std::pin::Pin;
 
 struct Foo;

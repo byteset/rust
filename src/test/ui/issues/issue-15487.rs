@@ -2,7 +2,6 @@
 #![allow(unused_attributes)]
 // ignore-windows
 // ignore-wasm32-bare no libs to link
-// ignore-sgx no libs to link
 
 #![feature(link_args)]
 

@@ -2,11 +2,7 @@ error: expected `;` or `{`, found `}`
   --> $DIR/issue-6610.rs:1:20
    |
 LL | trait Foo { fn a() }
-   |           -        ^
-   |           |        |
-   |           |        expected `;` or `{`
-   |           |        the item list ends here
-   |           while parsing this item list starting here
+   |                    ^ expected `;` or `{`
 
 error: aborting due to previous error
 

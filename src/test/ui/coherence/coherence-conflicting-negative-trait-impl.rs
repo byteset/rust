@@ -1,17 +1,23 @@
-#![feature(negative_impls)]
-#![feature(marker_trait_attr)]
+// revisions: old re
 
-#[marker]
+#![cfg_attr(re, feature(re_rebalance_coherence))]
+#![feature(optin_builtin_traits)]
+#![feature(overlapping_marker_traits)]
+
 trait MyTrait {}
 
 struct TestType<T>(::std::marker::PhantomData<T>);
 
-unsafe impl<T: MyTrait + 'static> Send for TestType<T> {}
+unsafe impl<T: MyTrait+'static> Send for TestType<T> {}
 
-impl<T: MyTrait> !Send for TestType<T> {} //~ ERROR found both positive and negative implementation
+impl<T: MyTrait> !Send for TestType<T> {}
+//[old]~^ ERROR conflicting implementations of trait `std::marker::Send`
+//[re]~^^ ERROR E0119
 
-unsafe impl<T: 'static> Send for TestType<T> {} //~ ERROR conflicting implementations
+unsafe impl<T:'static> Send for TestType<T> {}
 
 impl !Send for TestType<i32> {}
+//[old]~^ ERROR conflicting implementations of trait `std::marker::Send`
+//[re]~^^ ERROR E0119
 
 fn main() {}

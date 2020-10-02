@@ -1,5 +1,8 @@
 // aux-build:bang_proc_macro2.rs
 
+#![feature(proc_macro_hygiene)]
+#![allow(unused_macros)]
+
 extern crate bang_proc_macro2;
 
 use bang_proc_macro2::bang_proc_macro2;

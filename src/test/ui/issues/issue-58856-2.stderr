@@ -7,17 +7,13 @@ LL |     fn how_are_you(&self -> Empty {
    |                   |     help: `)` may belong here
    |                   unclosed delimiter
 
-error: non-item in item list
+error: expected one of `async`, `const`, `crate`, `default`, `extern`, `fn`, `pub`, `type`, `unsafe`, or `}`, found `)`
   --> $DIR/issue-58856-2.rs:11:1
    |
-LL | impl Howness for () {
-   |                     - item list starts here
-...
+LL |     }
+   |      - expected one of 10 possible tokens here
 LL | }
-   | ^
-   | |
-   | non-item starts here
-   | item list ends here
+   | ^ unexpected token
 
 error[E0407]: method `how_are_you` is not a member of trait `Howness`
   --> $DIR/issue-58856-2.rs:6:5

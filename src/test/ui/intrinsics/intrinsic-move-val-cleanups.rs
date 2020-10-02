@@ -1,5 +1,4 @@
 // run-pass
-#![allow(unused_braces)]
 #![allow(unused_unsafe)]
 #![allow(unreachable_code)]
 // ignore-emscripten no threads support

@@ -1,8 +1,8 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 // Test that we can handle newtypes wrapping extern types
 
-#![feature(extern_types)]
+#![feature(extern_types, const_transmute)]
 
 use std::marker::PhantomData;
 

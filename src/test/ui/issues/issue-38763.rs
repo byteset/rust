@@ -5,7 +5,6 @@
 pub struct Foo(i128);
 
 #[no_mangle]
-#[allow(improper_ctypes_definitions)]
 pub extern "C" fn foo(x: Foo) -> Foo { x }
 
 fn main() {

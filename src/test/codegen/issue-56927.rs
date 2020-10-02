@@ -23,7 +23,7 @@ pub fn test1(s: &mut S) {
 
 // CHECK-LABEL: @test2
 // CHECK: store i32 4, i32* %{{.+}}, align 4
-#[allow(unconditional_panic)]
+#[allow(const_err)]
 #[no_mangle]
 pub fn test2(s: &mut S) {
     s.arr[usize::MAX / 4 + 1] = 4;

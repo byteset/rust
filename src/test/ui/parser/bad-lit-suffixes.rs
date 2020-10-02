@@ -1,9 +1,9 @@
 extern
-    "C"suffix //~ ERROR suffixes on a string literal are invalid
+    "C"suffix //~ ERROR suffixes on an ABI spec are invalid
     fn foo() {}
 
 extern
-    "C"suffix //~ ERROR suffixes on a string literal are invalid
+    "C"suffix //~ ERROR suffixes on an ABI spec are invalid
 {}
 
 fn main() {

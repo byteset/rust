@@ -5,9 +5,9 @@ fn foo(x: Whatever) {
     match x {
         Some(field) =>
 //~^ ERROR mismatched types
-//~| expected enum `Whatever`, found enum `Option`
-//~| expected enum `Whatever`
-//~| found enum `Option<_>`
+//~| expected type `Whatever`
+//~| found type `std::option::Option<_>`
+//~| expected enum `Whatever`, found enum `std::option::Option`
             field.access(),
     }
 }

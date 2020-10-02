@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 // Tests for nested self-reference which caused a stack overflow.
 

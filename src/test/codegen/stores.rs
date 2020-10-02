@@ -1,5 +1,6 @@
 // compile-flags: -C no-prepopulate-passes
 // ignore-tidy-linelength
+// min-llvm-version 7.0
 
 #![crate_type = "lib"]
 

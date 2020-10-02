@@ -1,13 +1,12 @@
-// run-rustfix
 // Issue #50974
 
-pub struct Foo {
-    pub a: u8,
-    pub b: u8
+struct Foo {
+    a: u8,
+    b: u8
 }
 
 fn main() {
-    let _ = Foo {
+    let bar = Foo {
         a: 0,,
           //~^ ERROR expected identifier
         b: 42

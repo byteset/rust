@@ -5,7 +5,7 @@
 // revisions: cfail1 cfail2
 // build-pass (FIXME(62277): could be check-pass?)
 
-#![feature(rustc_attrs)]
+#![feature(on_unimplemented)]
 #![deny(unused_attributes)]
 
 #[rustc_on_unimplemented = "invalid"]

@@ -1,6 +1,6 @@
 -include ../tools.mk
 
-# ignore-windows-msvc
+# ignore-windows
 
 all:
 	$(RUSTC) --emit=obj app.rs

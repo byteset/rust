@@ -1,6 +1,6 @@
 // edition:2018
 #![feature(impl_trait_in_bindings)]
-//~^ WARN the feature `impl_trait_in_bindings` is incomplete
+//~^ WARN the feature `impl_trait_in_bindings` is incomplete and may cause the compiler to crash
 
 use std::io::Error;
 

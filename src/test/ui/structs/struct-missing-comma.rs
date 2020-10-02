@@ -1,12 +1,11 @@
 // Issue #50636
-// run-rustfix
 
-pub struct S {
-    pub foo: u32 //~ expected `,`, or `}`, found keyword `pub`
+struct S {
+    foo: u32 //~ expected `,`, or `}`, found `bar`
     //     ~^ HELP try adding a comma: ','
-    pub bar: u32
+    bar: u32
 }
 
 fn main() {
-    let _ = S { foo: 5, bar: 6 };
+    let s = S { foo: 5, bar: 6 };
 }

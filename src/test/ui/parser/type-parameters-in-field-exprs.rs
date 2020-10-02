@@ -1,3 +1,5 @@
+// compile-flags: -Z continue-parse-after-error
+
 struct Foo {
     x: isize,
     y: isize,
@@ -9,9 +11,9 @@ fn main() {
         y: 2,
     };
     f.x::<isize>;
-    //~^ ERROR field expressions cannot have generic arguments
+    //~^ ERROR field expressions may not have generic arguments
     f.x::<>;
-    //~^ ERROR field expressions cannot have generic arguments
+    //~^ ERROR field expressions may not have generic arguments
     f.x::();
-    //~^ ERROR field expressions cannot have generic arguments
+    //~^ ERROR field expressions may not have generic arguments
 }

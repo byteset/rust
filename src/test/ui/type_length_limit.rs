@@ -1,11 +1,11 @@
-// build-fail
+// ignore-musl
+// ignore-x86
 // error-pattern: reached the type-length limit while instantiating
-// normalize-stderr-test: ".nll/" -> "/"
 
 // Test that the type length limit can be changed.
 
 #![allow(dead_code)]
-#![type_length_limit="4"]
+#![type_length_limit="256"]
 
 macro_rules! link {
     ($id:ident, $t:ty) => {

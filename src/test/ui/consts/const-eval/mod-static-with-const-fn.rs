@@ -12,9 +12,14 @@ unsafe impl Sync for Foo {}
 
 static FOO: Foo = Foo(UnsafeCell::new(42));
 
+fn foo() {}
+
 static BAR: () = unsafe {
     *FOO.0.get() = 5;
-    //~^ mutation through a reference
+    //~^ contains unimplemented expression
+
+    foo();
+    //~^ ERROR calls in statics are limited to constant functions, tuple structs and tuple variants
 };
 
 fn main() {

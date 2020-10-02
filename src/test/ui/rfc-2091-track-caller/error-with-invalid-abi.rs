@@ -1,11 +1,7 @@
+#![feature(track_caller)] //~ WARN the feature `track_caller` is incomplete
+
 #[track_caller]
 extern "C" fn f() {}
-//~^^ ERROR `#[track_caller]` requires Rust ABI
-
-extern "C" {
-    #[track_caller]
-    fn g();
-    //~^^ ERROR `#[track_caller]` requires Rust ABI
-}
+//~^^ ERROR rust ABI is required to use `#[track_caller]`
 
 fn main() {}

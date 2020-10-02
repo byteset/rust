@@ -1,6 +1,7 @@
 // Test that we can use ! as an argument to a trait impl.
 
-// check-pass
+// run-fail
+// error-pattern:oh no!
 
 #![feature(never_type)]
 

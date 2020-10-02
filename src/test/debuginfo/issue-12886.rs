@@ -6,7 +6,7 @@
 
 // gdb-command:run
 // gdb-command:next
-// gdb-check:[...]24[...]let s = Some(5).unwrap(); // #break
+// gdb-check:[...]25[...]s
 // gdb-command:continue
 
 #![feature(omit_gdb_pretty_printer_section)]

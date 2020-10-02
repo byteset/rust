@@ -1,5 +1,4 @@
 // run-pass
-#![allow(unused_braces)]
 #![allow(unused_assignments)]
 
 // Make sure that the constructor args are codegened for zero-sized tuple structs

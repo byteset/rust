@@ -1,5 +1,4 @@
 // run-pass
-#![allow(unused_braces)]
 fn main() {
     let v1 = { 1 + {2} * {3} };
     let v2 =   1 + {2} * {3}  ;

@@ -2,7 +2,6 @@
 
 #![feature(core_intrinsics)]
 #![feature(const_fn)]
-#![feature(const_type_name)]
 #![allow(dead_code)]
 
 const fn type_name_wrapper<T>(_: &T) -> &'static str {

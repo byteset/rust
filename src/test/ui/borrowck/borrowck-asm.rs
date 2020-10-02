@@ -3,11 +3,10 @@
 // ignore-powerpc
 // ignore-powerpc64
 // ignore-powerpc64le
-// ignore-riscv64
 // ignore-sparc
 // ignore-sparc64
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 
 #[cfg(any(target_arch = "x86",
             target_arch = "x86_64",
@@ -20,7 +19,7 @@ mod test_cases {
         let y: &mut isize;
         let x = &mut 0isize;
         unsafe {
-            llvm_asm!("nop" : : "r"(x));
+            asm!("nop" : : "r"(x));
         }
         let z = x;  //~ ERROR use of moved value: `x`
     }
@@ -29,7 +28,7 @@ mod test_cases {
         let mut x = 3;
         let y = &mut x;
         unsafe {
-            llvm_asm!("nop" : : "r"(x)); //~ ERROR cannot use
+            asm!("nop" : : "r"(x)); //~ ERROR cannot use
         }
         let z = y;
     }
@@ -37,12 +36,12 @@ mod test_cases {
     fn out_is_assign() {
         let x = 3;
         unsafe {
-            llvm_asm!("nop" : "=r"(x));  //~ ERROR cannot assign twice
+            asm!("nop" : "=r"(x));  //~ ERROR cannot assign twice
         }
         let mut a = &mut 3;
         let b = &*a;
         unsafe {
-            llvm_asm!("nop" : "=r"(a));  // OK, Shallow write to `a`
+            asm!("nop" : "=r"(a));  // OK, Shallow write to `a`
         }
         let c = b;
         let d = *a;
@@ -51,14 +50,14 @@ mod test_cases {
     fn rw_is_assign() {
         let x = 3;
         unsafe {
-            llvm_asm!("nop" : "+r"(x));  //~ ERROR cannot assign twice
+            asm!("nop" : "+r"(x));  //~ ERROR cannot assign twice
         }
     }
 
     fn indirect_is_not_init() {
         let x: i32;
         unsafe {
-            llvm_asm!("nop" : "=*r"(x)); //~ ERROR use of possibly-uninitialized variable
+            asm!("nop" : "=*r"(x)); //~ ERROR use of possibly-uninitialized variable
         }
     }
 
@@ -66,7 +65,7 @@ mod test_cases {
         let mut x = &mut 3;
         let y = &*x;
         unsafe {
-            llvm_asm!("nop" : "+r"(x));  //~ ERROR cannot assign to `x` because it is borrowed
+            asm!("nop" : "+r"(x));  //~ ERROR cannot assign to `x` because it is borrowed
         }
         let z = y;
     }
@@ -74,7 +73,7 @@ mod test_cases {
     fn two_moves() {
         let x = &mut 2;
         unsafe {
-            llvm_asm!("nop" : : "r"(x), "r"(x) );    //~ ERROR use of moved value
+            asm!("nop" : : "r"(x), "r"(x) );    //~ ERROR use of moved value
         }
     }
 }

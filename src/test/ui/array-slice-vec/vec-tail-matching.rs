@@ -1,5 +1,7 @@
 // run-pass
 
+#![feature(slice_patterns)]
+
 struct Foo {
     string: &'static str
 }

@@ -1,11 +1,11 @@
 fn main() {
     enum Test {
-        Very //~ HELP missing `,`
-        Bad(usize) //~ HELP missing `,`
-        //~^ ERROR expected one of `(`, `,`, `=`, `{`, or `}`, found `Bad`
-        Stuff { a: usize } //~ HELP missing `,`
-        //~^ ERROR expected one of `,`, `=`, or `}`, found `Stuff`
+        Very
+        //~^ ERROR missing comma
+        Bad(usize)
+        //~^ ERROR missing comma
+        Stuff { a: usize }
+        //~^ ERROR missing comma
         Here
-        //~^ ERROR expected one of `,`, `=`, or `}`, found `Here`
     }
 }

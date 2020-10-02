@@ -1,3 +1,5 @@
+// compile-flags: -Z continue-parse-after-error
+
 fn main() {
     let _ = b"\u{a66e}";
     //~^ ERROR unicode escape sequences cannot be used as a byte or in a byte string

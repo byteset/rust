@@ -1,8 +1,7 @@
-// This file tests that we don't generate any code for saturation when using the
-// unchecked intrinsics.
+// compile-flags: -C no-prepopulate-passes
 
-// compile-flags: -C opt-level=3
-// ignore-wasm32 the wasm target is tested in `wasm_casts_*`
+// This file tests that we don't generate any code for saturation if
+// -Z saturating-float-casts is not enabled.
 
 #![crate_type = "lib"]
 
@@ -13,7 +12,7 @@ pub fn f32_to_u32(x: f32) -> u32 {
     // CHECK-NOT: fcmp
     // CHECK-NOT: icmp
     // CHECK-NOT: select
-    unsafe { x.to_int_unchecked() }
+    x as u32
 }
 
 // CHECK-LABEL: @f32_to_i32
@@ -23,7 +22,7 @@ pub fn f32_to_i32(x: f32) -> i32 {
     // CHECK-NOT: fcmp
     // CHECK-NOT: icmp
     // CHECK-NOT: select
-    unsafe { x.to_int_unchecked() }
+    x as i32
 }
 
 #[no_mangle]
@@ -32,5 +31,5 @@ pub fn f64_to_u16(x: f64) -> u16 {
     // CHECK-NOT: fcmp
     // CHECK-NOT: icmp
     // CHECK-NOT: select
-    unsafe { x.to_int_unchecked() }
+    x as u16
 }

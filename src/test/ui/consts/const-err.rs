@@ -1,7 +1,6 @@
-// build-fail
 // compile-flags: -Zforce-overflow-checks=on
 
-#![allow(arithmetic_overflow)]
+#![allow(exceeding_bitshifts)]
 #![warn(const_err)]
 
 fn black_box<T>(_: T) {

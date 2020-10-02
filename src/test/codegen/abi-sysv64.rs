@@ -4,7 +4,6 @@
 
 // ignore-arm
 // ignore-aarch64
-// ignore-riscv64 sysv64 not supported
 
 // compile-flags: -C no-prepopulate-passes
 

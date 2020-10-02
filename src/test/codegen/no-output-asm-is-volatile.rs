@@ -1,6 +1,6 @@
 // compile-flags: -O
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 #![crate_type = "lib"]
 
 // Check that inline assembly expressions without any outputs
@@ -9,6 +9,6 @@
 // CHECK-LABEL: @assembly
 #[no_mangle]
 pub fn assembly() {
-    unsafe { llvm_asm!("") }
+    unsafe { asm!("") }
 // CHECK: tail call void asm sideeffect "", {{.*}}
 }

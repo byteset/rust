@@ -1,3 +1,4 @@
+// ignore-license
 void overflow();
 
 int main() {

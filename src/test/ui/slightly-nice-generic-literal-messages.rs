@@ -6,7 +6,7 @@ fn main() {
     match Foo(1.1, marker::PhantomData) {
         1 => {}
     //~^ ERROR mismatched types
-    //~| expected struct `Foo<{float}, _>`
+    //~| expected type `Foo<{float}, _>`
     //~| found type `{integer}`
     //~| expected struct `Foo`, found integer
     }

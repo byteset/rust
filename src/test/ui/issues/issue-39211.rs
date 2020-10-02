@@ -8,8 +8,7 @@ trait Mat {
 }
 
 fn m<M: Mat>() {
-    let a = [3; M::Row::DIM];
-    //~^ ERROR constant expression depends on a generic parameter
+    let a = [3; M::Row::DIM]; //~ ERROR associated type `Row` not found for `M`
 }
 fn main() {
 }

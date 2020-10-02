@@ -1,9 +1,7 @@
 // run-pass
 
-// revisions: full min
-#![cfg_attr(full, feature(const_generics))]
-#![cfg_attr(full, allow(incomplete_features))]
-#![cfg_attr(min, feature(min_const_generics))]
+#![feature(const_generics)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 pub trait BitLen: Sized {
     const BIT_LEN: usize;
@@ -14,5 +12,5 @@ impl<const L: usize> BitLen for [u8; L] {
 }
 
 fn main() {
-    let _foo = <[u8; 2]>::BIT_LEN;
+    let foo = <[u8; 2]>::BIT_LEN;
 }

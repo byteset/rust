@@ -1,4 +1,4 @@
-#![deny(broken_intra_doc_links)]
+#![deny(intra_doc_link_resolution_failure)]
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
 

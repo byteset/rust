@@ -1,6 +1,6 @@
 // run-pass
 
-#![feature(specialization)] //~ WARN the feature `specialization` is incomplete
+#![feature(specialization)]
 
 // Test that you can specialize via an explicit trait hierarchy
 

@@ -1,10 +1,10 @@
-error[E0423]: expected function, tuple struct or tuple variant, found trait `Foo`
+error[E0423]: expected function, found trait `Foo`
   --> $DIR/issue-58022.rs:14:9
    |
 LL |         Foo(Box::new(*slice))
-   |         ^^^ not a function, tuple struct or tuple variant
+   |         ^^^ not a function
 
-error[E0283]: type annotations needed
+error[E0283]: type annotations needed: cannot resolve `_: Foo`
   --> $DIR/issue-58022.rs:4:25
    |
 LL |     const SIZE: usize;
@@ -12,12 +12,6 @@ LL |     const SIZE: usize;
 LL | 
 LL |     fn new(slice: &[u8; Foo::SIZE]) -> Self;
    |                         ^^^^^^^^^
-   |                         |
-   |                         cannot infer type
-   |                         help: use the fully qualified path to an implementation: `<Type as Foo>::SIZE`
-   |
-   = note: cannot satisfy `_: Foo`
-   = note: associated constants cannot be accessed directly on a `trait`, they can only be accessed through a specific `impl`
 
 error: aborting due to 2 previous errors
 

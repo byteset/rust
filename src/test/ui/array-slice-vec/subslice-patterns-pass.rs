@@ -4,6 +4,8 @@
 
 // run-pass
 
+#![feature(slice_patterns)]
+
 #![allow(unreachable_patterns)]
 
 use std::convert::identity;

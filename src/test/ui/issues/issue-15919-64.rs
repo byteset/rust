@@ -1,4 +1,3 @@
-// build-fail
 // ignore-32bit
 
 // FIXME https://github.com/rust-lang/rust/issues/59774

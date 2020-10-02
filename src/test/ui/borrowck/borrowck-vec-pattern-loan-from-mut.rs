@@ -1,3 +1,5 @@
+#![feature(slice_patterns)]
+
 fn a() {
     let mut v = vec![1, 2, 3];
     let vb: &mut [isize] = &mut v;

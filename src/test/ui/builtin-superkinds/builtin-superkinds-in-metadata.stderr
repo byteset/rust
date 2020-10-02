@@ -2,18 +2,12 @@ error[E0277]: `T` cannot be sent between threads safely
   --> $DIR/builtin-superkinds-in-metadata.rs:13:23
    |
 LL | impl <T:Sync+'static> RequiresRequiresShareAndSend for X<T> { }
-   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `T` cannot be sent between threads safely
-   | 
-  ::: $DIR/auxiliary/trait_superkinds_in_metadata.rs:7:58
+   |       --              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `T` cannot be sent between threads safely
+   |       |
+   |       help: consider further restricting this bound: `T: std::marker::Send +`
    |
-LL | pub trait RequiresRequiresShareAndSend : RequiresShare + Send { }
-   |                                                          ---- required by this bound in `RequiresRequiresShareAndSend`
-   |
+   = help: within `X<T>`, the trait `std::marker::Send` is not implemented for `T`
    = note: required because it appears within the type `X<T>`
-help: consider further restricting this bound
-   |
-LL | impl <T:Sync+'static + Send> RequiresRequiresShareAndSend for X<T> { }
-   |                      ^^^^^^
 
 error: aborting due to previous error
 

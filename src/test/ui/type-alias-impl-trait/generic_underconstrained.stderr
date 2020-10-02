@@ -1,22 +1,19 @@
 error: at least one trait must be specified
-  --> $DIR/generic_underconstrained.rs:6:35
+  --> $DIR/generic_underconstrained.rs:6:40
    |
 LL | type Underconstrained<T: Trait> = impl 'static;
-   |                                   ^^^^^^^^^^^^
+   |                                        ^^^^^^^
 
 error[E0277]: the trait bound `T: Trait` is not satisfied
-  --> $DIR/generic_underconstrained.rs:10:31
+  --> $DIR/generic_underconstrained.rs:6:1
    |
 LL | type Underconstrained<T: Trait> = impl 'static;
-   |                          ----- required by this bound in `Underconstrained`
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Trait` is not implemented for `T`
 ...
 LL | fn underconstrain<T>(_: T) -> Underconstrained<T> {
-   |                               ^^^^^^^^^^^^^^^^^^^ the trait `Trait` is not implemented for `T`
+   |                   - help: consider restricting this bound: `T: Trait`
    |
-help: consider restricting type parameter `T`
-   |
-LL | fn underconstrain<T: Trait>(_: T) -> Underconstrained<T> {
-   |                    ^^^^^^^
+   = note: the return type of a function must have a statically known size
 
 error: aborting due to 2 previous errors
 

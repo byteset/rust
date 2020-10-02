@@ -1,15 +1,15 @@
-use crate::common::Config;
-use std::env;
 use std::ffi::OsStr;
+use std::env;
 use std::path::PathBuf;
+use crate::common::Config;
 
-use tracing::*;
+use log::*;
 
 #[cfg(test)]
 mod tests;
 
 /// Conversion table from triple OS name to Rust SYSNAME
-const OS_TABLE: &[(&str, &str)] = &[
+const OS_TABLE: &'static [(&'static str, &'static str)] = &[
     ("android", "android"),
     ("androideabi", "android"),
     ("cloudabi", "cloudabi"),
@@ -21,7 +21,6 @@ const OS_TABLE: &[(&str, &str)] = &[
     ("fuchsia", "fuchsia"),
     ("haiku", "haiku"),
     ("hermit", "hermit"),
-    ("illumos", "illumos"),
     ("ios", "ios"),
     ("l4re", "l4re"),
     ("linux", "linux"),
@@ -37,7 +36,7 @@ const OS_TABLE: &[(&str, &str)] = &[
     ("vxworks", "vxworks"),
 ];
 
-const ARCH_TABLE: &[(&str, &str)] = &[
+const ARCH_TABLE: &'static [(&'static str, &'static str)] = &[
     ("aarch64", "aarch64"),
     ("amd64", "x86_64"),
     ("arm", "arm"),
@@ -47,7 +46,6 @@ const ARCH_TABLE: &[(&str, &str)] = &[
     ("armv7", "arm"),
     ("armv7s", "arm"),
     ("asmjs", "asmjs"),
-    ("avr", "avr"),
     ("hexagon", "hexagon"),
     ("i386", "x86"),
     ("i586", "x86"),
@@ -69,7 +67,6 @@ const ARCH_TABLE: &[(&str, &str)] = &[
     ("powerpc", "powerpc"),
     ("powerpc64", "powerpc64"),
     ("powerpc64le", "powerpc64"),
-    ("riscv64gc", "riscv64"),
     ("s390x", "s390x"),
     ("sparc", "sparc"),
     ("sparc64", "sparc64"),
@@ -80,42 +77,6 @@ const ARCH_TABLE: &[(&str, &str)] = &[
     ("wasm32", "wasm32"),
     ("x86_64", "x86_64"),
     ("xcore", "xcore"),
-];
-
-pub const ASAN_SUPPORTED_TARGETS: &[&str] = &[
-    "aarch64-fuchsia",
-    "aarch64-unknown-linux-gnu",
-    "x86_64-apple-darwin",
-    "x86_64-fuchsia",
-    "x86_64-unknown-freebsd",
-    "x86_64-unknown-linux-gnu",
-];
-
-pub const LSAN_SUPPORTED_TARGETS: &[&str] =
-    &["aarch64-unknown-linux-gnu", "x86_64-apple-darwin", "x86_64-unknown-linux-gnu"];
-
-pub const MSAN_SUPPORTED_TARGETS: &[&str] =
-    &["aarch64-unknown-linux-gnu", "x86_64-unknown-freebsd", "x86_64-unknown-linux-gnu"];
-
-pub const TSAN_SUPPORTED_TARGETS: &[&str] = &[
-    "aarch64-unknown-linux-gnu",
-    "x86_64-apple-darwin",
-    "x86_64-unknown-freebsd",
-    "x86_64-unknown-linux-gnu",
-];
-
-const BIG_ENDIAN: &[&str] = &[
-    "armebv7r",
-    "mips",
-    "mips64",
-    "mipsisa32r6",
-    "mipsisa64r6",
-    "powerpc",
-    "powerpc64",
-    "s390x",
-    "sparc",
-    "sparc64",
-    "sparcv9",
 ];
 
 pub fn matches_os(triple: &str, name: &str) -> bool {
@@ -144,21 +105,17 @@ pub fn get_arch(triple: &str) -> &'static str {
     panic!("Cannot determine Architecture from triple");
 }
 
-/// Determine the endianness from `triple`
-pub fn is_big_endian(triple: &str) -> bool {
-    let triple_arch = triple.split('-').next().unwrap();
-    BIG_ENDIAN.contains(&triple_arch)
-}
-
 pub fn matches_env(triple: &str, name: &str) -> bool {
-    if let Some(env) = triple.split('-').nth(3) { env.starts_with(name) } else { false }
+    if let Some(env) = triple.split('-').nth(3) {
+        env.starts_with(name)
+    } else {
+        false
+    }
 }
 
 pub fn get_pointer_width(triple: &str) -> &'static str {
     if (triple.contains("64") && !triple.ends_with("gnux32")) || triple.starts_with("s390x") {
         "64bit"
-    } else if triple.starts_with("avr") {
-        "16bit"
     } else {
         "32bit"
     }
@@ -195,11 +152,11 @@ pub trait PathBufExt {
 
 impl PathBufExt for PathBuf {
     fn with_extra_extension<S: AsRef<OsStr>>(&self, extension: S) -> PathBuf {
-        if extension.as_ref().is_empty() {
+        if extension.as_ref().len() == 0 {
             self.clone()
         } else {
             let mut fname = self.file_name().unwrap().to_os_string();
-            if !extension.as_ref().to_str().unwrap().starts_with('.') {
+            if !extension.as_ref().to_str().unwrap().starts_with(".") {
                 fname.push(".");
             }
             fname.push(extension);

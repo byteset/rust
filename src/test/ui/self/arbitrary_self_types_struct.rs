@@ -1,4 +1,5 @@
 // run-pass
+#![feature(arbitrary_self_types)]
 
 use std::rc::Rc;
 

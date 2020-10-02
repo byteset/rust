@@ -3,7 +3,7 @@
 // These are forbidden occurrences of label-break-value
 
 fn labeled_unsafe() {
-    unsafe 'b: {} //~ ERROR expected `{`, found `'b`
+    unsafe 'b: {} //~ ERROR expected one of `extern`, `fn`, or `{`
 }
 
 fn labeled_if() {

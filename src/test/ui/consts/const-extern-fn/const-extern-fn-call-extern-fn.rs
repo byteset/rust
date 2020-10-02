@@ -7,7 +7,7 @@ extern "C" {
 const extern fn bar() {
     unsafe {
         regular_in_block();
-        //~^ ERROR: calls in constant functions
+        //~^ ERROR: cannot call functions with `"C"` abi in `min_const_fn`
     }
 }
 
@@ -16,7 +16,7 @@ extern fn regular() {}
 const extern fn foo() {
     unsafe {
         regular();
-        //~^ ERROR: calls in constant functions
+        //~^ ERROR: cannot call functions with `"C"` abi in `min_const_fn`
     }
 }
 

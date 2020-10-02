@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #[derive(Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 struct Array<T> {
     f00: [T; 00],

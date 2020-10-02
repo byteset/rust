@@ -1,3 +1,5 @@
+#![feature(slice_patterns)]
+
 pub struct History<'a> { pub _s: &'a str }
 
 impl<'a> History<'a> {

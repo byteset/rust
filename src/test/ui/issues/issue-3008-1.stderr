@@ -7,10 +7,7 @@ LL | enum Bar {
 LL |     BarSome(Bar)
    |             --- recursive without indirection
    |
-help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to make `Bar` representable
-   |
-LL |     BarSome(Box<Bar>)
-   |             ^^^^   ^
+   = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `Bar` representable
 
 error: aborting due to previous error
 

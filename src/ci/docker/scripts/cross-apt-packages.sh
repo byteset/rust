@@ -17,10 +17,9 @@ apt-get update && apt-get install -y --no-install-recommends \
   libssl-dev \
   libtool-bin \
   make \
-  ninja-build \
   patch \
   pkg-config \
-  python3 \
+  python2.7 \
   sudo \
   texinfo \
   unzip \

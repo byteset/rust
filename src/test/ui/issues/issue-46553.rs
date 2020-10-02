@@ -1,5 +1,5 @@
 // run-pass
-#![feature(const_fn_fn_ptr_basics)]
+#![feature(const_fn)]
 #![deny(const_err)]
 
 pub struct Data<T> {

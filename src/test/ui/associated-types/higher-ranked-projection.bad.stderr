@@ -1,12 +1,14 @@
-error[E0308]: mismatched types
+error[E0271]: type mismatch resolving `for<'a> <&'a _ as Mirror>::Image == _`
   --> $DIR/higher-ranked-projection.rs:25:5
    |
+LL | fn foo<U, T>(_t: T)
+   |    ---
+LL |     where for<'a> &'a T: Mirror<Image=U>
+   |                                 ------- required by this bound in `foo`
+...
 LL |     foo(());
-   |     ^^^ one type is more general than the other
-   |
-   = note: expected type `&'a ()`
-              found type `&()`
+   |     ^^^ expected bound lifetime parameter 'a, found concrete lifetime
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0308`.
+For more information about this error, try `rustc --explain E0271`.

@@ -1,8 +1,6 @@
 // ignore-tidy-linelength
 // ignore-windows
 // ignore-macos
-// ignore-wasm
-// ignore-emscripten
 
 // compile-flags: -g -C no-prepopulate-passes
 

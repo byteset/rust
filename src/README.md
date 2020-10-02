@@ -1,8 +1,8 @@
 This directory contains the source code of the rust project, including:
-- The test suite
-- The bootstrapping build system
+- `rustc` and its tests
+- `libstd`
 - Various submodules for tools, like rustdoc, rls, etc.
 
-For more information on how various parts of the compiler work, see the [rustc dev guide].
+For more information on how various parts of the compiler work, see the [rustc guide].
 
-[rustc dev guide]: https://rustc-dev-guide.rust-lang.org/about-this-guide.html
+[rustc guide]: https://rust-lang.github.io/rustc-guide/about-this-guide.html

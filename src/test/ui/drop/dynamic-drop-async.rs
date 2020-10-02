@@ -5,10 +5,9 @@
 
 // run-pass
 // edition:2018
-// ignore-wasm32-bare compiled with panic=abort by default
+// ignore-emscripten compiled with panic=abort by default
 
-#![feature(move_ref_pattern)]
-
+#![feature(slice_patterns)]
 #![allow(unused)]
 
 use std::{
@@ -229,12 +228,6 @@ async fn subslice_pattern_reassign(a: Rc<Allocator>) {
     a.alloc().await;
 }
 
-async fn move_ref_pattern(a: Rc<Allocator>) {
-    let mut tup = (a.alloc().await, a.alloc().await, a.alloc().await, a.alloc().await);
-    let (ref _a, ref mut _b, _c, mut _d) = tup;
-    a.alloc().await;
-}
-
 fn run_test<F, G>(cx: &mut Context<'_>, ref f: F)
 where
     F: Fn(Rc<Allocator>) -> G,
@@ -330,6 +323,4 @@ fn main() {
     run_test(context, |a| subslice_pattern_from_end_with_drop(a, false, true));
     run_test(context, |a| subslice_pattern_from_end_with_drop(a, false, false));
     run_test(context, |a| subslice_pattern_reassign(a));
-
-    run_test(context, |a| move_ref_pattern(a));
 }

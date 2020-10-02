@@ -1,10 +1,9 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 /// ```
 /// \__________pkt->size___________/          \_result->size_/ \__pkt->size__/
 /// ```
 pub fn foo() {}
-//~^^^^ WARNING could not parse code block as Rust code
 
 /// ```
 ///    |
@@ -12,7 +11,6 @@ pub fn foo() {}
 ///    |     ^^^^^^ did you mean `baz::foobar`?
 /// ```
 pub fn bar() {}
-//~^^^^^^ WARNING could not parse code block as Rust code
 
 /// ```
 /// valid
@@ -26,7 +24,6 @@ pub fn bar() {}
 /// "invalid
 /// ```
 pub fn valid_and_invalid() {}
-//~^^^^^^^^ WARNING could not parse code block as Rust code
 
 /// This is a normal doc comment, but...
 ///
@@ -38,7 +35,6 @@ pub fn valid_and_invalid() {}
 ///
 /// Good thing we tested it!
 pub fn baz() {}
-//~^^^^^^ WARNING could not parse code block as Rust code
 
 /// Indented block start
 ///
@@ -47,7 +43,6 @@ pub fn baz() {}
 ///
 /// Indented block end
 pub fn quux() {}
-//~^^^^^ could not parse code block as Rust code
 
 /// Unclosed fence
 ///
@@ -59,31 +54,26 @@ pub fn xyzzy() {}
 ///
 ///     ```
 pub fn blah() {}
-//~^^ WARNING could not parse code block as Rust code
 
 /// ```edition2018
 /// \_
 /// ```
 pub fn blargh() {}
-//~^^^^ WARNING could not parse code block as Rust code
 
 #[doc = "```"]
 /// \_
 #[doc = "```"]
 pub fn crazy_attrs() {}
-//~^^^^ WARNING doc comment contains an invalid Rust code block
 
 /// ```rust
 /// ```
 pub fn empty_rust() {}
-//~^^^ WARNING Rust code block is empty
 
 /// ```
 ///
 ///
 /// ```
 pub fn empty_rust_with_whitespace() {}
-//~^^^^^ WARNING Rust code block is empty
 
 /// ```
 /// let x = 1;
@@ -92,10 +82,3 @@ pub fn empty_rust_with_whitespace() {}
 ///     \____/
 ///
 pub fn indent_after_fenced() {}
-//~^^^ WARNING could not parse code block as Rust code
-
-/// ```
-/// "invalid
-/// ```
-pub fn invalid() {}
-//~^^^^ WARNING could not parse code block as Rust code

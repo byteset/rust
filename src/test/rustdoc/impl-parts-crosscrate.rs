@@ -1,7 +1,7 @@
 // aux-build:rustdoc-impl-parts-crosscrate.rs
 // ignore-cross-compile
 
-#![feature(negative_impls)]
+#![feature(optin_builtin_traits)]
 
 extern crate rustdoc_impl_parts_crosscrate;
 

@@ -1,3 +1,5 @@
+// ignore-x86
+// ^ due to stderr output differences
 use std::thread;
 use std::rc::Rc;
 
@@ -23,7 +25,7 @@ fn main() {
     let x = foo(Port(Rc::new(())));
 
     thread::spawn(move|| {
-        //~^ ERROR `Rc<()>` cannot be sent between threads safely
+        //~^ ERROR `std::rc::Rc<()>` cannot be sent between threads safely
         let y = x;
         println!("{:?}", y);
     });

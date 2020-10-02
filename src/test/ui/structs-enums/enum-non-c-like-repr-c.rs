@@ -69,11 +69,8 @@ fn main() {
     unsafe {
         // This should be safe, because we don't match on it unless it's fully formed,
         // and it doesn't have a destructor.
-        //
-        // Furthermore, there are no types within MyEnum which cannot be initialized with zero,
-        // specifically, though padding and such are present, there are no references or similar
-        // types.
-        let mut dest: MyEnum = mem::zeroed();
+        #[allow(deprecated)]
+        let mut dest: MyEnum = mem::uninitialized();
         while buf.len() > 0 {
             match parse_my_enum(&mut dest, &mut buf) {
                 Ok(()) => output.push(Ok(dest)),

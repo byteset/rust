@@ -4,7 +4,7 @@
 //
 // Regression test for #53121.
 //
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 trait MyTrait<'a> {
     type Output;

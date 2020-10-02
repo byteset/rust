@@ -5,6 +5,11 @@ pub struct Good {
     aligned: [u8; 32],
 }
 
+#[repr(packed)]
+pub struct JustArray {
+    array: [u32]
+}
+
 #[deny(safe_packed_borrows)]
 fn main() {
     let good = Good {

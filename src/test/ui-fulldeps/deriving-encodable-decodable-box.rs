@@ -1,17 +1,16 @@
 // run-pass
 
 #![allow(unused_imports)]
+
 #![feature(box_syntax)]
 #![feature(rustc_private)]
 
-extern crate rustc_macros;
-extern crate rustc_serialize;
+extern crate serialize as rustc_serialize;
 
-use rustc_macros::{Decodable, Encodable};
+use rustc_serialize::{Encodable, Decodable};
 use rustc_serialize::json;
-use rustc_serialize::{Decodable, Encodable};
 
-#[derive(Encodable, Decodable)]
+#[derive(RustcEncodable, RustcDecodable)]
 struct A {
     foo: Box<[bool]>,
 }

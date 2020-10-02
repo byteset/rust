@@ -5,7 +5,6 @@ struct Bar<T> { x: T }
 struct W(u32);
 struct A { a: u32 }
 
-#[allow(redundant_semicolons)]
 const fn basics((a,): (u32,)) -> u32 {
     // Deferred assignment:
     let b: u32;

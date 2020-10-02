@@ -50,7 +50,8 @@ fn main() {
         }
 
         let _guard = Droppable;
-        core::panicking::panic("???");
+        let s = "issue-64655-allow-unwind-when-calling-panic-directly.rs";
+        core::panicking::panic(&("???", s, 17, 4));
     });
 
     let wait = handle.join();

@@ -1,4 +1,4 @@
-// Adapted from rust-lang/rust#58813
+// Adapated from rust-lang/rust#58813
 
 // revisions: rpass1 cfail2
 

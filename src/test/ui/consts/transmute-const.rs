@@ -1,5 +1,7 @@
 // run-pass
 
+#![feature(const_transmute)]
+
 use std::mem;
 
 #[repr(transparent)]

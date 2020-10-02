@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 pub trait Reader {}
 
 enum Wrapper<'a> {

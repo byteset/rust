@@ -1,13 +1,13 @@
 macro_rules! some_macro {
     ($other: expr) => ({
-        $other(None) //~ NOTE supplied 1 argument
+        $other(None)
+        //~^ this function takes 0 parameters but 1 parameter was supplied
     })
 }
 
-fn some_function() {} //~ NOTE defined here
+fn some_function() {}
 
 fn main() {
     some_macro!(some_function);
-    //~^ ERROR this function takes 0 arguments but 1 argument was supplied
-    //~| NOTE expected 0 arguments
+    //~^ in this expansion of some_macro!
 }

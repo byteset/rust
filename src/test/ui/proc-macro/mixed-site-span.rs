@@ -2,6 +2,8 @@
 
 // aux-build:mixed-site-span.rs
 
+#![feature(proc_macro_hygiene)]
+
 #[macro_use]
 extern crate mixed_site_span;
 

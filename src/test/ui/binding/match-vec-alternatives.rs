@@ -1,4 +1,5 @@
 // run-pass
+#![feature(slice_patterns)]
 
 fn match_vecs<'a, T>(l1: &'a [T], l2: &'a [T]) -> &'static str {
     match (l1, l2) {

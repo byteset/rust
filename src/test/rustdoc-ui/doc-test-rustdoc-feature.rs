@@ -1,14 +1,14 @@
-// check-pass
+// build-pass
 // compile-flags:--test
 // normalize-stdout-test: "src/test/rustdoc-ui" -> "$$DIR"
 
 #![feature(doc_cfg)]
 
-// Make sure `cfg(doc)` is set when finding doctests but not inside the doctests.
+// Make sure `cfg(rustdoc)` is set when finding doctests but not inside the doctests.
 
 /// ```
 /// #![feature(doc_cfg)]
-/// assert!(!cfg!(doc));
+/// assert!(!cfg!(rustdoc));
 /// ```
-#[cfg(doc)]
+#[cfg(rustdoc)]
 pub struct Foo;

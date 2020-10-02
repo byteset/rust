@@ -1,24 +1,24 @@
 #![feature(staged_api, allow_internal_unstable)]
 #![stable(feature = "stable", since = "1.0.0")]
 
-#[unstable(feature = "function", issue = "none")]
+#[unstable(feature = "function", issue = "0")]
 pub fn unstable() {}
 
 
 #[stable(feature = "stable", since = "1.0.0")]
 pub struct Foo {
-    #[unstable(feature = "struct_field", issue = "none")]
+    #[unstable(feature = "struct_field", issue = "0")]
     pub x: u8
 }
 
 impl Foo {
-    #[unstable(feature = "method", issue = "none")]
+    #[unstable(feature = "method", issue = "0")]
     pub fn method(&self) {}
 }
 
 #[stable(feature = "stable", since = "1.0.0")]
 pub struct Bar {
-    #[unstable(feature = "struct2_field", issue = "none")]
+    #[unstable(feature = "struct2_field", issue = "0")]
     pub x: u8
 }
 
@@ -49,15 +49,6 @@ macro_rules! call_method_allow {
 #[allow_internal_unstable(struct_field, struct2_field)]
 #[macro_export]
 macro_rules! access_field_allow {
-    ($e: expr) => { $e.x }
-}
-
-// regression test for #77088
-#[stable(feature = "stable", since = "1.0.0")]
-#[allow_internal_unstable(struct_field)]
-#[allow_internal_unstable(struct2_field)]
-#[macro_export]
-macro_rules! access_field_allow2 {
     ($e: expr) => { $e.x }
 }
 

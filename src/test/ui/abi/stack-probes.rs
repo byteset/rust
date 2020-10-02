@@ -11,8 +11,9 @@
 // ignore-cloudabi no processes
 // ignore-emscripten no processes
 // ignore-sgx no processes
+// ignore-musl FIXME #31506
 
-use std::mem::MaybeUninit;
+use std::mem;
 use std::process::Command;
 use std::thread;
 use std::env;
@@ -27,8 +28,8 @@ fn main() {
     let args = env::args().skip(1).collect::<Vec<_>>();
     if args.len() > 0 {
         match &args[0][..] {
-            "main-thread" => recurse(&MaybeUninit::uninit()),
-            "child-thread" => thread::spawn(|| recurse(&MaybeUninit::uninit())).join().unwrap(),
+            "main-thread" => recurse(&[]),
+            "child-thread" => thread::spawn(|| recurse(&[])).join().unwrap(),
             _ => panic!(),
         }
         return
@@ -47,11 +48,10 @@ fn main() {
 }
 
 #[allow(unconditional_recursion)]
-fn recurse(array: &MaybeUninit<[u64; 1024]>) {
-    unsafe {
-        black_box(array.as_ptr() as u64);
-    }
-    let local: MaybeUninit<[u64; 1024]> = MaybeUninit::uninit();
+fn recurse(array: &[u64]) {
+    unsafe { black_box(array.as_ptr() as u64); }
+    #[allow(deprecated)]
+    let local: [_; 1024] = unsafe { mem::uninitialized() };
     recurse(&local);
 }
 

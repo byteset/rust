@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #![allow(dead_code)]
 struct Parser<'a, I, O> {
     parse: Box<dyn FnMut(I) -> Result<O, String> + 'a>

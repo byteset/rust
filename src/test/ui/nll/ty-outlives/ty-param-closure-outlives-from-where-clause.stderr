@@ -1,4 +1,4 @@
-note: external requirements
+note: External requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:27:26
    |
 LL |       with_signature(a, b, |x, y| {
@@ -11,16 +11,16 @@ LL | |         require(&x, &y)
 LL | |     })
    | |_____^
    |
-   = note: defining type: no_region::<T>::{closure#0} with closure substs [
+   = note: defining type: DefId(0:23 ~ ty_param_closure_outlives_from_where_clause[317d]::no_region[0]::{{closure}}[0]) with closure substs [
+               T,
                i32,
                extern "rust-call" fn((std::cell::Cell<&'_#1r ()>, T)),
-               (),
            ]
    = note: late-bound region is '_#2r
    = note: number of external vids: 3
    = note: where T: '_#1r
 
-note: no external requirements
+note: No external requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:26:1
    |
 LL | / fn no_region<'a, T>(a: Cell<&'a ()>, b: T) {
@@ -32,7 +32,9 @@ LL | |     })
 LL | | }
    | |_^
    |
-   = note: defining type: no_region::<T>
+   = note: defining type: DefId(0:20 ~ ty_param_closure_outlives_from_where_clause[317d]::no_region[0]) with substs [
+               T,
+           ]
 
 error[E0309]: the parameter type `T` may not live long enough
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:27:26
@@ -47,9 +49,9 @@ LL | |         require(&x, &y)
 LL | |     })
    | |_____^
    |
-   = help: consider adding an explicit lifetime bound `T: 'a`...
+   = help: consider adding an explicit lifetime bound `T: ReFree(DefId(0:20 ~ ty_param_closure_outlives_from_where_clause[317d]::no_region[0]), BrNamed(crate0:DefIndex(21), 'a))`...
 
-note: external requirements
+note: External requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:43:26
    |
 LL |       with_signature(a, b, |x, y| {
@@ -62,15 +64,16 @@ LL | |         require(&x, &y)
 LL | |     })
    | |_____^
    |
-   = note: defining type: correct_region::<'_#1r, T>::{closure#0} with closure substs [
+   = note: defining type: DefId(0:27 ~ ty_param_closure_outlives_from_where_clause[317d]::correct_region[0]::{{closure}}[0]) with closure substs [
+               '_#1r,
+               T,
                i32,
                extern "rust-call" fn((std::cell::Cell<&'_#2r ()>, T)),
-               (),
            ]
    = note: number of external vids: 3
    = note: where T: '_#2r
 
-note: no external requirements
+note: No external requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:39:1
    |
 LL | / fn correct_region<'a, T>(a: Cell<&'a ()>, b: T)
@@ -82,9 +85,12 @@ LL | |     })
 LL | | }
    | |_^
    |
-   = note: defining type: correct_region::<'_#1r, T>
+   = note: defining type: DefId(0:24 ~ ty_param_closure_outlives_from_where_clause[317d]::correct_region[0]) with substs [
+               '_#1r,
+               T,
+           ]
 
-note: external requirements
+note: External requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:64:26
    |
 LL |       with_signature(a, b, |x, y| {
@@ -95,16 +101,17 @@ LL | |         require(&x, &y)
 LL | |     })
    | |_____^
    |
-   = note: defining type: wrong_region::<'_#1r, T>::{closure#0} with closure substs [
+   = note: defining type: DefId(0:32 ~ ty_param_closure_outlives_from_where_clause[317d]::wrong_region[0]::{{closure}}[0]) with closure substs [
+               '_#1r,
+               T,
                i32,
                extern "rust-call" fn((std::cell::Cell<&'_#2r ()>, T)),
-               (),
            ]
    = note: late-bound region is '_#3r
    = note: number of external vids: 4
    = note: where T: '_#2r
 
-note: no external requirements
+note: No external requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:60:1
    |
 LL | / fn wrong_region<'a, 'b, T>(a: Cell<&'a ()>, b: T)
@@ -116,7 +123,10 @@ LL | |     })
 LL | | }
    | |_^
    |
-   = note: defining type: wrong_region::<'_#1r, T>
+   = note: defining type: DefId(0:28 ~ ty_param_closure_outlives_from_where_clause[317d]::wrong_region[0]) with substs [
+               '_#1r,
+               T,
+           ]
 
 error[E0309]: the parameter type `T` may not live long enough
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:64:26
@@ -129,9 +139,9 @@ LL | |         require(&x, &y)
 LL | |     })
    | |_____^
    |
-   = help: consider adding an explicit lifetime bound `T: 'a`...
+   = help: consider adding an explicit lifetime bound `T: ReFree(DefId(0:28 ~ ty_param_closure_outlives_from_where_clause[317d]::wrong_region[0]), BrNamed(crate0:DefIndex(29), 'a))`...
 
-note: external requirements
+note: External requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:77:26
    |
 LL |       with_signature(a, b, |x, y| {
@@ -141,15 +151,17 @@ LL | |         require(&x, &y)
 LL | |     })
    | |_____^
    |
-   = note: defining type: outlives_region::<'_#1r, '_#2r, T>::{closure#0} with closure substs [
+   = note: defining type: DefId(0:37 ~ ty_param_closure_outlives_from_where_clause[317d]::outlives_region[0]::{{closure}}[0]) with closure substs [
+               '_#1r,
+               '_#2r,
+               T,
                i32,
                extern "rust-call" fn((std::cell::Cell<&'_#3r ()>, T)),
-               (),
            ]
    = note: number of external vids: 4
    = note: where T: '_#3r
 
-note: no external requirements
+note: No external requirements
   --> $DIR/ty-param-closure-outlives-from-where-clause.rs:72:1
    |
 LL | / fn outlives_region<'a, 'b, T>(a: Cell<&'a ()>, b: T)
@@ -161,7 +173,11 @@ LL | |     })
 LL | | }
    | |_^
    |
-   = note: defining type: outlives_region::<'_#1r, '_#2r, T>
+   = note: defining type: DefId(0:33 ~ ty_param_closure_outlives_from_where_clause[317d]::outlives_region[0]) with substs [
+               '_#1r,
+               '_#2r,
+               T,
+           ]
 
 error: aborting due to 2 previous errors
 

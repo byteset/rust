@@ -1,3 +1,4 @@
+// ignore-license
 #include <stdint.h>
 
 typedef struct TestStruct {

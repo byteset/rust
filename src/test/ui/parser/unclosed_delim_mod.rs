@@ -5,4 +5,4 @@ pub fn new() -> Result<Value, ()> {
     Ok(Value {
     }
 }
-//~^ ERROR mismatched closing delimiter
+//~^ ERROR incorrect close delimiter

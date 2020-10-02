@@ -1,7 +1,9 @@
 // run-pass
-// aux-build:cond_plugin.rs
 
 #![allow(unused_parens)]
+// aux-build:cond_plugin.rs
+
+#![feature(proc_macro_hygiene)]
 
 extern crate cond_plugin;
 

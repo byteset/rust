@@ -3,7 +3,7 @@
 // bounds derived from `Sized` requirements” that checks that the fixed compiler
 // accepts this code fragment with both AST and MIR borrow checkers.
 //
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 struct Qey<Q: ?Sized>(Q);
 

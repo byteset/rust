@@ -17,7 +17,6 @@
 // ignore-powerpc64le
 // ignore-powerpc
 // ignore-r600
-// ignore-riscv64
 // ignore-amdgcn
 // ignore-sparc
 // ignore-sparc64

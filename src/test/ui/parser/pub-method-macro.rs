@@ -15,8 +15,7 @@ mod bleh {
 
     impl S {
         pub defn!(f); //~ ERROR can't qualify macro invocation with `pub`
-        //~^ HELP remove the visibility
-        //~| HELP try adjusting the macro to put `pub` inside the invocation
+        //~^ HELP try adjusting the macro to put `pub` inside the invocation
     }
 }
 

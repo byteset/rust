@@ -1,11 +1,9 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 fn macros() {
     macro_rules! foo{
         ($p:pat, $e:expr, $b:block) => {{
             if let $p = $e $b
-            //~^ WARN irrefutable if-let
-            //~| WARN irrefutable if-let
         }}
     }
     macro_rules! bar{
@@ -14,10 +12,10 @@ fn macros() {
         }}
     }
 
-    foo!(a, 1, {
+    foo!(a, 1, { //~ WARN irrefutable if-let
         println!("irrefutable pattern");
     });
-    bar!(a, 1, {
+    bar!(a, 1, { //~ WARN irrefutable if-let
         println!("irrefutable pattern");
     });
 }

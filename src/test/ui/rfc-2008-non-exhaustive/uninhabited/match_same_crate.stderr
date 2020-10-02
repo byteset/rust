@@ -1,7 +1,10 @@
-error[E0004]: non-exhaustive patterns: type `UninhabitedStruct` is non-empty
+error[E0004]: non-exhaustive patterns: pattern `UninhabitedStruct` of type `UninhabitedStruct` is not handled
   --> $DIR/match_same_crate.rs:30:11
    |
-LL | / pub struct UninhabitedStruct {
+LL |   pub struct UninhabitedStruct {
+   |   -          ----------------- variant not covered
+   |  _|
+   | |
 LL | |     _priv: !,
 LL | | }
    | |_- `UninhabitedStruct` defined here
@@ -10,36 +13,36 @@ LL |       match x {}
    |             ^
    |
    = help: ensure that all possible cases are being handled, possibly by adding wildcards or more match arms
-   = note: the matched value is of type `UninhabitedStruct`
 
-error[E0004]: non-exhaustive patterns: type `UninhabitedTupleStruct` is non-empty
+error[E0004]: non-exhaustive patterns: pattern `UninhabitedTupleStruct` of type `UninhabitedTupleStruct` is not handled
   --> $DIR/match_same_crate.rs:34:11
    |
 LL | pub struct UninhabitedTupleStruct(!);
-   | ------------------------------------- `UninhabitedTupleStruct` defined here
+   | -------------------------------------
+   | |          |
+   | |          variant not covered
+   | `UninhabitedTupleStruct` defined here
 ...
 LL |     match x {}
    |           ^
    |
    = help: ensure that all possible cases are being handled, possibly by adding wildcards or more match arms
-   = note: the matched value is of type `UninhabitedTupleStruct`
 
-error[E0004]: non-exhaustive patterns: `Tuple(_)` and `Struct { .. }` not covered
+error[E0004]: non-exhaustive patterns: multiple patterns of type `UninhabitedVariants` are not handled
   --> $DIR/match_same_crate.rs:38:11
    |
 LL | / pub enum UninhabitedVariants {
 LL | |     #[non_exhaustive] Tuple(!),
-   | |                       ----- not covered
+   | |                       ----- variant not covered
 LL | |     #[non_exhaustive] Struct { x: ! }
-   | |                       ------ not covered
+   | |                       ------ variant not covered
 LL | | }
    | |_- `UninhabitedVariants` defined here
 ...
 LL |       match x {}
-   |             ^ patterns `Tuple(_)` and `Struct { .. }` not covered
+   |             ^
    |
    = help: ensure that all possible cases are being handled, possibly by adding wildcards or more match arms
-   = note: the matched value is of type `UninhabitedVariants`
 
 error: aborting due to 3 previous errors
 

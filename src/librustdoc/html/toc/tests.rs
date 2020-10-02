@@ -1,4 +1,4 @@
-use super::{Toc, TocBuilder, TocEntry};
+use super::{TocBuilder, Toc, TocEntry};
 
 #[test]
 fn builder_smoke() {
@@ -9,8 +9,11 @@ fn builder_smoke() {
     // there's been no macro mistake.
     macro_rules! push {
         ($level: expr, $name: expr) => {
-            assert_eq!(builder.push($level, $name.to_string(), "".to_string()), $name);
-        };
+            assert_eq!(builder.push($level,
+                                    $name.to_string(),
+                                    "".to_string()),
+                       $name);
+        }
     }
     push!(2, "0.1");
     push!(1, "1");
@@ -58,22 +61,20 @@ fn builder_smoke() {
         }
     }
     let expected = toc!(
-        (2, "0.1",),
-        (
-            1,
-            "1",
-            ((2, "1.1", ((3, "1.1.1",))((3, "1.1.2",))))((
-                2,
-                "1.2",
-                ((3, "1.2.1",))((3, "1.2.2",))
-            ))
-        ),
-        (1, "2",),
-        (
-            1,
-            "3",
-            ((4, "3.0.0.1", ((6, "3.0.0.1.0.1",))))((4, "3.0.0.2",))((2, "3.1", ((4, "3.1.0.1",))))
-        )
-    );
+        (2, "0.1", ),
+
+        (1, "1",
+         ((2, "1.1", ((3, "1.1.1", )) ((3, "1.1.2", ))))
+         ((2, "1.2", ((3, "1.2.1", )) ((3, "1.2.2", ))))
+         ),
+
+        (1, "2", ),
+
+        (1, "3",
+         ((4, "3.0.0.1", ((6, "3.0.0.1.0.1", ))))
+         ((4, "3.0.0.2", ))
+         ((2, "3.1", ((4, "3.1.0.1", ))))
+         )
+        );
     assert_eq!(expected, builder.into_toc());
 }

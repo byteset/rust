@@ -9,10 +9,10 @@ fn main() {
     const C: &S = &S;
     match C {
         C => {}
-        //~^ ERROR must be annotated with `#[derive(PartialEq, Eq)]`
+        //~^ ERROR to use a constant of type `S` in a pattern, `S` must be annotated with
     }
     const K: &T = &T;
-    match K {
+    match K { //~ ERROR non-exhaustive patterns: `&T` not covered
         K => {}
     }
 }

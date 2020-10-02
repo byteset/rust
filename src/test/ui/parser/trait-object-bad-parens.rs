@@ -1,5 +1,4 @@
 #![feature(optin_builtin_traits)]
-#![feature(negative_impls)]
 #![allow(bare_trait_objects)]
 
 auto trait Auto {}

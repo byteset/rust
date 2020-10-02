@@ -2,6 +2,7 @@
 // correctly accounts for or-patterns.
 
 #![feature(or_patterns)]
+//~^ WARN the feature `or_patterns` is incomplete
 
 enum E<T> { A(T, T), B(T) }
 

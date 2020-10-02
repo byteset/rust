@@ -1,15 +1,11 @@
-// Checks that `const fn` with const params can be used.
-// run-pass
-// revisions: full min
-
-#![cfg_attr(full, feature(const_generics))]
-#![cfg_attr(full, allow(incomplete_features))]
-#![cfg_attr(min, feature(min_const_generics))]
+#![feature(const_generics)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 const fn const_u32_identity<const X: u32>() -> u32 {
+    //~^ ERROR const parameters are not permitted in `const fn`
     X
 }
 
 fn main() {
-    assert_eq!(const_u32_identity::<18>(), 18);
+    println!("{:?}", const_u32_identity::<18>());
 }

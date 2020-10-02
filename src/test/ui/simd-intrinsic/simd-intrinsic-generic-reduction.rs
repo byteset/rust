@@ -1,4 +1,3 @@
-// build-fail
 // ignore-emscripten
 
 // Test that the simd_reduce_{op} intrinsics produce ok-ish error

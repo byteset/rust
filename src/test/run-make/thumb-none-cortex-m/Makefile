@@ -10,7 +10,10 @@
 # - thumbv7em-none-eabihf (Bare Cortex-M4F, M7F, FPU, hardfloat)
 # - thumbv7m-none-eabi (Bare Cortex-M3)
 
-# only-thumb
+# only-thumbv6m-none-eabi
+# only-thumbv7em-none-eabi
+# only-thumbv7em-none-eabihf
+# only-thumbv7m-none-eabi
 
 # For cargo setting
 RUSTC := $(RUSTC_ORIGINAL)
@@ -24,8 +27,7 @@ CRATE := cortex-m
 CRATE_URL := https://github.com/rust-embedded/cortex-m
 CRATE_SHA1 := a448e9156e2cb1e556e5441fd65426952ef4b927 # 0.5.0
 
-# Don't make lints fatal, but they need to at least warn or they break Cargo's target info parsing.
-export RUSTFLAGS := --cap-lints=warn
+export RUSTFLAGS := --cap-lints=allow
 
 all:
 	env
@@ -35,4 +37,4 @@ all:
 	# HACK(eddyb) sets `RUSTC_BOOTSTRAP=1` so Cargo can accept nightly features.
 	# These come from the top-level Rust workspace, that this crate is not a
 	# member of, but Cargo tries to load the workspace `Cargo.toml` anyway.
-	cd $(WORK_DIR) && cd $(CRATE) && env RUSTC_BOOTSTRAP=1 $(BOOTSTRAP_CARGO) build --target $(TARGET) -v
+	cd $(WORK_DIR) && cd $(CRATE) && env RUSTC_BOOTSTRAP=1 $(CARGO) build --target $(TARGET) -v

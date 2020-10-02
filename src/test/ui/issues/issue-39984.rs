@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #![allow(dead_code)]
 #![allow(unreachable_code)]
 // Regression test for issue #39984.

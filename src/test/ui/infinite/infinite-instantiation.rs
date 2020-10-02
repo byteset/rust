@@ -1,5 +1,8 @@
-// build-fail
-// normalize-stderr-test: ".nll/" -> "/"
+//
+// We get an error message at the top of file (dummy span).
+// This is not helpful, but also kind of annoying to prevent,
+// so for now just live with it.
+// This test case was originally for issue #2258.
 
 trait ToOpt: Sized {
     fn to_option(&self) -> Option<Self>;
@@ -18,9 +21,11 @@ impl<T:Clone> ToOpt for Option<T> {
 }
 
 fn function<T:ToOpt + Clone>(counter: usize, t: T) {
+//~^ ERROR reached the recursion limit while instantiating `function::<std::option::Option<
     if counter > 0 {
         function(counter - 1, t.to_option());
-        //~^ ERROR reached the recursion limit while instantiating `function::<Option<
+        // FIXME(#4287) Error message should be here. It should be
+        // a type error to instantiate `test` at a type other than T.
     }
 }
 

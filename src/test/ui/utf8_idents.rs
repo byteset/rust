@@ -1,5 +1,3 @@
-#![allow(mixed_script_confusables)]
-
 fn foo<
     'β, //~ ERROR non-ascii idents are not fully supported
     γ  //~ ERROR non-ascii idents are not fully supported

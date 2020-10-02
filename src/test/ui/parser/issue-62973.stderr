@@ -1,21 +1,10 @@
-error: this file contains an unclosed delimiter
+error: this file contains an un-closed delimiter
   --> $DIR/issue-62973.rs:8:2
    |
 LL | fn p() { match s { v, E { [) {) }
-   |        -         - unclosed delimiter
+   |        -         - un-closed delimiter
    |        |
-   |        unclosed delimiter
-LL | 
-LL | 
-   |  ^
-
-error: this file contains an unclosed delimiter
-  --> $DIR/issue-62973.rs:8:2
-   |
-LL | fn p() { match s { v, E { [) {) }
-   |        -         - unclosed delimiter
-   |        |
-   |        unclosed delimiter
+   |        un-closed delimiter
 LL | 
 LL | 
    |  ^
@@ -24,11 +13,9 @@ error: expected one of `,` or `}`, found `{`
   --> $DIR/issue-62973.rs:6:25
    |
 LL | fn p() { match s { v, E { [) {) }
-   |        -       -       -^ expected one of `,` or `}`
-   |        |       |       |
-   |        |       |       help: `}` may belong here
-   |        |       while parsing this struct
-   |        unclosed delimiter
+   |                -        ^ expected one of `,` or `}` here
+   |                |
+   |                while parsing this struct
 
 error: struct literals are not allowed here
   --> $DIR/issue-62973.rs:6:16
@@ -47,29 +34,29 @@ LL | )
    |
 
 error: expected one of `.`, `?`, `{`, or an operator, found `}`
-  --> $DIR/issue-62973.rs:8:2
+  --> $DIR/issue-62973.rs:8:1
    |
 LL | fn p() { match s { v, E { [) {) }
    |          ----- while parsing this match expression
 LL | 
 LL | 
-   |  ^ expected one of `.`, `?`, `{`, or an operator
+   | ^ expected one of `.`, `?`, `{`, or an operator here
 
-error: mismatched closing delimiter: `)`
+error: incorrect close delimiter: `)`
   --> $DIR/issue-62973.rs:6:28
    |
 LL | fn p() { match s { v, E { [) {) }
-   |                           -^ mismatched closing delimiter
+   |                           -^ incorrect close delimiter
    |                           |
-   |                           unclosed delimiter
+   |                           un-closed delimiter
 
-error: mismatched closing delimiter: `)`
+error: incorrect close delimiter: `)`
   --> $DIR/issue-62973.rs:6:31
    |
 LL | fn p() { match s { v, E { [) {) }
-   |                              -^ mismatched closing delimiter
+   |                              -^ incorrect close delimiter
    |                              |
-   |                              unclosed delimiter
+   |                              un-closed delimiter
 
-error: aborting due to 7 previous errors
+error: aborting due to 6 previous errors
 

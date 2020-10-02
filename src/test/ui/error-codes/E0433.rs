@@ -1,3 +1,3 @@
 fn main () {
-    let map = NonExistingMap::new(); //~ ERROR E0433
+    let map = HashMap::new(); //~ ERROR E0433
 }

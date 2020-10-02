@@ -1,8 +1,8 @@
-error[E0618]: expected function, found `Foo`
+error[E0618]: expected function, found `main::Foo`
   --> $DIR/issue-46771.rs:3:23
    |
 LL |     struct Foo;
-   |     ----------- `Foo` defined here
+   |     ----------- `main::Foo` defined here
 LL |     (1 .. 2).find(|_| Foo(0) == 0);
    |                       ^^^---
    |                       |

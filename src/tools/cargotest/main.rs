@@ -1,7 +1,9 @@
+#![deny(warnings)]
+
 use std::env;
-use std::fs;
-use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::path::{Path, PathBuf};
+use std::fs;
 
 struct Test {
     repo: &'static str,
@@ -11,7 +13,7 @@ struct Test {
     packages: &'static [&'static str],
 }
 
-const TEST_REPOS: &[Test] = &[
+const TEST_REPOS: &'static [Test] = &[
     Test {
         name: "iron",
         repo: "https://github.com/iron/iron",
@@ -22,14 +24,21 @@ const TEST_REPOS: &[Test] = &[
     Test {
         name: "ripgrep",
         repo: "https://github.com/BurntSushi/ripgrep",
-        sha: "3de31f752729525d85a3d1575ac1978733b3f7e7",
+        sha: "ad9befbc1d3b5c695e7f6b6734ee1b8e683edd41",
         lock: None,
         packages: &[],
     },
     Test {
         name: "tokei",
         repo: "https://github.com/XAMPPRocky/tokei",
-        sha: "fdf3f8cb279a7aeac0696c87e5d8b0cd946e4f9e",
+        sha: "5e11c4852fe4aa086b0e4fe5885822fbe57ba928",
+        lock: None,
+        packages: &[],
+    },
+    Test {
+        name: "treeify",
+        repo: "https://github.com/dzamlo/treeify",
+        sha: "999001b223152441198f117a68fb81f57bc086dd",
         lock: None,
         packages: &[],
     },
@@ -49,13 +58,20 @@ const TEST_REPOS: &[Test] = &[
         // This takes much less time to build than all of Servo and supports stable Rust.
         packages: &["selectors"],
     },
+    Test {
+        name: "webrender",
+        repo: "https://github.com/servo/webrender",
+        sha: "a3d6e6894c5a601fa547c6273eb963ca1321c2bb",
+        lock: None,
+        packages: &[],
+    },
 ];
 
 fn main() {
     let args = env::args().collect::<Vec<_>>();
-    let cargo = &args[1];
+    let ref cargo = args[1];
     let out_dir = Path::new(&args[2]);
-    let cargo = &Path::new(cargo);
+    let ref cargo = Path::new(cargo);
 
     for test in TEST_REPOS.iter().rev() {
         test_repo(cargo, out_dir, test);
@@ -77,7 +93,11 @@ fn clone_repo(test: &Test, out_dir: &Path) -> PathBuf {
     let out_dir = out_dir.join(test.name);
 
     if !out_dir.join(".git").is_dir() {
-        let status = Command::new("git").arg("init").arg(&out_dir).status().unwrap();
+        let status = Command::new("git")
+                         .arg("init")
+                         .arg(&out_dir)
+                         .status()
+                         .expect("");
         assert!(status.success());
     }
 
@@ -86,23 +106,23 @@ fn clone_repo(test: &Test, out_dir: &Path) -> PathBuf {
     for depth in &[0, 1, 10, 100, 1000, 100000] {
         if *depth > 0 {
             let status = Command::new("git")
-                .arg("fetch")
-                .arg(test.repo)
-                .arg("master")
-                .arg(&format!("--depth={}", depth))
-                .current_dir(&out_dir)
-                .status()
-                .unwrap();
+                             .arg("fetch")
+                             .arg(test.repo)
+                             .arg("master")
+                             .arg(&format!("--depth={}", depth))
+                             .current_dir(&out_dir)
+                             .status()
+                             .expect("");
             assert!(status.success());
         }
 
         let status = Command::new("git")
-            .arg("reset")
-            .arg(test.sha)
-            .arg("--hard")
-            .current_dir(&out_dir)
-            .status()
-            .unwrap();
+                         .arg("reset")
+                         .arg(test.sha)
+                         .arg("--hard")
+                         .current_dir(&out_dir)
+                         .status()
+                         .expect("");
 
         if status.success() {
             found = true;
@@ -113,8 +133,12 @@ fn clone_repo(test: &Test, out_dir: &Path) -> PathBuf {
     if !found {
         panic!("unable to find commit {}", test.sha)
     }
-    let status =
-        Command::new("git").arg("clean").arg("-fdx").current_dir(&out_dir).status().unwrap();
+    let status = Command::new("git")
+                     .arg("clean")
+                     .arg("-fdx")
+                     .current_dir(&out_dir)
+                     .status()
+                     .unwrap();
     assert!(status.success());
 
     out_dir
@@ -133,7 +157,7 @@ fn run_cargo_test(cargo_path: &Path, crate_path: &Path, packages: &[&str]) -> bo
         .env("RUSTFLAGS", "--cap-lints warn")
         .current_dir(crate_path)
         .status()
-        .unwrap();
+        .expect("");
 
     status.success()
 }

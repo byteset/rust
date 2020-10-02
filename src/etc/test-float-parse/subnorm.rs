@@ -1,7 +1,7 @@
 mod _common;
 
-use _common::validate;
 use std::mem::transmute;
+use _common::validate;
 
 fn main() {
     for bits in 0u32..(1 << 21) {

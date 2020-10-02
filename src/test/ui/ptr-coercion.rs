@@ -5,19 +5,19 @@ pub fn main() {
     // *const -> *mut
     let x: *const isize = &42;
     let x: *mut isize = x; //~  ERROR mismatched types
-                           //~| expected raw pointer `*mut isize`
-                           //~| found raw pointer `*const isize`
+                           //~| expected type `*mut isize`
+                           //~| found type `*const isize`
                            //~| types differ in mutability
 
     // & -> *mut
     let x: *mut isize = &42; //~  ERROR mismatched types
-                             //~| expected raw pointer `*mut isize`
-                             //~| found reference `&isize`
+                             //~| expected type `*mut isize`
+                             //~| found type `&isize`
                              //~| types differ in mutability
 
     let x: *const isize = &42;
     let x: *mut isize = x; //~  ERROR mismatched types
-                           //~| expected raw pointer `*mut isize`
-                           //~| found raw pointer `*const isize`
+                           //~| expected type `*mut isize`
+                           //~| found type `*const isize`
                            //~| types differ in mutability
 }

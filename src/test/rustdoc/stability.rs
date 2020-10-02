@@ -1,6 +1,6 @@
 #![feature(staged_api)]
 
-#![unstable(feature = "test", issue = "none")]
+#![unstable(feature = "test", issue = "0")]
 
 pub struct Unstable {
     // @has stability/struct.Unstable.html \

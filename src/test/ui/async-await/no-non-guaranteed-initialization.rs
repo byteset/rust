@@ -1,3 +1,4 @@
+// compile-fail
 // edition:2018
 // compile-flags: --crate-type lib
 

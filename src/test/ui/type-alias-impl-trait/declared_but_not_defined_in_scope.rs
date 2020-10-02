@@ -9,5 +9,4 @@ mod boo {
 
 fn bomp() -> boo::Boo {
     ""
-    //~^ mismatched types
 }

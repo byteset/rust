@@ -10,7 +10,7 @@ use core::panic::PanicInfo;
 
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    //~^ ERROR found duplicate lang item `panic_impl`
+    //~^ error duplicate lang item found: `panic_impl`
     loop {}
 }
 

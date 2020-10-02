@@ -49,9 +49,9 @@
 }
 
 * {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+		  box-sizing: border-box;
 }
 
 /* This part handles the "default" theme being used depending on the system one. */
@@ -91,8 +91,7 @@ h2 {
 h3 {
 	font-size: 1.3em;
 }
-h1, h2, h3:not(.impl):not(.method):not(.type):not(.tymethod):not(.notable),
-h4:not(.method):not(.type):not(.tymethod):not(.associatedconstant) {
+h1, h2, h3:not(.impl):not(.method):not(.type):not(.tymethod):not(.important), h4:not(.method):not(.type):not(.tymethod):not(.associatedconstant) {
 	font-weight: 500;
 	margin: 20px 0 15px 0;
 	padding-bottom: 6px;
@@ -101,11 +100,7 @@ h1.fqn {
 	border-bottom: 1px dashed;
 	margin-top: 0;
 }
-h1.fqn > .in-band > a:hover {
-	text-decoration: underline;
-}
-h2, h3:not(.impl):not(.method):not(.type):not(.tymethod),
-h4:not(.method):not(.type):not(.tymethod):not(.associatedconstant) {
+h2, h3:not(.impl):not(.method):not(.type):not(.tymethod), h4:not(.method):not(.type):not(.tymethod):not(.associatedconstant) {
 	border-bottom: 1px solid;
 }
 h3.impl, h3.method, h4.method, h3.type, h4.type, h4.associatedconstant {
@@ -126,10 +121,6 @@ h1, h2, h3, h4,
 	font-family: "Fira Sans", sans-serif;
 }
 
-.content ul.crate a.crate {
-	font: 16px/1.6 "Fira Sans";
-}
-
 ol, ul {
 	padding-left: 25px;
 }
@@ -145,7 +136,7 @@ summary {
 	outline: none;
 }
 
-code, pre, a.test-arrow {
+code, pre {
 	font-family: "Source Code Pro", monospace;
 }
 .docblock code, .docblock-short code {
@@ -196,25 +187,6 @@ nav.sub {
 	overflow: auto;
 }
 
-/* Improve the scrollbar display on firefox */
-* {
-	scrollbar-width: initial;
-}
-.sidebar {
-	scrollbar-width: thin;
-}
-
-/* Improve the scrollbar display on webkit-based browsers */
-::-webkit-scrollbar {
-	width: 12px;
-}
-.sidebar::-webkit-scrollbar {
-	width: 8px;
-}
-::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0;
-}
-
 .sidebar .block > ul > li {
 	margin-right: -10px;
 }
@@ -225,7 +197,7 @@ nav.sub {
 
 /* Everything else */
 
-.hidden {
+.js-only, .hidden {
 	display: none !important;
 }
 
@@ -333,7 +305,6 @@ nav.sub {
 .rustdoc:not(.source) .example-wrap {
 	display: inline-flex;
 	margin-bottom: 10px;
-	position: relative;
 }
 
 .example-wrap {
@@ -373,7 +344,6 @@ nav.sub {
 #results > table {
 	width: 100%;
 	table-layout: fixed;
-	margin-bottom: 40px;
 }
 
 .content pre.line-numbers {
@@ -406,7 +376,7 @@ nav.sub {
 	text-overflow: ellipsis;
 	margin: 0;
 }
-.docblock code, .docblock-short code {
+.docblock-short code {
 	white-space: pre-wrap;
 }
 
@@ -532,7 +502,7 @@ h4 > code, h3 > code, .invisible > code {
 	font-size: 0.8em;
 }
 
-.content .methods > div:not(.notable-traits) {
+.content .methods > div:not(.important-traits) {
 	margin-left: 40px;
 	margin-bottom: 15px;
 }
@@ -572,11 +542,11 @@ h4 > code, h3 > code, .invisible > code {
 }
 
 .content .stability::before {
-	content: '⬑';
-	font-size: 25px;
+	content: '˪';
+	font-size: 30px;
 	position: absolute;
-	top: -6px;
-	left: -19px;
+	top: -9px;
+	left: -13px;
 }
 
 .content .impl-items .method, .content .impl-items > .type, .impl-items > .associatedconstant {
@@ -638,7 +608,7 @@ a {
 	display: initial;
 }
 
-.in-band:hover > .anchor, .impl:hover > .anchor {
+.in-band:hover > .anchor {
 	display: inline-block;
 	position: absolute;
 }
@@ -678,7 +648,7 @@ a {
 }
 .search-container > div {
 	display: inline-flex;
-	width: calc(100% - 63px);
+	width: calc(100% - 34px);
 }
 #crate-search {
 	margin-top: 5px;
@@ -908,7 +878,6 @@ a.test-arrow {
 	font-size: 130%;
 	top: 5px;
 	right: 5px;
-	z-index: 1;
 }
 a.test-arrow:hover{
 	text-decoration: none;
@@ -1064,7 +1033,7 @@ h3 > .collapse-toggle, h4 > .collapse-toggle {
 
 .information {
 	position: absolute;
-	left: -25px;
+	left: -20px;
 	margin-top: 7px;
 	z-index: 1;
 }
@@ -1079,77 +1048,36 @@ h3 > .collapse-toggle, h4 > .collapse-toggle {
 	width: 120px;
 	display: none;
 	text-align: center;
-	padding: 5px 3px 3px 3px;
+	padding: 5px 3px;
 	border-radius: 6px;
 	margin-left: 5px;
 	top: -5px;
 	left: 105%;
 	z-index: 10;
-	font-size: 16px;
+}
+
+.tooltip:hover .tooltiptext {
+	display: inline;
 }
 
 .tooltip .tooltiptext::after {
 	content: " ";
 	position: absolute;
 	top: 50%;
-	left: 16px;
+	left: 11px;
 	margin-top: -5px;
 	border-width: 5px;
 	border-style: solid;
 }
 
-.tooltip.compile_fail, .tooltip.should_panic, .tooltip.ignore {
-	font-weight: bold;
-	font-size: 20px;
-}
-
-.notable-traits-tooltip {
-	display: inline-block;
-	cursor: pointer;
-}
-
-.notable-traits:hover .notable-traits-tooltiptext,
-.notable-traits .notable-traits-tooltiptext.force-tooltip {
-	display: inline-block;
-}
-
-.notable-traits .notable-traits-tooltiptext {
-	display: none;
-	padding: 5px 3px 3px 3px;
-	border-radius: 6px;
-	margin-left: 5px;
-	z-index: 10;
-	font-size: 16px;
-	cursor: default;
-	position: absolute;
+.important-traits .tooltip .tooltiptext {
 	border: 1px solid;
 }
 
-.notable-traits-tooltip::after {
-	/* The margin on the tooltip does not capture hover events,
-	   this extends the area of hover enough so that mouse hover is not
-	   lost when moving the mouse to the tooltip */
-	content: "\00a0\00a0\00a0";
-}
-
-.notable-traits .notable, .notable-traits .docblock {
-	margin: 0;
-}
-
-.notable-traits .docblock code.content{
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-}
-
-/* Example code has the "Run" button that needs to be positioned relative to the pre */
-pre.rust.rust-example-rendered {
-	position: relative;
-}
-
 pre.rust {
-	tab-size: 4;
-	-moz-tab-size: 4;
+	position: relative;
+	tab-width: 4;
+	-moz-tab-width: 4;
 }
 
 .search-failed {
@@ -1187,13 +1115,12 @@ pre.rust {
 	font-size: 16px;
 }
 
-.notable-traits {
+.important-traits {
 	cursor: pointer;
 	z-index: 2;
-	margin-left: 5px;
 }
 
-h4 > .notable-traits {
+h4 > .important-traits {
 	position: absolute;
 	left: -44px;
 	top: 2px;
@@ -1254,24 +1181,14 @@ h4 > .notable-traits {
 	outline: none;
 }
 
-#settings-menu, .help-button {
-	position: absolute;
-	top: 10px;
-}
-
 #settings-menu {
+	position: absolute;
 	right: 0;
+	top: 10px;
 	outline: none;
 }
 
-.help-button {
-	right: 30px;
-	font-family: "Fira Sans",sans-serif;
-	text-align: center;
-	font-size: 17px;
-}
-
-#theme-picker, #settings-menu, .help-button {
+#theme-picker, #settings-menu {
 	padding: 4px;
 	width: 27px;
 	height: 29px;
@@ -1294,7 +1211,7 @@ h4 > .notable-traits {
 #theme-choices > button {
 	border: none;
 	width: 100%;
-	padding: 4px 8px;
+	padding: 4px;
 	text-align: center;
 	background: rgba(0,0,0,0);
 }
@@ -1304,16 +1221,6 @@ h4 > .notable-traits {
 }
 
 /* Media Queries */
-
-@media (min-width: 701px) {
-	/* In case there is no documentation before a code block, we need to add some margin at the top
-	to prevent an overlay between the "collapse toggle" and the information tooltip.
-	However, it's needed needed with smaller screen width because the doc/code block is always put
-	"one line" below. */
-	.information:first-child > .tooltip {
-		margin-top: 16px;
-	}
-}
 
 @media (max-width: 700px) {
 	body {
@@ -1445,7 +1352,7 @@ h4 > .notable-traits {
 		z-index: 1;
 	}
 
-	h4 > .notable-traits {
+	h4 > .important-traits {
 		position: absolute;
 		left: -22px;
 		top: 24px;
@@ -1535,11 +1442,6 @@ h4 > .notable-traits {
 	#main > .line-numbers {
 		margin-top: 0;
 	}
-
-	.notable-traits .notable-traits-tooltiptext {
-		left: 0;
-		top: 100%;
-	}
 }
 
 @media print {
@@ -1558,10 +1460,80 @@ h4 > .notable-traits {
 	}
 }
 
-h3.notable {
+.modal {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 10000;
+	top: 0;
+	left: 0;
+}
+
+.modal-content {
+	display: block;
+	max-width: 60%;
+	min-width: 200px;
+	padding: 8px;
+	top: 40%;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -40%);
+	border: 1px solid;
+	border-radius: 4px;
+	border-top-right-radius: 0;
+}
+
+.modal-content > .docblock {
+	margin: 0;
+}
+
+h3.important {
 	margin: 0;
 	margin-bottom: 13px;
 	font-size: 19px;
+}
+
+.modal-content > .docblock > code.content {
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+}
+
+.modal-content > .close {
+	position: absolute;
+	font-weight: 900;
+	right: -25px;
+	top: -1px;
+	font-size: 18px;
+	width: 25px;
+	padding-right: 2px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	text-align: center;
+	border: 1px solid;
+	border-right: 0;
+	cursor: pointer;
+}
+
+.modal-content > .whiter {
+	height: 25px;
+	position: absolute;
+	width: 3px;
+	right: -2px;
+	top: 0px;
+}
+
+#main > div.important-traits {
+	position: absolute;
+	left: -24px;
+	margin-top: 16px;
+}
+
+.content > .methods > .method > div.important-traits {
+	position: absolute;
+	font-weight: 400;
+	left: -42px;
+	margin-top: 2px;
 }
 
 kbd {

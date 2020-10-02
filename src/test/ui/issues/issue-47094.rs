@@ -1,12 +1,12 @@
-#[repr(C, u8)] //~ ERROR conflicting representation hints
-//~^ WARN this was previously accepted
+// build-pass (FIXME(62277): could be check-pass?)
+
+#[repr(C,u8)]
 enum Foo {
     A,
     B,
 }
 
-#[repr(C)] //~ ERROR conflicting representation hints
-//~^ WARN this was previously accepted
+#[repr(C)]
 #[repr(u8)]
 enum Bar {
     A,

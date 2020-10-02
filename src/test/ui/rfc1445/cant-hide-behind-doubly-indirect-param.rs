@@ -1,6 +1,6 @@
 // This is part of a set of tests exploring the different ways a
-// structural-match ADT might try to hold a
-// non-structural-match in hidden manner that lets matches
+// `#[structural_match]` ADT might try to hold a
+// non-`#[structural_match]` in hidden manner that lets matches
 // through that we had intended to reject.
 //
 // See discussion on rust-lang/rust#62307 and rust-lang/rust#62339
@@ -23,7 +23,7 @@ fn main() {
     match WRAP_DOUBLY_INDIRECT_PARAM {
         WRAP_DOUBLY_INDIRECT_PARAM => { panic!("WRAP_DOUBLY_INDIRECT_PARAM matched itself"); }
         //~^ WARN must be annotated with `#[derive(PartialEq, Eq)]`
-        //~| WARN this was previously accepted
+        //~| WARN will become a hard error in a future release
         _ => { println!("WRAP_DOUBLY_INDIRECT_PARAM correctly did not match itself"); }
     }
 }

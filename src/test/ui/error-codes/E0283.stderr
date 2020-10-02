@@ -1,13 +1,11 @@
-error[E0283]: type annotations needed
+error[E0283]: type annotations needed: cannot resolve `_: Generator`
   --> $DIR/E0283.rs:18:21
    |
 LL |     fn create() -> u32;
    |     ------------------- required by `Generator::create`
 ...
 LL |     let cont: u32 = Generator::create();
-   |                     ^^^^^^^^^^^^^^^^^ cannot infer type
-   |
-   = note: cannot satisfy `_: Generator`
+   |                     ^^^^^^^^^^^^^^^^^
 
 error: aborting due to previous error
 

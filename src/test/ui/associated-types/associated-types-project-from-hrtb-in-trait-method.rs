@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-// run-rustfix
 // Check projection of an associated type out of a higher-ranked trait-bound
 // in the context of a method definition in a trait.
 
@@ -20,19 +18,6 @@ trait AnotherTrait<I : for<'x> Foo<&'x isize>> {
 
 trait YetAnotherTrait<I : for<'x> Foo<&'x isize>> {
     fn some_method<'a>(&self, arg: <I as Foo<&'a isize>>::A);
-}
-
-trait Banana<'a> {
-    type Assoc: Default;
-}
-
-struct Peach<X>(std::marker::PhantomData<X>);
-
-impl<X: for<'a> Banana<'a>> Peach<X> {
-    fn mango(&self) -> X::Assoc {
-    //~^ ERROR cannot extract an associated type from a higher-ranked trait bound in this context
-        Default::default()
-    }
 }
 
 pub fn main() {}

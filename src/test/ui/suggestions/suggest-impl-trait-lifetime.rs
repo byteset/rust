@@ -3,7 +3,7 @@
 use std::fmt::Debug;
 
 fn foo(d: impl Debug) {
-//~^ HELP consider adding an explicit lifetime bound...
+//~^ HELP consider adding an explicit lifetime bound  `'static` to `impl Debug`
     bar(d);
 //~^ ERROR the parameter type `impl Debug` may not live long enough
 //~| NOTE ...so that the type `impl Debug` will meet its required lifetime bounds

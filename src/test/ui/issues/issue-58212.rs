@@ -1,12 +1,13 @@
-// check-pass
+// run-pass
 
 trait FromUnchecked {
-    fn from_unchecked();
+    unsafe fn from_unchecked();
 }
 
 impl FromUnchecked for [u8; 1] {
-    fn from_unchecked() {
-        let mut array: Self = [0; 1];
+    unsafe fn from_unchecked() {
+        #[allow(deprecated)]
+        let mut array: Self = std::mem::uninitialized();
         let _ptr = &mut array as *mut [u8] as *mut u8;
     }
 }

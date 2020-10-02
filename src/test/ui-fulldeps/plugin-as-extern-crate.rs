@@ -1,10 +1,11 @@
-// check-pass
-// aux-build:empty-plugin.rs
+// aux-build:attr-plugin-test.rs
 // ignore-cross-compile
 //
-// empty_plugin will not compile on a cross-compiled target because
-// librustc_ast is not compiled for it.
+// attr_plugin_test will not compile on a cross-compiled target because
+// libsyntax is not compiled for it.
 
-extern crate empty_plugin; // OK, plugin crates are still crates
+#![deny(plugin_as_library)]
 
-fn main() {}
+extern crate attr_plugin_test; //~ ERROR compiler plugin used as an ordinary library
+
+fn main() { }

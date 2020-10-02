@@ -2,18 +2,13 @@ error[E0308]: try expression alternatives have incompatible types
   --> $DIR/issue-59756.rs:13:5
    |
 LL |     foo()?
-   |     ^^^^^^ expected enum `std::result::Result`, found struct `A`
+   |     ^^^^^-
+   |     |    |
+   |     |    help: try removing this `?`
+   |     expected enum `std::result::Result`, found struct `A`
    |
-   = note: expected enum `std::result::Result<A, B>`
-            found struct `A`
-help: try removing this `?`
-   |
-LL |     foo()
-   |         --
-help: try using a variant of the expected enum
-   |
-LL |     Ok(foo()?)
-   |
+   = note: expected type `std::result::Result<A, B>`
+              found type `A`
 
 error: aborting due to previous error
 

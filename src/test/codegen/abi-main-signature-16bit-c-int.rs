@@ -10,7 +10,6 @@
 // ignore-mips64
 // ignore-powerpc
 // ignore-powerpc64
-// ignore-riscv64
 // ignore-s390x
 // ignore-sparc
 // ignore-sparc64

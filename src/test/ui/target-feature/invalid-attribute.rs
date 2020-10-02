@@ -7,13 +7,11 @@
 // ignore-powerpc
 // ignore-powerpc64
 // ignore-powerpc64le
-// ignore-riscv64
 // ignore-s390x
 // ignore-sparc
 // ignore-sparc64
 
 #![feature(target_feature)]
-#![warn(unused_attributes)]
 
 #[target_feature = "+sse2"]
 //~^ ERROR malformed `target_feature` attribute
@@ -28,7 +26,7 @@ unsafe fn foo() {}
 
 #[target_feature(enable = "sse2")]
 //~^ ERROR `#[target_feature(..)]` can only be applied to `unsafe` functions
-//~| NOTE see issue #69098
+//~| NOTE can only be applied to `unsafe` functions
 fn bar() {}
 //~^ NOTE not an `unsafe` function
 
@@ -49,20 +47,17 @@ struct Foo;
 
 #[target_feature(enable = "sse2")]
 //~^ ERROR attribute should be applied to a function
-enum Bar {}
+enum Bar { }
 //~^ NOTE not a function
 
 #[target_feature(enable = "sse2")]
 //~^ ERROR attribute should be applied to a function
-union Qux {
+union Qux { f1: u16, f2: u16 }
 //~^ NOTE not a function
-    f1: u16,
-    f2: u16,
-}
 
 #[target_feature(enable = "sse2")]
 //~^ ERROR attribute should be applied to a function
-trait Baz {}
+trait Baz { }
 //~^ NOTE not a function
 
 #[inline(always)]
@@ -70,29 +65,9 @@ trait Baz {}
 #[target_feature(enable = "sse2")]
 unsafe fn test() {}
 
-trait Quux {
-    fn foo();
-}
-
-impl Quux for Foo {
-    #[target_feature(enable = "sse2")]
-    //~^ ERROR `#[target_feature(..)]` can only be applied to `unsafe` functions
-    //~| NOTE see issue #69098
-    fn foo() {}
-    //~^ NOTE not an `unsafe` function
-}
-
 fn main() {
-    #[target_feature(enable = "sse2")]
-    //~^ ERROR attribute should be applied to a function
     unsafe {
         foo();
         bar();
     }
-    //~^^^^ NOTE not a function
-
-    #[target_feature(enable = "sse2")]
-    //~^ ERROR attribute should be applied to a function
-    || {};
-    //~^ NOTE not a function
 }

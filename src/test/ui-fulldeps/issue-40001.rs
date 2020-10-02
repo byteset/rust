@@ -2,9 +2,8 @@
 // aux-build:issue-40001-plugin.rs
 // ignore-stage1
 
-#![feature(plugin, register_tool)]
-#![plugin(issue_40001_plugin)] //~ WARNING compiler plugins are deprecated
-#![register_tool(plugin)]
+#![feature(plugin)]
+#![plugin(issue_40001_plugin)]
 
-#[plugin::allowed_attr]
+#[whitelisted_attr]
 fn main() {}

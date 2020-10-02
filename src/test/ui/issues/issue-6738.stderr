@@ -6,10 +6,7 @@ LL |         self.x += v.x;
    |         |
    |         cannot use `+=` on type `T`
    |
-help: consider restricting type parameter `T`
-   |
-LL | impl<T: std::ops::AddAssign> Foo<T> {
-   |       ^^^^^^^^^^^^^^^^^^^^^
+   = note: `T` might need a bound for `std::ops::AddAssign`
 
 error: aborting due to previous error
 

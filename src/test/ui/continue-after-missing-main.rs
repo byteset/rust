@@ -1,4 +1,6 @@
-#![allow(dead_code)] //~ ERROR `main` function not found in crate
+#![allow(dead_code)]
+
+// error-pattern:`main` function not found in crate
 
 struct Tableau<'a, MP> {
     provider: &'a MP,

@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 // compile-flags: -Z unpretty=hir
 
 #![feature(type_alias_impl_trait)]

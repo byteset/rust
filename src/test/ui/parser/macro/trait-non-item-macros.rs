@@ -1,13 +1,10 @@
 macro_rules! bah {
-    ($a:expr) => {
-        $a
-    }; //~^ ERROR macro expansion ignores token `2` and any following
+    ($a:expr) => ($a)
+    //~^ ERROR expected one of `async`, `const`, `extern`, `fn`, `type`, or `unsafe`, found `2`
 }
 
-trait Bar {
+trait bar {
     bah!(2);
 }
 
-fn main() {
-    let _recovery_witness: () = 0; //~ ERROR mismatched types
-}
+fn main() {}

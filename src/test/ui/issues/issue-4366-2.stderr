@@ -4,7 +4,7 @@ error[E0412]: cannot find type `Bar` in this scope
 LL |         fn sub() -> Bar { 1 }
    |                     ^^^ not found in this scope
    |
-help: consider importing this type alias
+help: possible candidate is found in another module, you can import it into scope
    |
 LL |         use a::b::Bar;
    |
@@ -15,9 +15,11 @@ error[E0423]: expected function, found module `foo`
 LL |     foo();
    |     ^^^ not a function
    |
-help: consider importing this function instead
+help: possible better candidates are found in other modules, you can import them into scope
    |
 LL | use foo::foo;
+   |
+LL | use m1::foo;
    |
 
 error: aborting due to 2 previous errors

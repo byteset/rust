@@ -1,4 +1,3 @@
-// run-rustfix
 #![feature(type_ascription)]
 
 fn main() {

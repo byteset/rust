@@ -1,5 +1,5 @@
 // run-pass
-#![allow(dead_code, unused)]
+#![allow(dead_code)]
 
 #[repr(u8)]
 enum Foo {

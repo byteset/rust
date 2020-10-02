@@ -1,13 +1,11 @@
-error: expected one of `!`, `.`, `::`, `;`, `?`, `{`, `}`, or an operator, found `$`
+error: unknown macro variable `nonexistent`
   --> $DIR/issue-6596-2.rs:5:16
    |
 LL |         { $inp $nonexistent }
-   |                ^^^^^^^^^^^^ expected one of 8 possible tokens
+   |                ^^^^^^^^^^^^ unknown macro variable
 ...
 LL |     g!(foo);
    |     -------- in this macro invocation
-   |
-   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to previous error
 

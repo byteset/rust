@@ -3,4 +3,4 @@ fn main() {
         std::mem::transmute::<f32, u32>(1.0);
     //}
 }
-//~^^^ ERROR expected `{`, found `std`
+//~^^^ ERROR expected one of `extern`, `fn`, or `{`, found `std`

@@ -1,4 +1,7 @@
 // aux-build:coherence_inherent_cc_lib.rs
+// revisions: old re
+
+#![cfg_attr(re, feature(re_rebalance_coherence))]
 
 // Tests that methods that implement a trait cannot be invoked
 // unless the trait is imported.
@@ -21,7 +24,8 @@ mod NoImport {
 
     fn call_the_fn(s: &TheStruct) {
         s.the_fn();
-        //~^ ERROR E0599
+        //[old]~^ ERROR no method named `the_fn` found
+        //[re]~^^ ERROR E0599
     }
 }
 

@@ -2,13 +2,11 @@
 
 #![feature(rustc_private)]
 
-extern crate rustc_macros;
 #[allow(dead_code)]
-extern crate rustc_serialize;
 
-use rustc_macros::{Decodable, Encodable};
+extern crate serialize as rustc_serialize;
 
-#[derive(Decodable, Encodable, Debug)]
+#[derive(RustcDecodable, RustcEncodable,Debug)]
 struct A {
     a: String,
 }

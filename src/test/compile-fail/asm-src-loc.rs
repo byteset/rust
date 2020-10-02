@@ -1,9 +1,9 @@
 // ignore-emscripten
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 
 fn main() {
     unsafe {
-        llvm_asm!("nowayisthisavalidinstruction"); //~ ERROR instruction
+        asm!("nowayisthisavalidinstruction"); //~ ERROR instruction
     }
 }

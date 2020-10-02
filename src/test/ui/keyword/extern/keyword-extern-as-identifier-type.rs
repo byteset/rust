@@ -1,3 +1,3 @@
-type A = extern::foo::bar; //~ ERROR expected type, found keyword `extern`
+type A = extern::foo::bar; //~ ERROR expected `fn`, found `::`
 
 fn main() {}

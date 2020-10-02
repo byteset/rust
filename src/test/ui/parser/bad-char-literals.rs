@@ -1,6 +1,7 @@
+// compile-flags: -Z continue-parse-after-error
+
 // ignore-tidy-cr
 // ignore-tidy-tab
-
 fn main() {
     // these literals are just silly.
     ''';

@@ -17,7 +17,7 @@ macro_rules! check {
 
 fn main() {
     println!("{}" a);
-    //~^ ERROR expected `,`, found `a`
+    //~^ ERROR expected token: `,`
     foo!(a b);
     //~^ ERROR no rules expected the token `b`
     foo!(a, b, c, d e);

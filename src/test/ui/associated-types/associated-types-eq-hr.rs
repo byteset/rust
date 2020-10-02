@@ -7,7 +7,7 @@ pub trait TheTrait<T> {
 }
 
 struct IntStruct {
-    x: isize,
+    x: isize
 }
 
 impl<'a> TheTrait<&'a isize> for IntStruct {
@@ -19,7 +19,7 @@ impl<'a> TheTrait<&'a isize> for IntStruct {
 }
 
 struct UintStruct {
-    x: isize,
+    x: isize
 }
 
 impl<'a> TheTrait<&'a isize> for UintStruct {
@@ -30,7 +30,8 @@ impl<'a> TheTrait<&'a isize> for UintStruct {
     }
 }
 
-struct Tuple {}
+struct Tuple {
+}
 
 impl<'a> TheTrait<(&'a isize, &'a isize)> for Tuple {
     type A = &'a isize;
@@ -41,43 +42,37 @@ impl<'a> TheTrait<(&'a isize, &'a isize)> for Tuple {
 }
 
 fn foo<T>()
-where
-    T: for<'x> TheTrait<&'x isize, A = &'x isize>,
+    where T : for<'x> TheTrait<&'x isize, A = &'x isize>
 {
     // ok for IntStruct, but not UintStruct
 }
 
 fn bar<T>()
-where
-    T: for<'x> TheTrait<&'x isize, A = &'x usize>,
+    where T : for<'x> TheTrait<&'x isize, A = &'x usize>
 {
     // ok for UintStruct, but not IntStruct
 }
 
 fn tuple_one<T>()
-where
-    T: for<'x, 'y> TheTrait<(&'x isize, &'y isize), A = &'x isize>,
+    where T : for<'x,'y> TheTrait<(&'x isize, &'y isize), A = &'x isize>
 {
     // not ok for tuple, two lifetimes and we pick first
 }
 
 fn tuple_two<T>()
-where
-    T: for<'x, 'y> TheTrait<(&'x isize, &'y isize), A = &'y isize>,
+    where T : for<'x,'y> TheTrait<(&'x isize, &'y isize), A = &'y isize>
 {
     // not ok for tuple, two lifetimes and we pick second
 }
 
 fn tuple_three<T>()
-where
-    T: for<'x> TheTrait<(&'x isize, &'x isize), A = &'x isize>,
+    where T : for<'x> TheTrait<(&'x isize, &'x isize), A = &'x isize>
 {
     // ok for tuple
 }
 
 fn tuple_four<T>()
-where
-    T: for<'x, 'y> TheTrait<(&'x isize, &'y isize)>,
+    where T : for<'x,'y> TheTrait<(&'x isize, &'y isize)>
 {
     // not ok for tuple, two lifetimes, and lifetime matching is invariant
 }
@@ -94,14 +89,14 @@ pub fn call_bar() {
 
 pub fn call_tuple_one() {
     tuple_one::<Tuple>();
-    //~^ ERROR implementation of `TheTrait` is not general enough
-    //~| ERROR implementation of `TheTrait` is not general enough
+    //~^ ERROR not satisfied
+    //~| ERROR type mismatch
 }
 
 pub fn call_tuple_two() {
     tuple_two::<Tuple>();
-    //~^ ERROR implementation of `TheTrait` is not general enough
-    //~| ERROR implementation of `TheTrait` is not general enough
+    //~^ ERROR not satisfied
+    //~| ERROR type mismatch
 }
 
 pub fn call_tuple_three() {
@@ -110,7 +105,7 @@ pub fn call_tuple_three() {
 
 pub fn call_tuple_four() {
     tuple_four::<Tuple>();
-    //~^ ERROR implementation of `TheTrait` is not general enough
+    //~^ ERROR not satisfied
 }
 
-fn main() {}
+fn main() { }

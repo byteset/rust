@@ -2,4 +2,4 @@ fn main() {
 
 }
     let _ = ();
-} //~ ERROR unexpected closing delimiter
+} //~ ERROR unexpected close delimiter

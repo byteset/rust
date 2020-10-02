@@ -12,11 +12,11 @@ help: you can escape reserved keywords to use them as identifiers
 LL |             r#return
    |
 
-error: expected one of `.`, `=>`, `?`, or an operator, found reserved identifier `_`
+error: expected one of `.`, `=>`, `?`, or an operator, found `_`
   --> $DIR/issue-15980.rs:13:9
    |
 LL |         }
-   |          - expected one of `.`, `=>`, `?`, or an operator
+   |          - expected one of `.`, `=>`, `?`, or an operator here
 LL |
 LL |         _ => {}
    |         ^ unexpected token

@@ -1,1 +1,1 @@
-# //~ ERROR expected one of `!` or `[`, found `<eof>`
+# //~ ERROR expected `[`, found `<eof>`

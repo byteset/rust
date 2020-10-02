@@ -2,9 +2,7 @@ struct S;
 
 impl S {
     static fn f() {}
-    //~^ ERROR expected identifier, found keyword `fn`
-    //~| ERROR expected one of `:`, `;`, or `=`
-    //~| ERROR missing type for `static` item
+    //~^ ERROR expected one of `async`, `const`, `crate`, `default`, `extern`, `fn`, `pub`, `type`,
 }
 
 fn main() {}

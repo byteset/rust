@@ -1,7 +1,7 @@
 mod _common;
 
-use _common::validate;
 use std::char;
+use _common::validate;
 
 fn main() {
     for n in 0..10 {

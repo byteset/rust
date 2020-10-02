@@ -3,7 +3,7 @@
 // check-pass
 // aux-build:intercrate.rs
 
-#![feature(decl_macro)]
+#![feature(decl_macro, crate_in_paths)]
 
 extern crate intercrate;
 

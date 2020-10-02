@@ -5,6 +5,6 @@ fn main() {
     match 42 { A => () }
     //~^ ERROR mismatched types
     //~| expected type `{integer}`
-    //~| found tuple `(isize, isize)`
+    //~| found type `(isize, isize)`
     //~| expected integer, found tuple
 }

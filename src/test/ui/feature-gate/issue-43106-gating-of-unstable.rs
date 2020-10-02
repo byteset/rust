@@ -18,7 +18,6 @@ mod unstable {
 
     #[unstable()] struct S;
     //~^ ERROR stability attributes may not be used outside of the standard library
-    //~| ERROR stability attributes may not be used outside of the standard library
 
     #[unstable()] type T = S;
     //~^ ERROR stability attributes may not be used outside of the standard library

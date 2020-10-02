@@ -6,5 +6,3 @@ LL |     Void(Void),
    |
    = note: `-W dead-code` implied by `-W unused`
 
-warning: 1 warning emitted
-

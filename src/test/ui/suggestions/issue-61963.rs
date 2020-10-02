@@ -16,7 +16,6 @@ pub struct Qux<T>(T);
 
 #[dom_struct]
 pub struct Foo {
-    //~^ ERROR trait objects without an explicit `dyn` are deprecated [bare_trait_objects]
     qux: Qux<Qux<Baz>>,
     bar: Box<Bar>,
     //~^ ERROR trait objects without an explicit `dyn` are deprecated [bare_trait_objects]

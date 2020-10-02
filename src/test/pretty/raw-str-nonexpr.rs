@@ -1,8 +1,8 @@
 // pp-exact
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 
 #[cfg(foo = r#"just parse this"#)]
 extern crate blah as blah;
 
-fn main() { unsafe { llvm_asm!(r###"blah"###); } }
+fn main() { unsafe { asm!(r###"blah"###); } }

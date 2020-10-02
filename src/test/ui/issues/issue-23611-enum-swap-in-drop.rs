@@ -153,7 +153,6 @@ impl<'a> Drop for E<'a> {
             }
         };
 
-        #[allow(unused_must_use)]
         if do_drop {
             mem::replace(self, E::A(GaspA(f_a, 0xA3A0, log, D::new("drop", 6, log)), true));
         }

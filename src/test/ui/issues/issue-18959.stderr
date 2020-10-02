@@ -1,15 +1,11 @@
 error[E0038]: the trait `Bar` cannot be made into an object
-  --> $DIR/issue-18959.rs:11:11
+  --> $DIR/issue-18959.rs:11:1
    |
 LL | pub trait Foo { fn foo<T>(&self, ext_thing: &T); }
-   |                    --- ...because method `foo` has generic type parameters
-LL | pub trait Bar: Foo { }
-   |           --- this trait cannot be made into an object...
+   |                    --- method `foo` has generic type parameters
 ...
 LL | fn foo(b: &dyn Bar) {
-   |           ^^^^^^^^ the trait `Bar` cannot be made into an object
-   |
-   = help: consider moving `foo` to another trait
+   | ^^^^^^^^^^^^^^^^^^^ the trait `Bar` cannot be made into an object
 
 error: aborting due to previous error
 

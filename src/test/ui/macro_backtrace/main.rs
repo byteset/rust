@@ -1,7 +1,6 @@
 // Test that the macro backtrace facility works
 // aux-build:ping.rs
-// revisions: default -Zmacro-backtrace
-//[-Zmacro-backtrace] compile-flags: -Z macro-backtrace
+// compile-flags: -Z external-macro-backtrace
 
 #[macro_use] extern crate ping;
 
