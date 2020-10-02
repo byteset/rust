@@ -2,7 +2,7 @@ pub trait AbstractRenderer {}
 
 fn _create_render(_: &()) ->
     dyn AbstractRenderer
-//~^ ERROR return type cannot have an unboxed trait object
+//~^ ERROR the size for values of type
 {
     match 0 {
         _ => unimplemented!()

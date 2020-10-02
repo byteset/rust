@@ -1,7 +1,6 @@
 // run-pass
 // ignore-arm
 // ignore-aarch64
-// ignore-riscv64 thiscall isn't supported
 
 #![feature(abi_thiscall)]
 

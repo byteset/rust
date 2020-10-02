@@ -1,6 +1,5 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #![feature(specialization)]
-//~^ WARN the feature `specialization` is incomplete
 
 fn main() {}
 

@@ -1,22 +1,10 @@
-error: visibility `pub` is not followed by an item
-  --> $DIR/issue-41155.rs:4:5
-   |
-LL |     pub
-   |     ^^^ the visibility
-   |
-   = help: you likely meant to define an item, e.g., `pub fn foo() {}`
-
-error: non-item in item list
+error: expected one of `(`, `async`, `const`, `default`, `extern`, `fn`, `type`, or `unsafe`, found `}`
   --> $DIR/issue-41155.rs:5:1
    |
-LL | impl S {
-   |        - item list starts here
 LL |     pub
+   |        - expected one of 8 possible tokens here
 LL | }
-   | ^
-   | |
-   | non-item starts here
-   | item list ends here
+   | ^ unexpected token
 
-error: aborting due to 2 previous errors
+error: aborting due to previous error
 

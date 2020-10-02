@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 trait Foo {}
 impl Foo for dyn Send {}

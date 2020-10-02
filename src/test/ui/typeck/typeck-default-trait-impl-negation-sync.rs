@@ -1,4 +1,4 @@
-#![feature(negative_impls)]
+#![feature(optin_builtin_traits)]
 
 struct Managed;
 impl !Send for Managed {}
@@ -34,7 +34,7 @@ fn main() {
     //~^ ERROR `MyNotSync` cannot be shared between threads safely [E0277]
 
     is_sync::<MyTypeWUnsafe>();
-    //~^ ERROR `UnsafeCell<u8>` cannot be shared between threads safely [E0277]
+    //~^ ERROR `std::cell::UnsafeCell<u8>` cannot be shared between threads safely [E0277]
 
     is_sync::<MyTypeManaged>();
     //~^ ERROR `Managed` cannot be shared between threads safely [E0277]

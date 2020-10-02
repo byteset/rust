@@ -3,5 +3,5 @@
 
 #![crate_type = "lib"]
 
-// CHECK: attributes #{{.*}} "frame-pointer"="all" "instrument-function-entry-inlined"="{{.*}}mcount{{.*}}"
+// CHECK: attributes #{{.*}} "instrument-function-entry-inlined"="{{.*}}mcount{{.*}}" "no-frame-pointer-elim"="true"
 pub fn foo() {}

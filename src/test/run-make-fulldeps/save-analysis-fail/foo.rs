@@ -2,13 +2,13 @@
 #![feature(box_syntax)]
 #![feature(rustc_private)]
 
-extern crate rustc_graphviz;
+extern crate graphviz;
 // A simple rust project
 
 extern crate krate2;
 extern crate krate2 as krate3;
 
-use rustc_graphviz::RenderOption;
+use graphviz::RenderOption;
 use std::collections::{HashMap,HashSet};
 use std::cell::RefCell;
 use std::io::Write;

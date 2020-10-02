@@ -1,4 +1,5 @@
 // run-pass
+#![feature(slice_patterns)]
 
 fn main() {
     assert_eq!(count_members(&[1, 2, 3, 4]), 4);

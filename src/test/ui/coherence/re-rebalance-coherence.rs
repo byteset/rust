@@ -1,3 +1,5 @@
+#![feature(re_rebalance_coherence)]
+
 // run-pass
 // aux-build:re_rebalance_coherence_lib.rs
 

@@ -4,9 +4,9 @@
 #![deny(rustc::ty_pass_by_reference)]
 #![allow(unused)]
 
-extern crate rustc_middle;
+extern crate rustc;
 
-use rustc_middle::ty::{Ty, TyCtxt};
+use rustc::ty::{Ty, TyCtxt};
 
 fn ty_by_ref(
     ty_val: Ty<'_>,

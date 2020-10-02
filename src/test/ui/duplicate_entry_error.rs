@@ -1,4 +1,3 @@
-// normalize-stderr-test "loaded from .*libstd-.*.rlib" -> "loaded from SYSROOT/libstd-*.rlib"
 // note-pattern: first defined in crate `std`.
 
 // Test for issue #31788 and E0152
@@ -9,7 +8,7 @@ use std::panic::PanicInfo;
 
 #[lang = "panic_impl"]
 fn panic_impl(info: &PanicInfo) -> ! {
-//~^ ERROR: found duplicate lang item `panic_impl`
+//~^ ERROR: duplicate lang item found: `panic_impl`.
     loop {}
 }
 

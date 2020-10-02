@@ -1,6 +1,6 @@
 -include ../tools.mk
 
-# only-windows-gnu
+# only-mingw
 
 all:
 	$(CXX) foo.cpp -c -o $(TMPDIR)/foo.o

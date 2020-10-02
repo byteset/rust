@@ -1,4 +1,5 @@
 // run-pass
+#![allow(unused_variables)]
 // Test that we mutate a counter on the stack only when we expect to.
 
 fn call<F>(f: F) where F : FnOnce() {
@@ -12,7 +13,7 @@ fn main() {
     call(|| {
         // Move `y`, but do not move `counter`, even though it is read
         // by value (note that it is also mutated).
-        for item in y { //~ WARN unused variable: `item`
+        for item in y {
             let v = counter;
             counter += v;
         }
@@ -21,8 +22,7 @@ fn main() {
 
     call(move || {
         // this mutates a moved copy, and hence doesn't affect original
-        counter += 1; //~  WARN value assigned to `counter` is never read
-                      //~| WARN unused variable: `counter`
+        counter += 1;
     });
     assert_eq!(counter, 88);
 }

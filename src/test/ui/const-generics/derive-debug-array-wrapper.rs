@@ -1,14 +1,9 @@
-// Check that deriving debug on struct with const is permitted.
-// run-pass
-// revisions: full min
-
-#![cfg_attr(full, feature(const_generics))]
-#![cfg_attr(full, allow(incomplete_features))]
-#![cfg_attr(min, feature(min_const_generics))]
+#![feature(const_generics)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 #[derive(Debug)]
 struct X<const N: usize> {
-    a: [u32; N],
+    a: [u32; N], //~ ERROR arrays only have std trait implementations for lengths 0..=32
 }
 
 fn main() {}

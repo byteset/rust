@@ -12,7 +12,7 @@ impl Drop for WithDrop {
 
 fn reborrow_from_generator(r: &mut ()) {
     let d = WithDrop;
-    move || { d; yield; &mut *r }; //~ WARN unused generator that must be used
+    move || { d; yield; &mut *r };
 }
 
 fn main() {}

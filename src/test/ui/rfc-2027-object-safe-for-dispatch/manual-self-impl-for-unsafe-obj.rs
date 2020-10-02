@@ -1,5 +1,6 @@
-// Check that we can manually implement an object-unsafe trait for its trait object.
-
+// Check that we can manually implement an object
+// unsafe trait for its trait object
+//
 // run-pass
 
 #![feature(object_safe_for_dispatch)]
@@ -45,7 +46,7 @@ fn main() {
 
     let mut res = String::new();
 
-    // Directly call static.
+    // Directly call static
     res.push(Struct::stat()); // "A"
     res.push(<dyn Bad>::stat()); // "AC"
 
@@ -54,13 +55,15 @@ fn main() {
     // These look similar enough...
     let bad = unsafe { std::mem::transmute::<&dyn Good, &dyn Bad>(good) };
 
-    // Call virtual.
+    // Call virtual
     res.push(s.virt()); // "ACB"
     res.push(bad.virt()); // "ACBD"
 
-    // Indirectly call static.
+    // Indirectly call static
     res.push(s.indirect()); // "ACBDA"
     res.push(bad.indirect()); // "ACBDAC"
 
-    assert_eq!(&res, "ACBDAC");
+    if &res != "ACBDAC" {
+        panic!();
+    }
 }

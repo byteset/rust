@@ -12,11 +12,5 @@ error: invalid trailing slash in literal
 LL | "\u\"
    |     ^
 
-error: expected item, found `"\u\"`
-  --> $DIR/issue-62913.rs:1:1
-   |
-LL | "\u\"
-   | ^^^^^^ expected item
-
-error: aborting due to 3 previous errors
+error: aborting due to 2 previous errors
 

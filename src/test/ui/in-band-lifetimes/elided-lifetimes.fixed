@@ -3,7 +3,7 @@
 
 #![allow(unused)]
 #![deny(elided_lifetimes_in_paths)]
-//~^ NOTE the lint level is defined here
+//~^ NOTE lint level defined here
 
 use std::cell::{RefCell, Ref};
 

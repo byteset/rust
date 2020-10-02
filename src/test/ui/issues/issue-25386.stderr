@@ -1,19 +1,20 @@
-error[E0616]: field `c_object` of struct `Item` is private
-  --> $DIR/issue-25386.rs:19:16
+error[E0616]: field `c_object` of struct `stuff::Item` is private
+  --> $DIR/issue-25386.rs:19:11
    |
 LL |         (*$var.c_object).$member.is_some()
-   |                ^^^^^^^^ private field
+   |           ^^^^^^^^^^^^^
 ...
 LL |     println!("{}", check_ptr_exist!(item, name));
    |                    ---------------------------- in this macro invocation
-   |
-   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0616]: field `name` of struct `CObj` is private
-  --> $DIR/issue-25386.rs:26:43
+error[E0616]: field `name` of struct `stuff::CObj` is private
+  --> $DIR/issue-25386.rs:19:9
    |
+LL |         (*$var.c_object).$member.is_some()
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^
+...
 LL |     println!("{}", check_ptr_exist!(item, name));
-   |                                           ^^^^ private field
+   |                    ---------------------------- in this macro invocation
 
 error: aborting due to 2 previous errors
 

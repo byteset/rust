@@ -6,13 +6,7 @@ struct A {}
 
 impl A {
     #[test]
-    fn new() -> A {
-        //~^ ERROR `#[test]` attribute is only allowed on non associated functions
-        A {}
-    }
-    #[test]
-    fn recovery_witness() -> A {
-        //~^ ERROR `#[test]` attribute is only allowed on non associated functions
+    fn new() -> A { //~ ERROR `#[test]` attribute is only allowed on non associated functions
         A {}
     }
 }

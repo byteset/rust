@@ -1,3 +1,5 @@
+// compile-flags: -Z continue-parse-after-error
+
 static FOO: &'static [u8] = b"\f";  //~ ERROR unknown byte escape
 
 pub fn main() {

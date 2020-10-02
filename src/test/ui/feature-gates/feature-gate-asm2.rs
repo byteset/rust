@@ -1,10 +1,7 @@
-// only-x86_64
+// ignore-emscripten
 
 fn main() {
     unsafe {
-        println!("{:?}", asm!(""));
-        //~^ ERROR inline assembly is not stable enough
-        println!("{:?}", llvm_asm!(""));
-        //~^ ERROR prefer using the new asm! syntax instead
+        println!("{:?}", asm!("")); //~ ERROR inline assembly is not stable
     }
 }

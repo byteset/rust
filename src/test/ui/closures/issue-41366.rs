@@ -7,6 +7,7 @@ impl<'g> T<'g> for u32 {
 }
 
 fn main() {
-    (&|_| ()) as &dyn for<'x> Fn(<u32 as T<'x>>::V);
+    (&|_|()) as &dyn for<'x> Fn(<u32 as T<'x>>::V);
     //~^ ERROR: type mismatch in closure arguments
+    //~| ERROR: type mismatch resolving
 }

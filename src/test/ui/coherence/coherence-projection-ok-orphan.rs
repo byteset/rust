@@ -2,6 +2,9 @@
 // does not hold and (due to the orphan rules), we can rely on that.
 
 // check-pass
+// revisions: old re
+
+#![cfg_attr(re, feature(re_rebalance_coherence))]
 
 pub trait Foo<P> {}
 

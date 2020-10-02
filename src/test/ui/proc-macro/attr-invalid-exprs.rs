@@ -1,9 +1,8 @@
-//! Attributes producing expressions in invalid locations
-
 // aux-build:attr-stmt-expr.rs
 
-#![feature(proc_macro_hygiene)]
-#![feature(stmt_expr_attributes)]
+//! Attributes producing expressions in invalid locations
+
+#![feature(stmt_expr_attributes, proc_macro_hygiene)]
 
 extern crate attr_stmt_expr;
 use attr_stmt_expr::{duplicate, no_output};

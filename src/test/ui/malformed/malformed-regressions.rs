@@ -1,12 +1,8 @@
-#[doc] //~ ERROR attribute must be of the form
-//~^ WARN this was previously accepted
-#[ignore()] //~ ERROR attribute must be of the form
-//~^ WARN this was previously accepted
-#[inline = ""] //~ ERROR attribute must be of the form
-//~^ WARN this was previously accepted
-#[link] //~ ERROR attribute must be of the form
-//~^ WARN this was previously accepted
-#[link = ""] //~ ERROR attribute must be of the form
-//~^ WARN this was previously accepted
+// build-pass (FIXME(62277): could be check-pass?)
 
+#[doc] //~ WARN attribute must be of the form
+#[ignore()] //~ WARN attribute must be of the form
+#[inline = ""] //~ WARN attribute must be of the form
+#[link] //~ WARN attribute must be of the form
+#[link = ""] //~ WARN attribute must be of the form
 fn main() {}

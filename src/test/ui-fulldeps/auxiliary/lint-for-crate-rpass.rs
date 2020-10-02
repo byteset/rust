@@ -3,18 +3,15 @@
 #![feature(plugin_registrar, rustc_private)]
 #![feature(box_syntax)]
 
+#[macro_use] extern crate rustc;
 extern crate rustc_driver;
-extern crate rustc_hir;
-extern crate rustc_lint;
-extern crate rustc_span;
-#[macro_use]
-extern crate rustc_session;
-extern crate rustc_ast;
+extern crate syntax;
 
-use rustc_ast::attr;
+use rustc::lint::{LateContext, LintContext, LintPass, LateLintPass};
 use rustc_driver::plugin::Registry;
-use rustc_lint::{LateContext, LateLintPass, LintContext, LintPass};
-use rustc_span::symbol::Symbol;
+use rustc::hir;
+use syntax::attr;
+use syntax::symbol::Symbol;
 
 macro_rules! fake_lint_pass {
     ($struct:ident, $($attr:expr),*) => {
@@ -26,14 +23,12 @@ macro_rules! fake_lint_pass {
             }
         }
 
-        impl LateLintPass<'_> for $struct {
-            fn check_crate(&mut self, cx: &LateContext, krate: &rustc_hir::Crate) {
+        impl<'a, 'tcx> LateLintPass<'a, 'tcx> for $struct {
+            fn check_crate(&mut self, cx: &LateContext, krate: &hir::Crate) {
                 $(
-                    if !cx.sess().contains_name(&krate.item.attrs, $attr) {
-                        cx.lint(CRATE_NOT_OKAY, |lint| {
-                             let msg = format!("crate is not marked with #![{}]", $attr);
-                             lint.build(&msg).set_span(krate.item.span).emit()
-                        });
+                    if !attr::contains_name(&krate.attrs, $attr) {
+                        cx.span_lint(CRATE_NOT_OKAY, krate.span,
+                                     &format!("crate is not marked with #![{}]", $attr));
                     }
                 )*
             }
@@ -50,17 +45,17 @@ declare_lint!(CRATE_NOT_GREEN, Warn, "crate not marked with #![crate_green]");
 
 fake_lint_pass! {
     PassOkay,
-    Symbol::intern("crate_okay")
+    Symbol::intern("rustc_crate_okay")
 }
 
 fake_lint_pass! {
     PassRedBlue,
-    Symbol::intern("crate_red"), Symbol::intern("crate_blue")
+    Symbol::intern("rustc_crate_red"), Symbol::intern("rustc_crate_blue")
 }
 
 fake_lint_pass! {
     PassGreyGreen,
-    Symbol::intern("crate_grey"), Symbol::intern("crate_green")
+    Symbol::intern("rustc_crate_grey"), Symbol::intern("rustc_crate_green")
 }
 
 #[plugin_registrar]

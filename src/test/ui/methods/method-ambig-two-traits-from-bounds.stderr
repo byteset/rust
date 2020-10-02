@@ -9,19 +9,13 @@ note: candidate #1 is defined in the trait `A`
    |
 LL | trait A { fn foo(&self); }
    |           ^^^^^^^^^^^^^^
+   = help: to disambiguate the method call, write `A::foo(t)` instead
 note: candidate #2 is defined in the trait `B`
   --> $DIR/method-ambig-two-traits-from-bounds.rs:2:11
    |
 LL | trait B { fn foo(&self); }
    |           ^^^^^^^^^^^^^^
-help: disambiguate the associated function for candidate #1
-   |
-LL |     A::foo(t);
-   |     ^^^^^^^^^
-help: disambiguate the associated function for candidate #2
-   |
-LL |     B::foo(t);
-   |     ^^^^^^^^^
+   = help: to disambiguate the method call, write `B::foo(t)` instead
 
 error: aborting due to previous error
 

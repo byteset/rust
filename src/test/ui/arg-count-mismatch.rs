@@ -1,4 +1,4 @@
-// error-pattern: arguments were supplied
+// error-pattern: parameters were supplied
 
 fn f(x: isize) { }
 

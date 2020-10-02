@@ -1,4 +1,4 @@
-// compile-flags:--test
+// compile-flags:--test -Z unstable-options
 // edition:2018
 
 /// ```rust

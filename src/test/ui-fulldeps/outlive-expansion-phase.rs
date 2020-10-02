@@ -3,6 +3,6 @@
 // ignore-stage1
 
 #![feature(plugin)]
-#![plugin(outlive_expansion_phase)] //~ WARNING compiler plugins are deprecated
+#![plugin(outlive_expansion_phase)]
 
 pub fn main() {}

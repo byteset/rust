@@ -2,32 +2,33 @@ error[E0308]: mismatched types
   --> $DIR/associated-types-eq-3.rs:23:18
    |
 LL |     let _: Bar = x.boo();
-   |            ---   ^^^^^^^ expected struct `Bar`, found associated type
-   |            |
-   |            expected due to this
+   |                  ^^^^^^^ expected struct `Bar`, found associated type
    |
-   = note:       expected struct `Bar`
-           found associated type `<I as Foo>::A`
-help: consider constraining the associated type `<I as Foo>::A` to `Bar`
-   |
-LL | fn foo2<I: Foo<A = Bar>>(x: I) {
-   |               ^^^^^^^^^
+   = note: expected type `Bar`
+              found type `<I as Foo>::A`
+   = note: consider constraining the associated type `<I as Foo>::A` to `Bar`
+   = note: for more information, visit https://doc.rust-lang.org/book/ch19-03-advanced-traits.html
 
 error[E0271]: type mismatch resolving `<isize as Foo>::A == Bar`
   --> $DIR/associated-types-eq-3.rs:38:5
    |
 LL | fn foo1<I: Foo<A=Bar>>(x: I) {
-   |                ----- required by this bound in `foo1`
+   |    ----        ----- required by this bound in `foo1`
 ...
 LL |     foo1(a);
-   |     ^^^^ expected struct `Bar`, found `usize`
+   |     ^^^^ expected usize, found struct `Bar`
+   |
+   = note: expected type `usize`
+              found type `Bar`
 
 error[E0271]: type mismatch resolving `<isize as Foo>::A == Bar`
   --> $DIR/associated-types-eq-3.rs:41:9
    |
 LL |     baz(&a);
-   |         ^^ expected struct `Bar`, found `usize`
+   |         ^^ expected usize, found struct `Bar`
    |
+   = note: expected type `usize`
+              found type `Bar`
    = note: required for the cast to the object type `dyn Foo<A = Bar>`
 
 error: aborting due to 3 previous errors

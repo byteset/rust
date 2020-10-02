@@ -1,7 +1,4 @@
-fn with_int<F>(f: F)
-where
-    F: FnOnce(&isize),
-{
+fn with_int<F>(f: F) where F: FnOnce(&isize) {
     let x = 3;
     f(&x);
 }
@@ -9,5 +6,5 @@ where
 fn main() {
     let mut x = None;
     with_int(|y| x = Some(y));
-    //~^ ERROR borrowed data escapes outside of closure
+    //~^ ERROR borrowed data cannot be stored outside of its closure
 }

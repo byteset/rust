@@ -1,4 +1,3 @@
-// build-fail
 // compile-flags:-C panic=abort -C prefer-dynamic
 // ignore-musl - no dylibs here
 // ignore-cloudabi

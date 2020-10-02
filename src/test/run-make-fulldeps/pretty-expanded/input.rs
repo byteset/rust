@@ -2,7 +2,7 @@
 
 // #13544
 
-extern crate rustc_serialize;
+extern crate serialize as rustc_serialize;
 
 #[derive(RustcEncodable)] pub struct A;
 #[derive(RustcEncodable)] pub struct B(isize);

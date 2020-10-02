@@ -5,12 +5,9 @@ LL | union U {
    | ^^^^^^^ recursive type has infinite size
 LL |     a: u8,
 LL |     b: U,
-   |        - recursive without indirection
+   |     ---- recursive without indirection
    |
-help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to make `U` representable
-   |
-LL |     b: Box<U>,
-   |        ^^^^ ^
+   = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `U` representable
 
 error: aborting due to previous error
 

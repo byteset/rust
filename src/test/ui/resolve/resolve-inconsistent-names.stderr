@@ -47,7 +47,7 @@ LL |         (A, B) | (ref B, c) | (c, A) => ()
    |         |                variable not in all patterns
    |         pattern doesn't bind `c`
 
-error[E0409]: variable `B` is bound inconsistently across alternatives separated by `|`
+error[E0409]: variable `B` is bound in inconsistent ways within the same match arm
   --> $DIR/resolve-inconsistent-names.rs:19:23
    |
 LL |         (A, B) | (ref B, c) | (c, A) => ()
@@ -86,14 +86,11 @@ LL |         (CONST1, _) | (_, Const2) => ()
 error[E0308]: mismatched types
   --> $DIR/resolve-inconsistent-names.rs:19:19
    |
-LL |     match x {
-   |           - this expression has type `(E, E)`
 LL |         (A, B) | (ref B, c) | (c, A) => ()
-   |             -     ^^^^^ expected enum `E`, found `&E`
-   |             |
-   |             first introduced with type `E` here
+   |                   ^^^^^ expected enum `E`, found &E
    |
-   = note: in the same arm, a binding must have the same type in all alternatives
+   = note: expected type `E`
+              found type `&E`
 
 error: aborting due to 9 previous errors
 

@@ -1,22 +1,17 @@
-error: unexpected closing delimiter: `}`
+error: unexpected close delimiter: `}`
   --> $DIR/macro-mismatched-delim-paren-brace.rs:5:1
    |
-LL | fn main() {
-   |           - this opening brace...
-...
-LL |     }
-   |     - ...matches this closing brace
 LL | }
-   | ^ unexpected closing delimiter
+   | ^ unexpected close delimiter
 
-error: mismatched closing delimiter: `}`
+error: incorrect close delimiter: `}`
   --> $DIR/macro-mismatched-delim-paren-brace.rs:4:5
    |
 LL |     foo! (
-   |          - unclosed delimiter
+   |          - un-closed delimiter
 LL |         bar, "baz", 1, 2.0
 LL |     }
-   |     ^ mismatched closing delimiter
+   |     ^ incorrect close delimiter
 
 error: aborting due to 2 previous errors
 

@@ -1,9 +1,7 @@
 // run-pass
-// revisions: full min
 
-#![cfg_attr(full, feature(const_generics))]
-#![cfg_attr(full, allow(incomplete_features))]
-#![cfg_attr(min, feature(min_const_generics))]
+#![feature(const_generics)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 use std::fmt::Display;
 

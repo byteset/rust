@@ -1,4 +1,4 @@
-// build-pass
+// build-pass (FIXME(62277): could be check-pass?)
 // ignore-cloudabi no std::fs
 
 // Regression test for #20797.

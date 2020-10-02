@@ -1,3 +1,1 @@
-fn main() {
-    rustdoc::main()
-}
+fn main() { rustdoc::main() }

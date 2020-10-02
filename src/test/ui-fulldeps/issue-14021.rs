@@ -4,14 +4,13 @@
 #![allow(unused_imports)]
 #![feature(rustc_private)]
 
-extern crate rustc_macros;
-extern crate rustc_serialize;
+extern crate serialize;
+extern crate serialize as rustc_serialize;
 
-use rustc_macros::{Decodable, Encodable};
-use rustc_serialize::json;
-use rustc_serialize::{Decodable, Encodable};
+use serialize::{Encodable, Decodable};
+use serialize::json;
 
-#[derive(Encodable, Decodable, PartialEq, Debug)]
+#[derive(RustcEncodable, RustcDecodable, PartialEq, Debug)]
 struct UnitLikeStruct;
 
 pub fn main() {

@@ -1,4 +1,5 @@
-use std::mem::zeroed;
+#![allow(deprecated)]
+
 enum Void {}
 
 fn main() {
@@ -7,25 +8,21 @@ fn main() {
         Ok(n) => n,
     };
 
-    // This is pretty much instant UB. However, we have no choice -- we need to
-    // test matching on a reference to `&Void`; we cannot do anything other than
-    // just accept the fact that this is UB if `main` did run, but it doesn't;
-    // this test only checks that these are feature-gated.
-    let x: &Void = unsafe { zeroed() };
+    let x: &Void = unsafe { std::mem::uninitialized() };
     let _ = match x {}; //~ ERROR non-exhaustive
 
-    let x: (Void,) = unsafe { zeroed() };
+    let x: (Void,) = unsafe { std::mem::uninitialized() };
     let _ = match x {}; //~ ERROR non-exhaustive
 
-    let x: [Void; 1] = unsafe { zeroed() };
+    let x: [Void; 1] = unsafe { std::mem::uninitialized() };
     let _ = match x {}; //~ ERROR non-exhaustive
 
-    let x: &[Void] = unsafe { zeroed() };
+    let x: &[Void] = unsafe { std::mem::uninitialized() };
     let _ = match x {   //~ ERROR non-exhaustive
         &[] => (),
     };
 
-    let x: Void = unsafe { zeroed() };
+    let x: Void = unsafe { std::mem::uninitialized() };
     let _ = match x {}; // okay
 
     let x: Result<u32, Void> = Ok(23);

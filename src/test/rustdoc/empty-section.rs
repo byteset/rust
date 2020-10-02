@@ -1,6 +1,6 @@
 #![crate_name = "foo"]
 
-#![feature(negative_impls)]
+#![feature(optin_builtin_traits)]
 
 pub struct Foo;
 

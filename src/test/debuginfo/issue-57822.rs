@@ -1,7 +1,8 @@
 // This test makes sure that the LLDB pretty printer does not throw an exception
 // for nested closures and generators.
 
-// Require a gdb that can read DW_TAG_variant_part.
+// Require LLVM with DW_TAG_variant_part and a gdb that can read it.
+// min-system-llvm-version: 8.0
 // min-gdb-version: 8.2
 // ignore-tidy-linelength
 
@@ -22,10 +23,10 @@
 // lldb-command:run
 
 // lldb-command:print g
-// lldbg-check:(issue_57822::main::closure-1) $0 = { 0 = { 0 = 1 } }
+// lldbg-check:(issue_57822::main::closure-1) $0 = closure-1(closure-0(1))
 
 // lldb-command:print b
-// lldbg-check:(issue_57822::main::generator-3) $1 = { 0 = { 0 = 2 } }
+// lldbg-check:(issue_57822::main::generator-3) $1 = generator-3(generator-2(2))
 
 #![feature(omit_gdb_pretty_printer_section, generators, generator_trait)]
 #![omit_gdb_pretty_printer_section]
@@ -44,7 +45,7 @@ fn main() {
         yield;
     };
     let mut b = move || {
-        Pin::new(&mut a).resume(());
+        Pin::new(&mut a).resume();
         yield;
     };
 

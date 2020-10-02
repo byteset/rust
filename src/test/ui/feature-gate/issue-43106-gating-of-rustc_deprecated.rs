@@ -18,7 +18,6 @@ mod rustc_deprecated {
 
     #[rustc_deprecated()] struct S;
     //~^ ERROR stability attributes may not be used outside of the standard library
-    //~| ERROR stability attributes may not be used outside of the standard library
 
     #[rustc_deprecated()] type T = S;
     //~^ ERROR stability attributes may not be used outside of the standard library

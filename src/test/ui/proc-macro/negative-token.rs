@@ -1,6 +1,8 @@
 // run-pass
 // aux-build:negative-token.rs
 
+#![feature(proc_macro_hygiene)]
+
 extern crate negative_token;
 
 use negative_token::*;

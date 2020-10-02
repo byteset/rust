@@ -1,19 +1,11 @@
-error[E0764]: mutable references are not allowed in constants
-  --> $DIR/issue-65394.rs:8:13
+error[E0017]: references in constants may only refer to immutable values
+  --> $DIR/issue-65394.rs:5:13
    |
 LL |     let r = &mut x;
-   |             ^^^^^^ `&mut` is only allowed in `const fn`
+   |             ^^^^^^ constants require immutable values
 
-error[E0493]: destructors cannot be evaluated at compile-time
-  --> $DIR/issue-65394.rs:7:9
-   |
-LL |     let mut x = Vec::<i32>::new();
-   |         ^^^^^ constants cannot evaluate destructors
-...
-LL | };
-   | - value is dropped here
+[ERROR rustc_mir::transform::qualify_consts] old validator: [($DIR/issue-65394.rs:5:13: 5:19, "MutBorrow(Mut { allow_two_phase_borrow: false })")]
+[ERROR rustc_mir::transform::qualify_consts] new validator: [($DIR/issue-65394.rs:5:13: 5:19, "MutBorrow(Mut { allow_two_phase_borrow: false })"), ($DIR/issue-65394.rs:4:9: 4:14, "LiveDrop")]
+error: aborting due to previous error
 
-error: aborting due to 2 previous errors
-
-Some errors have detailed explanations: E0493, E0764.
-For more information about an error, try `rustc --explain E0493`.
+For more information about this error, try `rustc --explain E0017`.

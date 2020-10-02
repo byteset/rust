@@ -35,19 +35,19 @@ fn main() {
     }
 
     while let Some(_) = Some(()) {
-        if break () { //~ ERROR `break` with value from a `while` loop
+        if break () { //~ ERROR `break` with value from a `while let` loop
         }
     }
 
     while let Some(_) = Some(()) {
         break None;
-        //~^ ERROR `break` with value from a `while` loop
+        //~^ ERROR `break` with value from a `while let` loop
     }
 
     'while_let_loop: while let Some(_) = Some(()) {
         loop {
             break 'while_let_loop "nope";
-            //~^ ERROR `break` with value from a `while` loop
+            //~^ ERROR `break` with value from a `while let` loop
             break 33;
         };
     }

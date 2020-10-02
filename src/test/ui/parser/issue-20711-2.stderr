@@ -1,14 +1,10 @@
-error: expected item after attributes
-  --> $DIR/issue-20711-2.rs:6:5
+error: expected one of `async`, `const`, `crate`, `default`, `extern`, `fn`, `pub`, `type`, or `unsafe`, found `}`
+  --> $DIR/issue-20711-2.rs:7:1
    |
-LL | impl Foo {
-   |          - while parsing this item list starting here
-...
 LL |     #[stable(feature = "rust1", since = "1.0.0")]
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-LL |
+   |                                                  - expected one of 9 possible tokens here
 LL | }
-   | - the item list ends here
+   | ^ unexpected token
 
 error: aborting due to previous error
 

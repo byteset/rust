@@ -1,4 +1,4 @@
-// run-pass (note: this is spec-UB, but it works for now)
+// run-pass
 #![allow(dead_code)]
 // ignore-emscripten weird assertion?
 

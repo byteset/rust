@@ -25,6 +25,7 @@ mod imp {
 
 #[cfg(unix)]
 mod imp {
+    use libc;
     use std::io;
     use std::io::prelude::*;
     use std::mem;
@@ -196,6 +197,9 @@ mod imp {
         if v.capacity() == v.len() {
             v.reserve(1);
         }
-        slice::from_raw_parts_mut(v.as_mut_ptr().offset(v.len() as isize), v.capacity() - v.len())
+        slice::from_raw_parts_mut(
+            v.as_mut_ptr().offset(v.len() as isize),
+            v.capacity() - v.len(),
+        )
     }
 }

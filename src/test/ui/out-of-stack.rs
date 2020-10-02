@@ -3,11 +3,12 @@
 #![allow(unused_must_use)]
 #![allow(unconditional_recursion)]
 // ignore-android: FIXME (#20004)
+// ignore-musl
 // ignore-cloudabi no processes
 // ignore-emscripten no processes
 // ignore-sgx no processes
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 #![feature(rustc_private)]
 
 #[cfg(unix)]
@@ -21,7 +22,7 @@ use std::thread;
 // Inlining to avoid llvm turning the recursive functions into tail calls,
 // which doesn't consume stack.
 #[inline(always)]
-pub fn black_box<T>(dummy: T) { unsafe { llvm_asm!("" : : "r"(&dummy)) } }
+pub fn black_box<T>(dummy: T) { unsafe { asm!("" : : "r"(&dummy)) } }
 
 fn silent_recurse() {
     let buf = [0u8; 1000];

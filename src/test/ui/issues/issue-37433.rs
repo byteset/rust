@@ -1,11 +1,10 @@
-// build-fail
-// ignore-emscripten no llvm_asm! support
+// ignore-emscripten no asm! support
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 
 fn main() {
     unsafe {
-        llvm_asm!("" :: "r"(""));
+        asm!("" :: "r"(""));
         //~^ ERROR: invalid value for constraint in inline assembly
     }
 }

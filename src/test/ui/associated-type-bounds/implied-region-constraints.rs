@@ -1,3 +1,5 @@
+// compile-fail
+
 #![feature(associated_type_bounds)]
 
 trait Tr1 { type As1; }

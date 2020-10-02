@@ -2,7 +2,7 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 
-#![feature(const_fn_fn_ptr_basics)]
+#![feature(const_fn)]
 
 const fn x() {
     let t = true;

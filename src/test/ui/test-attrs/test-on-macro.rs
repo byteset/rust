@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 // compile-flags:--test
 
 #![deny(warnings)]
@@ -8,6 +8,6 @@ macro_rules! foo {
 }
 
 #[test]
-foo!(); //~ WARNING `#[test]` attribute should not be used on macros
+foo!();
 
 fn main(){}

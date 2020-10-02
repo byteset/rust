@@ -1,6 +1,7 @@
 // run-pass
+// #47096
 
-// Regression test for #47096.
+#![feature(slice_patterns)]
 
 fn foo(s: &[i32]) -> &[i32] {
     let &[ref xs @ ..] = s;

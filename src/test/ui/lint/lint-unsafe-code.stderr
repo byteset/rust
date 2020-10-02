@@ -4,7 +4,7 @@ error: declaration of an `unsafe` function
 LL | unsafe fn baz() {}
    | ^^^^^^^^^^^^^^^^^^
    |
-note: the lint level is defined here
+note: lint level defined here
   --> $DIR/lint-unsafe-code.rs:3:9
    |
 LL | #![deny(unsafe_code)]
@@ -90,8 +90,6 @@ LL |         unsafe {}
 ...
 LL |     unsafe_in_macro!()
    |     ------------------ in this macro invocation
-   |
-   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 14 previous errors
 

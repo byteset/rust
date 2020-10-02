@@ -6,7 +6,7 @@ enum MyOption<T> {
 fn main() {
     match MyOption::MySome(42) {
         MyOption::MySome { x: 42 } => (),
-        //~^ ERROR tuple variant `MyOption::MySome` written as struct variant
+        //~^ ERROR variant `MyOption::MySome` does not have a field named `x`
         _ => (),
     }
 }

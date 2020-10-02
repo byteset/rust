@@ -1,11 +1,9 @@
 // Test that a method/associated non-method within an impl block of a concrete const type i.e. A<2>,
 // is callable.
 // run-pass
-// revisions: full min
 
-#![cfg_attr(full, feature(const_generics))]
-#![cfg_attr(full, allow(incomplete_features))]
-#![cfg_attr(min, feature(min_const_generics))]
+#![feature(const_generics)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 pub struct A<const N: u32>;
 

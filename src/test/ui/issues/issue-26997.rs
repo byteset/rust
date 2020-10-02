@@ -1,4 +1,4 @@
-// build-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #![allow(dead_code)]
 pub struct Foo {
     x: isize,
@@ -6,7 +6,6 @@ pub struct Foo {
 }
 
 impl Foo {
-    #[allow(improper_ctypes_definitions)]
     pub extern fn foo_new() -> Foo {
         Foo { x: 21, y: 33 }
     }

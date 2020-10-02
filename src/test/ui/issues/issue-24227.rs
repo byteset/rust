@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 // This resulted in an ICE. Test for future-proofing
 // Issue #24227
 

@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 // Check that associated types are `Sized`
 
 // pretty-expanded FIXME #23616

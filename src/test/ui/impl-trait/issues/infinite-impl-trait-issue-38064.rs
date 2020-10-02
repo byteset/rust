@@ -5,13 +5,13 @@
 
 trait Quux {}
 
-fn foo() -> impl Quux { //~ ERROR cannot resolve opaque type
+fn foo() -> impl Quux { //~ opaque type expands to a recursive type
     struct Foo<T>(T);
     impl<T> Quux for Foo<T> {}
     Foo(bar())
 }
 
-fn bar() -> impl Quux { //~ ERROR cannot resolve opaque type
+fn bar() -> impl Quux { //~ opaque type expands to a recursive type
     struct Bar<T>(T);
     impl<T> Quux for Bar<T> {}
     Bar(foo())

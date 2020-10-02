@@ -1,6 +1,6 @@
 // Test if the on_unimplemented message override works
 
-#![feature(rustc_attrs)]
+#![feature(on_unimplemented)]
 
 
 #[rustc_on_unimplemented = "invalid"]

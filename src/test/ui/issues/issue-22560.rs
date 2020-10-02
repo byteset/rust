@@ -1,15 +1,10 @@
-trait Add<Rhs=Self> {
-    type Output;
-}
+use std::ops::{Add, Sub};
 
-trait Sub<Rhs=Self> {
-    type Output;
-}
-
-type Test = dyn Add + Sub;
-//~^ ERROR E0393
-//~| ERROR E0191
-//~| ERROR E0393
-//~| ERROR E0225
+type Test = dyn Add +
+            //~^ ERROR E0393
+            //~| ERROR E0191
+            Sub;
+            //~^ ERROR E0393
+            //~| ERROR E0225
 
 fn main() { }

@@ -9,5 +9,5 @@ fn main()
     let m = Mutex::new(Cell::new(0i32));
     let guard = m.lock().unwrap();
     test_sync(guard);
-    //~^ ERROR `Cell<i32>` cannot be shared between threads safely [E0277]
+    //~^ ERROR `std::cell::Cell<i32>` cannot be shared between threads safely [E0277]
 }

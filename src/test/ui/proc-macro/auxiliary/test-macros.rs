@@ -101,12 +101,6 @@ pub fn print_bang(input: TokenStream) -> TokenStream {
     print_helper(input, "BANG")
 }
 
-#[proc_macro]
-pub fn print_bang_consume(input: TokenStream) -> TokenStream {
-    print_helper(input, "BANG");
-    TokenStream::new()
-}
-
 #[proc_macro_attribute]
 pub fn print_attr(_: TokenStream, input: TokenStream) -> TokenStream {
     print_helper(input, "ATTR")
@@ -114,6 +108,5 @@ pub fn print_attr(_: TokenStream, input: TokenStream) -> TokenStream {
 
 #[proc_macro_derive(Print, attributes(print_helper))]
 pub fn print_derive(input: TokenStream) -> TokenStream {
-    print_helper(input, "DERIVE");
-    TokenStream::new()
+    print_helper(input, "DERIVE")
 }

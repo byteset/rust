@@ -3,9 +3,9 @@
 //! See comments in `src/bootstrap/rustc.rs` for more information.
 
 use std::env;
-use std::ffi::OsString;
-use std::path::PathBuf;
 use std::process::Command;
+use std::path::PathBuf;
+use std::ffi::OsString;
 
 fn main() {
     let args = env::args_os().skip(1).collect::<Vec<_>>();
@@ -13,6 +13,7 @@ fn main() {
     let libdir = env::var_os("RUSTDOC_LIBDIR").expect("RUSTDOC_LIBDIR was not set");
     let stage = env::var("RUSTC_STAGE").expect("RUSTC_STAGE was not set");
     let sysroot = env::var_os("RUSTC_SYSROOT").expect("RUSTC_SYSROOT was not set");
+    let mut has_unstable = false;
 
     use std::str::FromStr;
 
@@ -24,7 +25,7 @@ fn main() {
     let mut dylib_path = bootstrap::util::dylib_path();
     dylib_path.insert(0, PathBuf::from(libdir.clone()));
 
-    //FIXME(misdreavus): once stdsimd uses cfg(doc) instead of cfg(dox), remove the `--cfg dox`
+    //FIXME(misdreavus): once stdsimd uses cfg(rustdoc) instead of cfg(dox), remove the `--cfg dox`
     //arguments here
     let mut cmd = Command::new(rustdoc);
     cmd.args(&args)
@@ -34,7 +35,8 @@ fn main() {
         .arg("dox")
         .arg("--sysroot")
         .arg(&sysroot)
-        .env(bootstrap::util::dylib_path_var(), env::join_paths(&dylib_path).unwrap());
+        .env(bootstrap::util::dylib_path_var(),
+             env::join_paths(&dylib_path).unwrap());
 
     // Force all crates compiled by this compiler to (a) be unstable and (b)
     // allow the `rustc_private` feature to link to other unstable crates
@@ -42,19 +44,42 @@ fn main() {
     if env::var_os("RUSTC_FORCE_UNSTABLE").is_some() {
         cmd.arg("-Z").arg("force-unstable-if-unmarked");
     }
-    if let Some(linker) = env::var_os("RUSTDOC_LINKER") {
+    if let Some(linker) = env::var_os("RUSTC_TARGET_LINKER") {
         let mut arg = OsString::from("-Clinker=");
         arg.push(&linker);
         cmd.arg(arg);
     }
-    if env::var_os("RUSTDOC_FUSE_LD_LLD").is_some() {
-        cmd.arg("-Clink-args=-fuse-ld=lld");
+
+    // Bootstrap's Cargo-command builder sets this variable to the current Rust version; let's pick
+    // it up so we can make rustdoc print this into the docs
+    if let Some(version) = env::var_os("RUSTDOC_CRATE_VERSION") {
+        // This "unstable-options" can be removed when `--crate-version` is stabilized
+        if !has_unstable {
+            cmd.arg("-Z")
+               .arg("unstable-options");
+        }
+        cmd.arg("--crate-version").arg(version);
+        has_unstable = true;
+    }
+
+    // Needed to be able to run all rustdoc tests.
+    if let Some(_) = env::var_os("RUSTDOC_GENERATE_REDIRECT_PAGES") {
+        // This "unstable-options" can be removed when `--generate-redirect-pages` is stabilized
+        if !has_unstable {
+            cmd.arg("-Z")
+               .arg("unstable-options");
+        }
+        cmd.arg("--generate-redirect-pages");
+        has_unstable = true;
     }
 
     // Needed to be able to run all rustdoc tests.
     if let Some(ref x) = env::var_os("RUSTDOC_RESOURCE_SUFFIX") {
         // This "unstable-options" can be removed when `--resource-suffix` is stabilized
-        cmd.arg("-Z").arg("unstable-options");
+        if !has_unstable {
+            cmd.arg("-Z")
+               .arg("unstable-options");
+        }
         cmd.arg("--resource-suffix").arg(x);
     }
 

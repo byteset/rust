@@ -10,10 +10,8 @@ trait Foo {
 }
 
 impl Foo for u32 {
-    const fn f() -> u32 {
-        //~^ ERROR functions in traits cannot be declared const
-        22
-    }
+    const fn f() -> u32 { 22 }
+    //~^ ERROR trait fns cannot be declared const
 }
 
-fn main() {}
+fn main() { }

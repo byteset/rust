@@ -1,9 +1,13 @@
-#![feature(negative_impls)]
+// revisions: old re
+
+#![cfg_attr(re, feature(re_rebalance_coherence))]
+#![feature(optin_builtin_traits)]
+#![feature(overlapping_marker_traits)]
 
 use std::marker::Copy;
 
 enum TestE {
-    A,
+  A
 }
 
 struct MyType;
@@ -14,16 +18,20 @@ impl !Sync for NotSync {}
 unsafe impl Send for TestE {}
 unsafe impl Send for MyType {}
 unsafe impl Send for (MyType, MyType) {}
-//~^ ERROR E0117
+//[old]~^ ERROR E0117
+//[re]~^^ ERROR E0117
 
 unsafe impl Send for &'static NotSync {}
-//~^ ERROR E0321
+//[old]~^ ERROR E0321
+//[re]~^^ ERROR E0321
 
 unsafe impl Send for [MyType] {}
-//~^ ERROR E0117
+//[old]~^ ERROR E0117
+//[re]~^^ ERROR E0117
 
 unsafe impl Send for &'static [NotSync] {}
-//~^ ERROR conflicting implementations of trait
-//~| ERROR only traits defined in the current crate
+//[old]~^ ERROR E0117
+//[re]~^^ ERROR E0117
 
-fn main() {}
+fn main() {
+}

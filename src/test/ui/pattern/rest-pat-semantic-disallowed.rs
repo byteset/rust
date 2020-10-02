@@ -2,7 +2,7 @@
 // outside of slice (+ ident patterns witin those), tuple,
 // and tuple struct patterns and that duplicates are caught in these contexts.
 
-#![feature(box_patterns)]
+#![feature(slice_patterns, box_patterns)]
 
 fn main() {}
 

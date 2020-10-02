@@ -1,8 +1,6 @@
 // aux-build:derive-unstable-2.rs
 
-#![feature(register_attr)]
-
-#![register_attr(rustc_foo)]
+#![feature(custom_attribute)]
 
 #[macro_use]
 extern crate derive_unstable_2;

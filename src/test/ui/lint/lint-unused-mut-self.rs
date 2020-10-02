@@ -1,5 +1,3 @@
-// run-rustfix
-
 #![allow(unused_assignments)]
 #![allow(unused_variables)]
 #![allow(dead_code)]

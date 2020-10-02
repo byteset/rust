@@ -1,11 +1,11 @@
-error: mismatched closing delimiter: `)`
+error: incorrect close delimiter: `)`
   --> $DIR/issue-10636-1.rs:4:1
    |
 LL | struct Obj {
-   |            - unclosed delimiter
+   |            - un-closed delimiter
 ...
 LL | )
-   | ^ mismatched closing delimiter
+   | ^ incorrect close delimiter
 
 error: aborting due to previous error
 

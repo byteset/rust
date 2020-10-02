@@ -10,9 +10,8 @@ apt-get install -y --no-install-recommends \
   git \
   libssl-dev \
   make \
-  ninja-build \
   pkg-config \
-  python3 \
+  python2.7 \
   sudo \
   unzip \
   xz-utils

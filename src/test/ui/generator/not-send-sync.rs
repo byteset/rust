@@ -7,7 +7,7 @@ fn main() {
     fn assert_send<T: Send>(_: T) {}
 
     assert_sync(|| {
-        //~^ ERROR: generator cannot be shared between threads safely
+        //~^ ERROR: E0277
         let a = Cell::new(2);
         yield;
     });

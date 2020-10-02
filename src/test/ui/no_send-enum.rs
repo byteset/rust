@@ -1,4 +1,4 @@
-#![feature(negative_impls)]
+#![feature(optin_builtin_traits)]
 
 use std::marker::Send;
 

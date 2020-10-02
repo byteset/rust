@@ -1,7 +1,5 @@
-// run-rustfix
-
-pub struct Struct {
-    pub a: usize,
+struct Struct {
+    a: usize,
 };
 //~^ ERROR expected item, found `;`
 

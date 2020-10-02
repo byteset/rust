@@ -11,12 +11,12 @@ struct S(i32);
 fn foo(x: &mut S) {
     // `x` is initialized here, so maybe-uninit bit is 0.
 
-    rustc_peek(&x); //~ ERROR rustc_peek: bit not set
+    unsafe { rustc_peek(&x) }; //~ ERROR rustc_peek: bit not set
 
     ::std::mem::drop(x);
 
     // `x` definitely uninitialized here, so maybe-uninit bit is 1.
-    rustc_peek(&x);
+    unsafe { rustc_peek(&x) };
 }
 fn main() {
     foo(&mut S(13));

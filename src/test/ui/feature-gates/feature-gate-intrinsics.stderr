@@ -1,16 +1,18 @@
 error[E0658]: intrinsics are subject to change
-  --> $DIR/feature-gate-intrinsics.rs:1:8
+  --> $DIR/feature-gate-intrinsics.rs:1:1
    |
-LL | extern "rust-intrinsic" {
-   |        ^^^^^^^^^^^^^^^^
+LL | / extern "rust-intrinsic" {
+LL | |     fn bar();
+LL | | }
+   | |_^
    |
    = help: add `#![feature(intrinsics)]` to the crate attributes to enable
 
 error[E0658]: intrinsics are subject to change
-  --> $DIR/feature-gate-intrinsics.rs:5:8
+  --> $DIR/feature-gate-intrinsics.rs:5:1
    |
 LL | extern "rust-intrinsic" fn baz() {}
-   |        ^^^^^^^^^^^^^^^^
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(intrinsics)]` to the crate attributes to enable
 

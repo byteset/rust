@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 pub trait LineFormatter<'a> {
     type Iter: Iterator<Item=&'a str> + 'a;
     fn iter(&'a self, line: &'a str) -> Self::Iter;

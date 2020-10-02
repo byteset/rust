@@ -4,7 +4,6 @@ impl Foo {
     fn foo() {}
 
     #[stable(feature = "rust1", since = "1.0.0")]
-    //~^ ERROR expected item after attributes
-}
+} //~ ERROR expected one of `async`, `const`, `crate`, `default`, `extern`, `fn`, `pub`, `type`, or
 
 fn main() {}

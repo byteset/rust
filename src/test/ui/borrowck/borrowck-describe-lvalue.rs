@@ -1,5 +1,7 @@
 // ignore-tidy-linelength
 
+#![feature(slice_patterns)]
+
 pub struct Foo {
   x: u32
 }

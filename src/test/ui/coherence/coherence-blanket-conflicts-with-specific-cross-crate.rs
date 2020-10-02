@@ -1,4 +1,7 @@
 // aux-build:go_trait.rs
+// revisions: old re
+
+#![cfg_attr(re, feature(re_rebalance_coherence))]
 
 extern crate go_trait;
 
@@ -13,7 +16,8 @@ impl Go for MyThingy {
 }
 
 impl GoMut for MyThingy {
-//~^ ERROR E0119
+//[old]~^ ERROR conflicting implementations
+//[re]~^^ ERROR E0119
     fn go_mut(&mut self, arg: isize) { }
 }
 

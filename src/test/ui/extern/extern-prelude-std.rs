@@ -1,4 +1,5 @@
 // run-pass
+#![feature(extern_prelude)]
 
 mod foo {
     pub fn test() {

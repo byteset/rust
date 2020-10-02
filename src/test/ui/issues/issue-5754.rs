@@ -1,4 +1,4 @@
-// build-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #![allow(dead_code)]
 #![allow(improper_ctypes)]
 

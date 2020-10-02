@@ -1,4 +1,5 @@
 // run-pass
+
 #![no_std]
 
 extern crate std;

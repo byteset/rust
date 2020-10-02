@@ -59,11 +59,8 @@ Diagnostics have the following format:
     "spans": [
         {
             /* The file where the span is located.
-               Note that this path may not exist. For example, if the path
-               points to the standard library, and the rust src is not
-               available in the sysroot, then it may point to a non-existent
-               file. Beware that this may also point to the source of an
-               external crate.
+               For spans located within a macro expansion, this will be the
+               name of the expanded macro in the format "<MACRONAME macros>".
             */
             "file_name": "lib.rs",
             /* The byte offset where the span starts (0-based, inclusive). */
@@ -171,7 +168,7 @@ Diagnostics have the following format:
             "rendered": null
         },
         {
-            "message": "if this is intentional, prefix it with an underscore",
+            "message": "consider prefixing with an underscore",
             "code": null,
             "level": "help",
             "spans": [
@@ -204,7 +201,7 @@ Diagnostics have the following format:
     /* Optional string of the rendered version of the diagnostic as displayed
        by rustc. Note that this may be influenced by the `--json` flag.
     */
-    "rendered": "warning: unused variable: `x`\n --> lib.rs:2:9\n  |\n2 |     let x = 123;\n  |         ^ help: if this is intentional, prefix it with an underscore: `_x`\n  |\n  = note: `#[warn(unused_variables)]` on by default\n\n"
+    "rendered": "warning: unused variable: `x`\n --> lib.rs:2:9\n  |\n2 |     let x = 123;\n  |         ^ help: consider prefixing with an underscore: `_x`\n  |\n  = note: `#[warn(unused_variables)]` on by default\n\n"
 }
 ```
 

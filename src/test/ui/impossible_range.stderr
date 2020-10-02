@@ -1,18 +1,18 @@
 error[E0586]: inclusive range with no end
-  --> $DIR/impossible_range.rs:11:5
+  --> $DIR/impossible_range.rs:8:8
    |
 LL |     ..=;
-   |     ^^^ help: use `..` instead
+   |        ^
    |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+   = help: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 
 error[E0586]: inclusive range with no end
-  --> $DIR/impossible_range.rs:18:6
+  --> $DIR/impossible_range.rs:15:9
    |
 LL |     0..=;
-   |      ^^^ help: use `..` instead
+   |         ^
    |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+   = help: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 
 error: aborting due to 2 previous errors
 

@@ -2,7 +2,7 @@
 // implied bounds was causing outlives relations that were not
 // properly handled.
 //
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 fn main() {}
 

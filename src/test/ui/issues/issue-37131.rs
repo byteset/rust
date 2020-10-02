@@ -3,7 +3,6 @@
 
 // compile-flags: --target=thumbv6m-none-eabi
 // ignore-arm
-// needs-llvm-components: arm
 
 // error-pattern:target may not be installed
 fn main() { }

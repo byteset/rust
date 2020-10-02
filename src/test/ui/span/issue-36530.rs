@@ -1,8 +1,6 @@
 // gate-test-custom_inner_attributes
 
-#![feature(register_attr)]
-
-#![register_attr(foo)]
+#![feature(custom_attribute)]
 
 #[foo]
 mod foo {

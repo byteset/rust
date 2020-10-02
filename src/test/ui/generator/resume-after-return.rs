@@ -1,6 +1,6 @@
 // run-pass
 
-// ignore-wasm32-bare compiled with panic=abort by default
+// ignore-emscripten compiled with panic=abort by default
 
 #![feature(generators, generator_trait)]
 
@@ -16,12 +16,12 @@ fn main() {
         yield;
     };
 
-    match Pin::new(&mut foo).resume(()) {
+    match Pin::new(&mut foo).resume() {
         GeneratorState::Complete(()) => {}
         s => panic!("bad state: {:?}", s),
     }
 
-    match panic::catch_unwind(move || Pin::new(&mut foo).resume(())) {
+    match panic::catch_unwind(move || Pin::new(&mut foo).resume()) {
         Ok(_) => panic!("generator successfully resumed"),
         Err(_) => {}
     }

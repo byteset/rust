@@ -1,6 +1,6 @@
 -include ../tools.mk
 
-# ignore-windows-msvc
+# ignore-windows
 
 all:
 	$(RUSTC) -C opt-level=3 --emit=obj used.rs

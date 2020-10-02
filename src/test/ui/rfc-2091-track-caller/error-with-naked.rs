@@ -1,21 +1,8 @@
-#![feature(naked_functions)]
+#![feature(naked_functions, track_caller)] //~ WARN the feature `track_caller` is incomplete
 
-#[track_caller] //~ ERROR cannot use `#[track_caller]` with `#[naked]`
+#[track_caller]
 #[naked]
 fn f() {}
-
-struct S;
-
-impl S {
-    #[track_caller] //~ ERROR cannot use `#[track_caller]` with `#[naked]`
-    #[naked]
-    fn g() {}
-}
-
-extern "Rust" {
-    #[track_caller] //~ ERROR cannot use `#[track_caller]` with `#[naked]`
-    #[naked]
-    fn h();
-}
+//~^^^ ERROR cannot use `#[track_caller]` with `#[naked]`
 
 fn main() {}

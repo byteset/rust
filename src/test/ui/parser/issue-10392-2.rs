@@ -1,6 +1,4 @@
-// run-rustfix
-
-pub struct A { pub foo: isize }
+struct A { foo: isize }
 
 fn a() -> A { panic!() }
 

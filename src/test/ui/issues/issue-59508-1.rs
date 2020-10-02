@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 #![feature(const_generics)]
-//~^ WARN the feature `const_generics` is incomplete
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 // This test checks that generic parameter re-ordering diagnostic suggestions mention that
 // consts come after types and lifetimes when the `const_generics` feature is enabled.

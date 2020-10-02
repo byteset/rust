@@ -1,16 +1,15 @@
-error[E0764]: mutable references are not allowed in constants
-  --> $DIR/const-multi-ref.rs:6:13
+error[E0017]: references in constants may only refer to immutable values
+  --> $DIR/const-multi-ref.rs:3:13
    |
 LL |     let p = &mut a;
-   |             ^^^^^^ `&mut` is only allowed in `const fn`
+   |             ^^^^^^ constants require immutable values
 
-error[E0492]: cannot borrow a constant which may contain interior mutability, create a static instead
-  --> $DIR/const-multi-ref.rs:16:13
+error[E0017]: references in constants may only refer to immutable values
+  --> $DIR/const-multi-ref.rs:5:21
    |
-LL |     let p = &a;
-   |             ^^
+LL |     let reborrow = {p};
+   |                     ^ constants require immutable values
 
 error: aborting due to 2 previous errors
 
-Some errors have detailed explanations: E0492, E0764.
-For more information about an error, try `rustc --explain E0492`.
+For more information about this error, try `rustc --explain E0017`.

@@ -1,15 +1,12 @@
-// Checks that pointers must not be used as the type of const params.
-// revisions: full min
-
-#![cfg_attr(full, feature(const_generics))]
-#![cfg_attr(full, allow(incomplete_features))]
-#![cfg_attr(min, feature(min_const_generics))]
+// run-pass
+#![feature(const_generics, const_compare_raw_pointers)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 const A: u32 = 3;
 
-struct Const<const P: *const u32>; //~ ERROR: using raw pointers as const generic parameters
+struct Const<const P: *const u32>;
 
-impl<const P: *const u32> Const<P> { //~ ERROR: using raw pointers as const generic parameters
+impl<const P: *const u32> Const<{P}> {
     fn get() -> u32 {
         unsafe {
             *P

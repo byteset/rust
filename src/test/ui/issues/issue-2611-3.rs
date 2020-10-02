@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #![allow(dead_code)]
 // Tests that impls are allowed to have looser, more permissive bounds
 // than the traits require.

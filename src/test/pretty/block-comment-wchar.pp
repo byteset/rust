@@ -73,6 +73,7 @@ fn f() {
     */
 
 
+
     /* */
 
     /*
@@ -80,6 +81,7 @@ fn f() {
       Space 6+2:                     compare A
       Ogham Space Mark 6+2: compare B
     */
+
     /* */
 
     /*

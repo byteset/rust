@@ -3,12 +3,11 @@
 // that is, traits without items. In this case, a type `T` is
 // `MyMarker` if it is either `Debug` or `Display`.
 
-#![feature(marker_trait_attr)]
-#![feature(negative_impls)]
+#![feature(overlapping_marker_traits)]
+#![feature(optin_builtin_traits)]
 
 use std::fmt::{Debug, Display};
 
-#[marker]
 trait MyMarker {}
 
 impl<T: Debug> MyMarker for T {}

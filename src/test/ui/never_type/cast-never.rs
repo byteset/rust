@@ -1,6 +1,7 @@
 // Test that we can explicitly cast ! to another type
 
-// check-pass
+// run-fail
+// error-pattern:explicit
 
 #![feature(never_type)]
 

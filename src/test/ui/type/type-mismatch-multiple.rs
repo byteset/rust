@@ -2,6 +2,8 @@
 
 fn main() { let a: bool = 1; let b: i32 = true; }
 //~^ ERROR mismatched types
-//~| expected `bool`, found integer
+//~| expected type `bool`
+//~| found type `{integer}`
+//~| expected bool, found integer
 //~| ERROR mismatched types
-//~| expected `i32`, found `bool`
+//~| expected i32, found bool

@@ -1,5 +1,3 @@
-// build-fail
-
 //
 // error-pattern: symbol `fail` is already defined
 #![crate_type="rlib"]

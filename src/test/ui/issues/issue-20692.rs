@@ -1,4 +1,4 @@
-trait Array: Sized + Copy {}
+trait Array: Sized {}
 
 fn f<T: Array>(x: &T) {
     let _ = x

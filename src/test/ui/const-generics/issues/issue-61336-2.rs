@@ -1,14 +1,14 @@
-// revisions: full min
-#![cfg_attr(full, feature(const_generics))] //[full]~WARN the feature `const_generics` is incomplete
-#![cfg_attr(min, feature(min_const_generics))]
+#![feature(const_generics)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 fn f<T: Copy, const N: usize>(x: T) -> [T; N] {
-    [x; { N }]
+    [x; {N}]
+    //~^ ERROR array lengths can't depend on generic parameters
 }
 
 fn g<T, const N: usize>(x: T) -> [T; N] {
-    [x; { N }]
-    //~^ ERROR the trait bound `T: Copy` is not satisfied
+    [x; {N}]
+    //~^ ERROR array lengths can't depend on generic parameters
 }
 
 fn main() {

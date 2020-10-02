@@ -1,9 +1,11 @@
+// compile-flags: -Z continue-parse-after-error
+
 // Test that we can recover from mismatched braces in the parser.
 
 trait Foo {
     fn bar() {
         let x = foo(); //~ ERROR cannot find function `foo` in this scope
-    ) //~ ERROR mismatched closing delimiter: `)`
+    ) //~ ERROR incorrect close delimiter: `)`
 }
 
 fn main() {

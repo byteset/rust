@@ -70,4 +70,3 @@ LL |         f
 
 error: aborting due to 7 previous errors
 
-For more information about this error, try `rustc --explain E0623`.

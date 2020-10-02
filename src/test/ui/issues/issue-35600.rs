@@ -1,7 +1,5 @@
 // run-pass
-#![allow(non_camel_case_types)]
 #![allow(unused_variables)]
-
 trait Foo {
     type bar;
     fn bar();

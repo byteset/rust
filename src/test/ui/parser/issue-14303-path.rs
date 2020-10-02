@@ -8,6 +8,6 @@ mod foo {
 }
 
 fn bar<'a, 'b, 'c, T>(x: foo::X<'a, T, 'b, 'c>) {}
-//~^ ERROR type provided when a lifetime was expected
+//~^ ERROR lifetime arguments must be declared prior to type arguments
 
 fn main() {}

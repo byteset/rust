@@ -5,9 +5,9 @@ trait From<Src> {
 }
 
 trait To {
-    fn to<Dst>(
+    fn to<Dst>(  //~ ERROR the size for values of type
         self
-    ) -> <Dst as From<Self>>::Result where Dst: From<Self> { //~ ERROR the size for values of type
+    ) -> <Dst as From<Self>>::Result where Dst: From<Self> {
         From::from(self)
     }
 }

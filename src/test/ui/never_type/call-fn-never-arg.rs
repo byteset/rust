@@ -1,6 +1,7 @@
 // Test that we can use a ! for an argument of type !
 
-// check-pass
+// run-fail
+// error-pattern:wowzers!
 
 #![feature(never_type)]
 #![allow(unreachable_code)]

@@ -1,6 +1,7 @@
 // run-pass
 // Test inclusive range syntax.
-#![allow(unused_braces)]
+
+#![feature(range_is_empty)]
 #![allow(unused_comparisons)]
 
 use std::ops::RangeToInclusive;

@@ -3,19 +3,20 @@
 #![allow(unused_imports)]
 #![allow(unused_must_use)]
 // pretty-expanded FIXME #23616
+
 #![feature(rustc_private)]
 
-extern crate rustc_serialize;
+extern crate serialize;
 
-use rustc_serialize::json;
-use rustc_serialize::{Encodable, Encoder};
 use std::fmt;
+use serialize::{Encoder, Encodable};
+use serialize::json;
 
-struct Foo<T: for<'a> Encodable<json::Encoder<'a>>> {
+struct Foo<T: Encodable> {
     v: T,
 }
 
-impl<T: for<'a> Encodable<json::Encoder<'a>>> Drop for Foo<T> {
+impl<T: Encodable> Drop for Foo<T> {
     fn drop(&mut self) {
         json::encode(&self.v);
     }

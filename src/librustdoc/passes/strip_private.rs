@@ -1,15 +1,15 @@
-use rustc_hir::def_id::DefIdSet;
+use rustc::util::nodemap::DefIdSet;
 
 use crate::clean;
+use crate::fold::{DocFolder};
 use crate::core::DocContext;
-use crate::fold::DocFolder;
-use crate::passes::{ImplStripper, ImportStripper, Pass, Stripper};
+use crate::passes::{ImplStripper, ImportStripper, Stripper, Pass};
 
 pub const STRIP_PRIVATE: Pass = Pass {
     name: "strip-private",
-    run: strip_private,
+    pass: strip_private,
     description: "strips all private items from a crate which cannot be seen externally, \
-                  implies strip-priv-imports",
+        implies strip-priv-imports",
 };
 
 /// Strip private items from the point of view of a crate or externally from a

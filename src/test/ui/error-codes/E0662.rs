@@ -1,10 +1,10 @@
 // ignore-emscripten
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 
 fn main() {
-    llvm_asm!("xor %eax, %eax"
-              :
-              : "=test"("a") //~ ERROR E0662
-             );
+    asm!("xor %eax, %eax"
+         :
+         : "=test"("a") //~ ERROR E0662
+        );
 }

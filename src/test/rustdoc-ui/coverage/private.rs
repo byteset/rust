@@ -1,5 +1,5 @@
 // compile-flags:-Z unstable-options --show-coverage --document-private-items
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 
 #![allow(unused)]
 

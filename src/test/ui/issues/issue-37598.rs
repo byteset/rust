@@ -1,4 +1,5 @@
 // check-pass
+#![feature(slice_patterns)]
 
 fn check(list: &[u8]) {
     match list {

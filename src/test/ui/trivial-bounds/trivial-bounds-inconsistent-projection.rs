@@ -18,21 +18,21 @@ impl A for B {
 
 fn underspecified_bound() -> u8
 where
-    B: A //~ WARNING trivial_bounds
+    B: A
 {
     B::get_x()
 }
 
 fn inconsistent_bound() -> i32
 where
-    B: A<X = i32> //~ WARNING trivial_bounds
+    B: A<X = i32>
 {
     B::get_x()
 }
 
 fn redundant_bound() -> u8
 where
-    B: A<X = u8> //~ WARNING trivial_bounds
+    B: A<X = u8>
 {
     B::get_x()
 }
@@ -40,8 +40,6 @@ where
 fn inconsistent_dup_bound() -> i32
 where
     B: A<X = i32> + A
-    //~^ WARNING trivial_bounds
-    //~| WARNING trivial_bounds
 {
     B::get_x()
 }
@@ -49,8 +47,6 @@ where
 fn redundant_dup_bound() -> u8
 where
     B: A<X = u8> + A
-    //~^ WARNING trivial_bounds
-    //~| WARNING trivial_bounds
 {
     B::get_x()
 }

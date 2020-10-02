@@ -6,8 +6,8 @@
 
 trait ExtraCopy<T:Copy> { }
 
-enum SomeEnum<T,U>
-    where T: ExtraCopy<U> //~ ERROR E0277
+enum SomeEnum<T,U> //~ ERROR E0277
+    where T: ExtraCopy<U>
 {
     SomeVariant(T,U)
 }

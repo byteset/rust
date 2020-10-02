@@ -1,8 +1,8 @@
 extern {
     const fn foo();
-    //~^ ERROR functions in `extern` blocks cannot have qualifiers
+    //~^ ERROR extern items cannot be `const`
     const unsafe fn bar();
-    //~^ ERROR functions in `extern` blocks cannot have qualifiers
+    //~^ ERROR extern items cannot be `const`
 }
 
 fn main() {}

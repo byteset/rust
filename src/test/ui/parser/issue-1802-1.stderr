@@ -1,4 +1,4 @@
-error[E0768]: no valid digits found for number
+error: no valid digits found for number
   --> $DIR/issue-1802-1.rs:5:16
    |
 LL |     log(error, 0b);
@@ -6,4 +6,3 @@ LL |     log(error, 0b);
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0768`.

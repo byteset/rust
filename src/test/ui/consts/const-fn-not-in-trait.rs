@@ -5,11 +5,9 @@
 
 trait Foo {
     const fn f() -> u32;
-    //~^ ERROR functions in traits cannot be declared const
-    const fn g() -> u32 {
-        //~^ ERROR functions in traits cannot be declared const
-        0
-    }
+    //~^ ERROR trait fns cannot be declared const
+    const fn g() -> u32 { 0 }
+    //~^ ERROR trait fns cannot be declared const
 }
 
-fn main() {}
+fn main() { }

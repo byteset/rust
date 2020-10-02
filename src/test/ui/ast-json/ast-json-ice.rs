@@ -8,7 +8,7 @@
 // check-pass
 // dont-check-compiler-stdout - don't check for any AST change.
 
-#![feature(llvm_asm)]
+#![feature(asm)]
 
 enum V {
     A(i32),
@@ -30,7 +30,7 @@ fn main() {
         target_arch = "x86_64",
         target_arch = "arm",
         target_arch = "aarch64"))]
-    unsafe { llvm_asm!(""::::); }
+    unsafe { asm!(""::::); }
 
     let x: (i32) = 35;
     let y = x as i64<> + 5;

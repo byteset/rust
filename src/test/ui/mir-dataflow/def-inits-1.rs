@@ -11,13 +11,13 @@ struct S(i32);
 fn foo(test: bool, x: &mut S, y: S, mut z: S) -> S {
     let ret;
     // `ret` starts off uninitialized
-    rustc_peek(&ret);  //~ ERROR rustc_peek: bit not set
+    unsafe { rustc_peek(&ret); }  //~ ERROR rustc_peek: bit not set
 
     // All function formal parameters start off initialized.
 
-    rustc_peek(&x);
-    rustc_peek(&y);
-    rustc_peek(&z);
+    unsafe { rustc_peek(&x) };
+    unsafe { rustc_peek(&y) };
+    unsafe { rustc_peek(&z) };
 
     ret = if test {
         ::std::mem::replace(x, y)
@@ -27,21 +27,21 @@ fn foo(test: bool, x: &mut S, y: S, mut z: S) -> S {
     };
 
     // `z` may be uninitialized here.
-    rustc_peek(&z); //~ ERROR rustc_peek: bit not set
+    unsafe { rustc_peek(&z); } //~ ERROR rustc_peek: bit not set
 
     // `y` is definitely uninitialized here.
-    rustc_peek(&y); //~ ERROR rustc_peek: bit not set
+    unsafe { rustc_peek(&y); } //~ ERROR rustc_peek: bit not set
 
     // `x` is still (definitely) initialized (replace above is a reborrow).
-    rustc_peek(&x);
+    unsafe { rustc_peek(&x); }
 
     ::std::mem::drop(x);
 
     // `x` is *definitely* uninitialized here
-    rustc_peek(&x); //~ ERROR rustc_peek: bit not set
+    unsafe { rustc_peek(&x); } //~ ERROR rustc_peek: bit not set
 
     // `ret` is now definitely initialized (via `if` above).
-    rustc_peek(&ret);
+    unsafe { rustc_peek(&ret); }
 
     ret
 }

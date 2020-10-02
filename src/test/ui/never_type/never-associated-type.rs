@@ -1,6 +1,7 @@
 // Test that we can use ! as an associated type.
 
-// check-pass
+// run-fail
+// error-pattern:kapow!
 
 #![feature(never_type)]
 

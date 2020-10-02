@@ -1,5 +1,7 @@
 // run-pass
 
+#![feature(slice_patterns)]
+
 fn a() {
     let x = [1];
     match x {

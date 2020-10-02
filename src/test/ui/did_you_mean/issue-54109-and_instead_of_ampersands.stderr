@@ -1,75 +1,58 @@
-error: `and` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:7:15
-   |
-LL |     let _ = a and b;
-   |               ^^^ help: use `&&` to perform logical conjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
-
-error: `and` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:9:10
+error: expected `{`, found `and`
+  --> $DIR/issue-54109-and_instead_of_ampersands.rs:4:10
    |
 LL |     if a and b {
-   |          ^^^ help: use `&&` to perform logical conjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
+   |     --   ^^^
+   |     |    |
+   |     |    expected `{`
+   |     |    help: use `&&` instead of `and` for the boolean operator
+   |     this `if` statement has a condition, but no block
 
-error: `or` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:20:15
-   |
-LL |     let _ = a or b;
-   |               ^^ help: use `||` to perform logical disjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
-
-error: `or` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:22:10
+error: expected `{`, found `or`
+  --> $DIR/issue-54109-and_instead_of_ampersands.rs:13:10
    |
 LL |     if a or b {
-   |          ^^ help: use `||` to perform logical disjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
+   |     --   ^^
+   |     |    |
+   |     |    expected `{`
+   |     |    help: use `||` instead of `or` for the boolean operator
+   |     this `if` statement has a condition, but no block
 
-error: `and` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:30:11
+error: expected one of `!`, `)`, `,`, `.`, `::`, `?`, `{`, or an operator, found `and`
+  --> $DIR/issue-54109-and_instead_of_ampersands.rs:22:11
    |
 LL |     if (a and b) {
-   |           ^^^ help: use `&&` to perform logical conjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
+   |           ^^^
+   |           |
+   |           expected one of 8 possible tokens here
+   |           help: use `&&` instead of `and` for the boolean operator
 
-error: `or` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:38:11
+error: expected one of `!`, `)`, `,`, `.`, `::`, `?`, `{`, or an operator, found `or`
+  --> $DIR/issue-54109-and_instead_of_ampersands.rs:31:11
    |
 LL |     if (a or b) {
-   |           ^^ help: use `||` to perform logical disjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
+   |           ^^
+   |           |
+   |           expected one of 8 possible tokens here
+   |           help: use `||` instead of `or` for the boolean operator
 
-error: `and` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:46:13
+error: expected one of `!`, `.`, `::`, `?`, `{`, or an operator, found `and`
+  --> $DIR/issue-54109-and_instead_of_ampersands.rs:40:13
    |
 LL |     while a and b {
-   |             ^^^ help: use `&&` to perform logical conjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
+   |             ^^^
+   |             |
+   |             expected one of `!`, `.`, `::`, `?`, `{`, or an operator here
+   |             help: use `&&` instead of `and` for the boolean operator
 
-error: `or` is not a logical operator
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:54:13
+error: expected one of `!`, `.`, `::`, `?`, `{`, or an operator, found `or`
+  --> $DIR/issue-54109-and_instead_of_ampersands.rs:49:13
    |
 LL |     while a or b {
-   |             ^^ help: use `||` to perform logical disjunction
-   |
-   = note: unlike in e.g., python and PHP, `&&` and `||` are used for logical operators
+   |             ^^
+   |             |
+   |             expected one of `!`, `.`, `::`, `?`, `{`, or an operator here
+   |             help: use `||` instead of `or` for the boolean operator
 
-error[E0308]: mismatched types
-  --> $DIR/issue-54109-and_instead_of_ampersands.rs:13:33
-   |
-LL |     let _recovery_witness: () = 0;
-   |                            --   ^ expected `()`, found integer
-   |                            |
-   |                            expected due to this
+error: aborting due to 6 previous errors
 
-error: aborting due to 9 previous errors
-
-For more information about this error, try `rustc --explain E0308`.

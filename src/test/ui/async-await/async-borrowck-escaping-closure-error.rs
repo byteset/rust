@@ -1,5 +1,5 @@
 // edition:2018
-#![feature(async_closure)]
+#![feature(async_closure,async_await)]
 fn foo() -> Box<dyn std::future::Future<Output = u32>> {
     let x = 0u32;
     Box::new((async || x)())

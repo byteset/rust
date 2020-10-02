@@ -1,4 +1,4 @@
-#![feature(negative_impls)]
+#![feature(optin_builtin_traits)]
 
 // @matches negative_impl/struct.Alpha.html '//pre' "pub struct Alpha"
 pub struct Alpha;

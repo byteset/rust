@@ -1,9 +1,9 @@
-#![feature(llvm_asm)]
+#![feature(asm)]
 
 fn main() {
     let a;
-    llvm_asm!("nop" "nop");
+    asm!("nop" "nop");
     //~^ ERROR E0660
-    llvm_asm!("nop" "nop" : "=r"(a));
+    asm!("nop" "nop" : "=r"(a));
     //~^ ERROR E0660
 }

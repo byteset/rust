@@ -3,6 +3,8 @@
 // edition:2018
 
 #![feature(or_patterns)]
+//~^ WARN the feature `or_patterns` is incomplete
+
 #![allow(non_camel_case_types)]
 
 fn main() {}

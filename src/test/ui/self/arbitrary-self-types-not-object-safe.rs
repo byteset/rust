@@ -1,6 +1,7 @@
 // revisions: curr object_safe_for_dispatch
 
 #![cfg_attr(object_safe_for_dispatch, feature(object_safe_for_dispatch))]
+#![feature(arbitrary_self_types)]
 
 use std::rc::Rc;
 

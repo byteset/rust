@@ -65,15 +65,13 @@ pub fn indirect_struct(_: S) {
 pub fn borrowed_struct(_: &S) {
 }
 
-// `Box` can get deallocated during execution of the function, so it should
-// not get `dereferenceable`.
-// CHECK: noalias nonnull align 4 i32* @_box(i32* noalias nonnull align 4 %x)
+// CHECK: noalias align 4 dereferenceable(4) i32* @_box(i32* noalias align 4 dereferenceable(4) %x)
 #[no_mangle]
 pub fn _box(x: Box<i32>) -> Box<i32> {
   x
 }
 
-// CHECK: @struct_return(%S* noalias nocapture sret dereferenceable(32){{( %0)?}})
+// CHECK: @struct_return(%S* noalias nocapture sret dereferenceable(32))
 #[no_mangle]
 pub fn struct_return() -> S {
   S {
@@ -117,7 +115,7 @@ pub fn str(_: &[u8]) {
 pub fn trait_borrow(_: &Drop) {
 }
 
-// CHECK: @trait_box({}* noalias nonnull align 1{{( %0)?}}, [3 x [[USIZE]]]* noalias readonly align {{.*}} dereferenceable({{.*}}){{( %1)?}})
+// CHECK: @trait_box({}* noalias nonnull align 1, [3 x [[USIZE]]]* noalias readonly align {{.*}} dereferenceable({{.*}}))
 #[no_mangle]
 pub fn trait_box(_: Box<Drop>) {
 }

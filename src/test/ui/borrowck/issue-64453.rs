@@ -2,8 +2,9 @@ struct Project;
 struct Value;
 
 static settings_dir: String = format!("");
-//~^ ERROR calls in statics are limited to constant functions
-//~| ERROR calls in statics are limited to constant functions
+//~^ ERROR [E0019]
+//~| ERROR [E0015]
+//~| ERROR [E0015]
 
 fn from_string(_: String) -> Value {
     Value
@@ -12,7 +13,7 @@ fn set_editor(_: Value) {}
 
 fn main() {
     let settings_data = from_string(settings_dir);
-    //~^ ERROR cannot move out of static item
+    //~^ ERROR cannot move out of static item `settings_dir` [E0507]
     let args: i32 = 0;
 
     match args {

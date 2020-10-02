@@ -1,6 +1,7 @@
 // run-pass
-
 #![allow(unused_variables)]
+
+#![feature(slice_patterns)]
 
 pub fn main() {
     let x = &[1, 2, 3, 4, 5];

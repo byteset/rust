@@ -10,8 +10,8 @@ impl<T: fmt::Debug> ops::FnOnce<(),> for Debuger<T> {
     type Output = ();
     fn call_once(self, _args: ()) {
     //~^ ERROR `call_once` has an incompatible type for trait
-    //~| expected fn pointer `extern "rust-call" fn
-    //~| found fn pointer `fn
+    //~| expected type `extern "rust-call" fn
+    //~| found type `fn
         println!("{:?}", self.x);
     }
 }

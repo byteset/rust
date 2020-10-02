@@ -1,3 +1,4 @@
+// compile-flags: -Z continue-parse-after-error
 static c3: char =
     '\x1' //~ ERROR: numeric character escape is too short
 ;

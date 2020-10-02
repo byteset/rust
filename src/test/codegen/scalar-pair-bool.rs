@@ -24,9 +24,8 @@ pub fn pair_i32_bool(pair: (i32, bool)) -> (i32, bool) {
 #[no_mangle]
 pub fn pair_and_or((a, b): (bool, bool)) -> (bool, bool) {
     // Make sure it can operate directly on the unpacked args
-    // (but it might not be using simple and/or instructions)
-    // CHECK-DAG: %_1.0
-    // CHECK-DAG: %_1.1
+    // CHECK: and i1 %_1.0, %_1.1
+    // CHECK: or i1 %_1.0, %_1.1
     (a && b, a || b)
 }
 

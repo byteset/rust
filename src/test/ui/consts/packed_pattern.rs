@@ -13,7 +13,7 @@ const FOO: Foo = Foo {
 fn main() {
     match FOO {
         Foo { field: (5, 6, 7, 8) } => {},
-        FOO => unreachable!(), //~ WARNING unreachable pattern
+        FOO => unreachable!(),
         _ => unreachable!(),
     }
 }

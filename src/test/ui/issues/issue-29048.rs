@@ -1,4 +1,4 @@
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 pub struct Chan;
 pub struct ChanSelect<'c, T> {
     chans: Vec<(&'c Chan, T)>,

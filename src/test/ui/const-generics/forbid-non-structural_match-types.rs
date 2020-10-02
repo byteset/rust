@@ -1,18 +1,13 @@
-// revisions: full min
-
-#![cfg_attr(full, feature(const_generics))]
-#![cfg_attr(full, allow(incomplete_features))]
-#![cfg_attr(min, feature(min_const_generics))]
+#![feature(const_generics)]
+//~^ WARN the feature `const_generics` is incomplete and may cause the compiler to crash
 
 #[derive(PartialEq, Eq)]
 struct A;
 
 struct B<const X: A>; // ok
-//[min]~^ ERROR `A` is forbidden
 
 struct C;
 
-struct D<const X: C>; //~ ERROR `C` must be annotated with `#[derive(PartialEq, Eq)]`
-//[min]~^ ERROR `C` is forbidden
+struct D<const X: C>; //~ ERROR the types of const generic parameters must derive
 
 fn main() {}

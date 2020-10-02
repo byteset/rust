@@ -1,4 +1,3 @@
-// edition:2018
 // Check that lifetime resolver enforces the lifetime name scoping
 // rules correctly in various scenarios.
 
@@ -46,13 +45,6 @@ fn fn_types(a: &'a isize, //~ ERROR undeclared lifetime
                                   &'b isize)>, //~ ERROR undeclared lifetime
             c: &'a isize) //~ ERROR undeclared lifetime
 {
-}
-
-struct Bug {}
-impl Bug {
-    async fn buggy(&self) -> &'a str { //~ ERROR use of undeclared lifetime name `'a`
-        todo!()
-    }
 }
 
 pub fn main() {}

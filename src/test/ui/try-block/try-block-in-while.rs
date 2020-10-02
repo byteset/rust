@@ -3,6 +3,5 @@
 #![feature(try_blocks)]
 
 fn main() {
-    while try { false } {}
-    //~^ ERROR the trait bound `bool: Try` is not satisfied
+    while try { false } {} //~ ERROR expected expression, found reserved keyword `try`
 }

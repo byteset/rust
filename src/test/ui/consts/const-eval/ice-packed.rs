@@ -1,7 +1,4 @@
-// Regression test for #50356: Compiler panic when using repr(packed)
-// associated constant in a match arm
-
-// check-pass
+// build-pass (FIXME(62277): could be check-pass?)
 #[derive(Copy, Clone, PartialEq, Eq)]
 #[repr(packed)]
 pub struct Num(u64);

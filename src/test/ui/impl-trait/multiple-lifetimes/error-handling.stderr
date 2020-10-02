@@ -1,15 +1,13 @@
 error: lifetime may not live long enough
-  --> $DIR/error-handling.rs:23:16
+  --> $DIR/error-handling.rs:13:56
    |
 LL | fn foo<'a, 'b, 'c>(x: &'static i32, mut y: &'a i32) -> E<'b, 'c> {
-   |        --  -- lifetime `'b` defined here
-   |        |
-   |        lifetime `'a` defined here
-...
-LL |         let _: &'b i32 = *u.0;
-   |                ^^^^^^^ type annotation requires that `'a` must outlive `'b`
+   |        -- lifetime `'a` defined here                   ^^^^^^^^^ opaque type requires that `'a` must outlive `'static`
    |
-   = help: consider adding the following bound: `'a: 'b`
+help: to allow this `impl Trait` to capture borrowed data with lifetime `'a`, add `'a` as a constraint
+   |
+LL | type E<'a, 'b> = impl Sized; + 'a
+   |
 
 error: aborting due to previous error
 

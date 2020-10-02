@@ -4,8 +4,11 @@ error[E0308]: mismatched types
 LL |         guts,
    |         ^^^^
    |         |
-   |         expected struct `String`, found `&str`
+   |         expected struct `std::string::String`, found &str
    |         help: try using a conversion method: `guts: guts.to_string()`
+   |
+   = note: expected type `std::string::String`
+              found type `&str`
 
 error[E0308]: mismatched types
   --> $DIR/issue-52820.rs:10:17
@@ -13,8 +16,11 @@ error[E0308]: mismatched types
 LL |         brains: guts.clone(),
    |                 ^^^^^^^^^^^^
    |                 |
-   |                 expected struct `String`, found `&str`
+   |                 expected struct `std::string::String`, found &str
    |                 help: try using a conversion method: `guts.to_string()`
+   |
+   = note: expected type `std::string::String`
+              found type `&str`
 
 error: aborting due to 2 previous errors
 

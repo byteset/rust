@@ -1,6 +1,10 @@
 // Test that a blank impl for all T:PartialEq conflicts with an impl for some
 // specific T when T:PartialEq.
 
+// revisions: old re
+
+#![cfg_attr(re, feature(re_rebalance_coherence))]
+
 trait OtherTrait {
     fn noop(&self);
 }
@@ -18,7 +22,8 @@ struct MyType {
 }
 
 impl MyTrait for MyType {
-//~^ ERROR E0119
+//[old]~^ ERROR E0119
+//[re]~^^ ERROR E0119
     fn get(&self) -> usize { self.dummy }
 }
 
